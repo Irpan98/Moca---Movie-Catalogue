@@ -1,0 +1,81 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "id.itborneo.moca"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+                "String",
+                "THE_MOVIE_DB_KEY",
+                '"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0N2ZkNTY3NTFiMmFhOTViMDczZTRkNDkxMWRjZGRhNyIsInN1YiI6IjVkMTYxMjZkNTBmN2NhMDAxNTE1ZjZiYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.i-k6okcETvpOqXvS_JC_YDSfeK0plnJh1x-VC1xvolk"')
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$core_ktx_version"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+//    implementation "androidx.legacy:legacy-support-v4:$legacy_support_version"
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+
+    //Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+
+    //Coroutine
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
+    //LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedata_version"
+
+    //liveData extensions
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    //fragment
+    implementation "androidx.fragment:fragment-ktx:$fragment_version"
+
+    //Jetpack Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+}
