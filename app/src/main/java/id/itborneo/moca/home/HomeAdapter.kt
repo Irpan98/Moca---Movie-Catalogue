@@ -1,15 +1,15 @@
-package id.itborneo.moca.movie
+package id.itborneo.moca.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import id.itborneo.moca.core.model.MovieModel
-import id.itborneo.moca.databinding.ItemMovieBinding
+import id.itborneo.moca.databinding.ItemHomeBinding
 
 
-class MovieAdapter(private val listener: (MovieModel) -> Unit) :
-    RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class HomeAdapter(private val listener: (MovieModel) -> Unit) :
+    RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     private var movies = listOf<MovieModel>()
 
@@ -20,7 +20,7 @@ class MovieAdapter(private val listener: (MovieModel) -> Unit) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemBinding =
-            ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(itemBinding)
     }
 
@@ -30,21 +30,17 @@ class MovieAdapter(private val listener: (MovieModel) -> Unit) :
 
     override fun getItemCount() = movies.size
 
-    inner class ViewHolder(private val itemBinding: ItemMovieBinding) :
+    inner class ViewHolder(private val itemBinding: ItemHomeBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(movie: MovieModel) {
             itemBinding.apply {
                 tvName.text = movie.title
-                Picasso.get()
-                    .load(
-                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/${movie.posterPath}"
-                    )
-                    .into(ivPoster)
 //                tvName.text = user.login
 //                tvSubtitle.text = user.htmlUrl?.removeRange(0, 8)
-//                Picasso.get()
-//                    .load(user.avatarUrl)
-//                    .into(ivImage)
+                Picasso.get()
+                    .load(
+                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/${movie.posterPath}")
+                            .into(ivPoster)
 //                clItem.setOnClickListener {
 //                    listener(user)
 //                }
