@@ -25,9 +25,9 @@
     </fragment>
     <fragment
         android:id="@+id/tvShowFragment"
-        android:name="id.itborneo.moca.tvshow.TvShowFragment"
+        android:name="id.itborneo.moca.series.SeriesFragment"
         android:label="fragment_tv_show"
-        tools:layout="@layout/fragment_tv_show" >
+        tools:layout="@layout/fragment_series" >
         <action
             android:id="@+id/action_tvShowFragment_to_detailActivity"
             app:destination="@id/detailActivity" />

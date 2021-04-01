@@ -9,5 +9,12 @@ interface ApiService {
     @GET("4/discover/movie/")
     suspend fun getMovies(): MoviesResponse
 
+//    https://api.themoviedb.org/
+
+    @GET("3/trending/movie/day")
+    suspend fun getTrendingMovie(): MoviesResponse
+
+    @GET("3/trending/tv/day")
+    suspend fun getTrendingSeries(): MoviesResponse
 }
 

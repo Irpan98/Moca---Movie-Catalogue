@@ -11,16 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.databinding.FragmentHomeBinding
-import id.itborneo.moca.movie.MovieViewModel
 
 
 class HomeFragment : Fragment() {
 
     private val TAG = "HomeFragment"
-    private lateinit var adapter: HomeAdapter
+    private lateinit var trendingMovieAdapter: HomeAdapter
+    private lateinit var trendingSeriesAdapter: HomeAdapter
+
     private lateinit var binding: FragmentHomeBinding
 
-    private val viewModel: MovieViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,19 +33,47 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         initRecycler()
         observerData()
     }
 
     private fun observerData() {
-        viewModel.getMovies().observe(viewLifecycleOwner) {
+
+        observerTrendingMovies()
+        observerTrendingSeries()
+
+    }
+
+    private fun observerTrendingSeries() {
+        viewModel.getTrendingSeries().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {
                         val result = it.data.results
                         if (result != null) {
-                            adapter.set(result)
+                            trendingSeriesAdapter.set(result)
+                        }
+                    }
+//                    showLoading(false)
+                }
+                Status.LOADING -> {
+//                    showLoading(true)
+                }
+                Status.ERROR -> {
+                    Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
+                }
+            }
+        }
+    }
+
+    private fun observerTrendingMovies() {
+        viewModel.getTrendingMovies().observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    if (it.data != null) {
+                        val result = it.data.results
+                        if (result != null) {
+                            trendingMovieAdapter.set(result)
                         }
                     }
 //                    showLoading(false)
@@ -62,11 +91,16 @@ class HomeFragment : Fragment() {
     private fun initRecycler() {
         binding.rvHomeMovies.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        adapter = HomeAdapter {
+        trendingMovieAdapter = HomeAdapter {
 //            actionToDetail(it)
         }
-        binding.rvHomeMovies.adapter = adapter
+        binding.rvHomeMovies.adapter = trendingMovieAdapter
+
+        binding.rvHomeSeries.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        trendingSeriesAdapter = HomeAdapter {
+//            actionToDetail(it)
+        }
+        binding.rvHomeSeries.adapter = trendingSeriesAdapter
     }
-
-
 }
