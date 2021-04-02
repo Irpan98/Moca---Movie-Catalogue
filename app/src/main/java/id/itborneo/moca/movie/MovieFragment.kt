@@ -10,9 +10,13 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.itborneo.moca.core.enums.Status
+import id.itborneo.moca.core.model.MovieModel
 import id.itborneo.moca.databinding.FragmentMovieBinding
+import id.itborneo.moca.detail.DetailActivity
 
 class MovieFragment : Fragment() {
+
+
     companion object {
         private const val TAG = "MovieFragment"
     }
@@ -63,10 +67,14 @@ class MovieFragment : Fragment() {
     private fun initRecycler() {
         binding.rvMovies.layoutManager = LinearLayoutManager(requireContext())
         adapter = MovieAdapter {
-//            actionToDetail(it)
+            actionToDetail(it)
         }
         binding.rvMovies.layoutManager = GridLayoutManager(context, 2)
         binding.rvMovies.adapter = adapter
+    }
+
+    private fun actionToDetail(movie: MovieModel) {
+        DetailActivity.getInstance(requireContext(), movie)
     }
 
 

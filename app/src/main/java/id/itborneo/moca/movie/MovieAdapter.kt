@@ -45,9 +45,9 @@ class MovieAdapter(private val listener: (MovieModel) -> Unit) :
 //                Picasso.get()
 //                    .load(user.avatarUrl)
 //                    .into(ivImage)
-//                clItem.setOnClickListener {
-//                    listener(user)
-//                }
+                root.setOnClickListener {
+                    listener(movie)
+                }
             }
         }
     }
