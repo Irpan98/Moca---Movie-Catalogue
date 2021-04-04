@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.factory.ViewModelFactory
@@ -29,6 +31,7 @@ class DetailActivity : AppCompatActivity() {
 
     }
 
+    private lateinit var creditsAdapter: CastAdapter
     private lateinit var binding: ActivityDetailBinding
 
     private var getIntentData: MovieModel? = null
@@ -41,12 +44,24 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         initBinding()
+        initCreditsRecycler()
         retrieveData()
 //        initToolbar()
 //        initTabLayout()
 //        buttonListener()
         observerDetailMovie()
         observerCredits()
+    }
+
+    private fun initCreditsRecycler() {
+
+        binding.rvCasts.layoutManager =
+            LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        creditsAdapter = CastAdapter {
+//            actionToDetail(it)
+        }
+        binding.rvCasts.adapter = creditsAdapter
+
     }
 
     private fun observerCredits() {
@@ -56,6 +71,8 @@ class DetailActivity : AppCompatActivity() {
 //                    showLoading(false)
 
                     if (it.data != null) {
+                        it.data.cast?.let { it1 -> creditsAdapter.set(it1) }
+
 //                        updateUI(it.data)
 //                        userDetail = it.data
                         Log.d(TAG, " getCredits ${it.status}, ${it.message} and ${it.data}")
@@ -127,7 +144,6 @@ class DetailActivity : AppCompatActivity() {
 
         binding.tvGenres.text = getGenres(data.genres)
         binding.tvOverview.text = data.overview.toString()
-        binding.tvProductionCompanies.text = data.productionCompanies.toString()
         binding.tvTitle.text = data.title
         binding.tvVoteAverage.text = data.voteAverage.toString()
 

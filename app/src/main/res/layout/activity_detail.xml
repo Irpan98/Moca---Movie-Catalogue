@@ -130,16 +130,28 @@
             tools:lines="3"
             tools:text="@tools:sample/lorem/random" />
 
-
         <TextView
-            android:id="@+id/tv_production_companies"
+            android:id="@+id/tv_label_cast"
+            style="@style/ItborneoText.Subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_overview"
             android:paddingHorizontal="@dimen/padding_layout"
             android:paddingTop="@dimen/padding_layout"
+            android:text="@string/storyline"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_casts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/padding_layout"
+            android:paddingTop="@dimen/padding_layout"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_overview"
+            app:layout_constraintTop_toBottomOf="@id/tv_label_cast"
+            tools:listitem="@layout/item_cast"
             tools:text="@tools:sample/lorem" />
 
 
