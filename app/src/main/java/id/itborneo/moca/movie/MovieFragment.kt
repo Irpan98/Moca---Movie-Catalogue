@@ -69,7 +69,7 @@ class MovieFragment : Fragment() {
         adapter = MovieAdapter {
             actionToDetail(it)
         }
-        binding.rvMovies.layoutManager = GridLayoutManager(context, 2)
+        binding.rvMovies.layoutManager = GridLayoutManager(context, 3)
         binding.rvMovies.adapter = adapter
     }
 

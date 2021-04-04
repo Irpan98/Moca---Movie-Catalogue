@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.factory.ViewModelFactory
 import id.itborneo.moca.core.model.MovieModel
+import id.itborneo.moca.core.model.detail.GenresItem
 import id.itborneo.moca.core.model.detail.MovieDetailModel
 import id.itborneo.moca.databinding.ActivityDetailBinding
 
@@ -45,6 +46,33 @@ class DetailActivity : AppCompatActivity() {
 //        initTabLayout()
 //        buttonListener()
         observerDetailMovie()
+        observerCredits()
+    }
+
+    private fun observerCredits() {
+        viewModel.getCredits().observe(this) {
+            when (it.status) {
+                Status.SUCCESS -> {
+//                    showLoading(false)
+
+                    if (it.data != null) {
+//                        updateUI(it.data)
+//                        userDetail = it.data
+                        Log.d(TAG, " getCredits ${it.status}, ${it.message} and ${it.data}")
+                    } else {
+//                        showError()
+                    }
+                }
+                Status.LOADING -> {
+//                    showLoading(true)
+                }
+                Status.ERROR -> {
+//                    showLoading(false)
+                    Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
+//                    showError()
+                }
+            }
+        }
     }
 
     private fun retrieveData() {
@@ -87,7 +115,7 @@ class DetailActivity : AppCompatActivity() {
 
         Glide.with(this)
             .load(
-                "https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.backdropPath}"
+                "https://image.tmdb.org/t/p/w500${data.backdropPath}"
             )
             .into(binding.ivBackdrop)
         Glide.with(this)
@@ -97,11 +125,24 @@ class DetailActivity : AppCompatActivity() {
             .into(binding.ivPoster)
 
 
-        binding.tvGenres.text = data.genres.toString()
+        binding.tvGenres.text = getGenres(data.genres)
         binding.tvOverview.text = data.overview.toString()
         binding.tvProductionCompanies.text = data.productionCompanies.toString()
         binding.tvTitle.text = data.title
         binding.tvVoteAverage.text = data.voteAverage.toString()
 
+    }
+
+    private fun getGenres(genres: List<GenresItem?>?): String {
+        var stringGenre = ""
+        genres?.forEachIndexed { index, genresItem ->
+            stringGenre += if (index != genres.lastIndex) {
+                " ${genresItem?.name} |"
+            } else {
+                " ${genresItem?.name}"
+            }
+        }
+
+        return stringGenre
     }
 }

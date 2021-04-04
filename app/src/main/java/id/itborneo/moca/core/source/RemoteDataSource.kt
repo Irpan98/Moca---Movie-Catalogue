@@ -19,7 +19,7 @@ class RemoteDataSource {
             }
         }
 
-     fun getMovies() = liveData(Dispatchers.IO) {
+    fun getMovies() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = api.getMovies()))
@@ -28,7 +28,7 @@ class RemoteDataSource {
         }
     }
 
-     fun getTrendingMovies() = liveData(Dispatchers.IO) {
+    fun getTrendingMovies() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = api.getTrendingMovie()))
@@ -37,7 +37,7 @@ class RemoteDataSource {
         }
     }
 
-     fun getTrendingSeries() = liveData(Dispatchers.IO) {
+    fun getTrendingSeries() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = api.getTrendingSeries()))
@@ -47,7 +47,7 @@ class RemoteDataSource {
     }
 
 
-     fun getNowPlayingMovies() = liveData(Dispatchers.IO) {
+    fun getNowPlayingMovies() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = api.getPlayingNowMovies()))
@@ -56,7 +56,7 @@ class RemoteDataSource {
         }
     }
 
-     fun getAiringTodaySeries() = liveData(Dispatchers.IO) {
+    fun getAiringTodaySeries() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
             emit(Resource.success(data = api.getAiringTodaySeries()))
@@ -64,6 +64,16 @@ class RemoteDataSource {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
+
+    fun getCreditsMovie(id: Int) =
+        liveData(Dispatchers.IO) {
+            emit(Resource.loading(data = null))
+            try {
+                emit(Resource.success(data = api.getCreditsMovie(id)))
+            } catch (exception: Exception) {
+                emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            }
+        }
 }
 
 

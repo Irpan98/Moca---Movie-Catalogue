@@ -1,5 +1,6 @@
 package id.itborneo.moca.core.networks
 
+import id.itborneo.moca.core.model.credits.CreditsModel
 import id.itborneo.moca.core.model.detail.MovieDetailModel
 import id.itborneo.moca.core.model.response.MoviesResponse
 import retrofit2.http.GET
@@ -27,5 +28,11 @@ interface ApiService {
 
     @GET("3/tv/airing_today")
     suspend fun getAiringTodaySeries(): MoviesResponse
+
+    @GET("3/movie/{id}/credits")
+    suspend fun getCreditsMovie(
+        @Path("id") id: Int
+    ): CreditsModel
+
 }
 
