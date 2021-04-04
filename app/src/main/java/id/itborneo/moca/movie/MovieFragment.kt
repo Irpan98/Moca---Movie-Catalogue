@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.model.MovieModel
 import id.itborneo.moca.databinding.FragmentMovieBinding
-import id.itborneo.moca.detail.DetailActivity
+import id.itborneo.moca.detail.DetailMovieActivity
 
 class MovieFragment : Fragment() {
 
@@ -74,7 +74,10 @@ class MovieFragment : Fragment() {
     }
 
     private fun actionToDetail(movie: MovieModel) {
-        DetailActivity.getInstance(requireContext(), movie)
+        if (movie.id != null) {
+            DetailMovieActivity.getInstance(requireContext(), movie.id)
+
+        }
     }
 
 

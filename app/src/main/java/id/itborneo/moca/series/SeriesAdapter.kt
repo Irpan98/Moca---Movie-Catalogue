@@ -1,4 +1,4 @@
-package id.itborneo.moca.home
+package id.itborneo.moca.series
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,36 +7,37 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import id.itborneo.moca.core.constant.ImageConstant
-import id.itborneo.moca.core.model.HomeItemModel
-import id.itborneo.moca.databinding.ItemHomeBinding
+import id.itborneo.moca.core.model.SeriesModel
+import id.itborneo.moca.databinding.ItemMovieBinding
 
 
-class HomeAdapter(private val listener: (HomeItemModel) -> Unit) :
-    RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class SeriesAdapter(private val listener: (SeriesModel) -> Unit) :
+    RecyclerView.Adapter<SeriesAdapter.ViewHolder>() {
 
-    private var items = listOf<HomeItemModel>()
+    private var series = listOf<SeriesModel>()
 
-    fun set(items: List<HomeItemModel>) {
-        this.items = items
+    fun set(series: List<SeriesModel>) {
+        this.series = series
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemBinding =
-            ItemHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(series[position])
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount() = series.size
 
-    inner class ViewHolder(private val itemBinding: ItemHomeBinding) :
+    inner class ViewHolder(private val itemBinding: ItemMovieBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(movie: HomeItemModel) {
+        fun bind(movie: SeriesModel) {
             itemBinding.apply {
+                tvName.text = movie.name
 
                 Glide.with(root.context)
                     .load("${ImageConstant.BASE_IMAGE}${movie.posterPath}")

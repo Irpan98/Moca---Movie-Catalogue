@@ -1,20 +1,17 @@
 package id.itborneo.moca.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import id.itborneo.moca.core.model.response.MoviesResponse
 import id.itborneo.moca.core.repository.MocaRepository
-import id.itborneo.moca.core.utils.Resource
 
 class HomeViewModel : ViewModel() {
 
     private val repo = MocaRepository()
 
-    private val trendingMovies: LiveData<Resource<MoviesResponse>> = repo.getTrendingMovies()
-    private val trendingSeries: LiveData<Resource<MoviesResponse>> = repo.getTrendingSeries()
+    private val trendingMovies = repo.getTrendingMovies()
+    private val trendingSeries = repo.getTrendingSeries()
 
-    private val nowPlayingMovie: LiveData<Resource<MoviesResponse>> = repo.getNowPlayingMovies()
-    private val airingTodaySeries: LiveData<Resource<MoviesResponse>> = repo.getAiringTodaySeries()
+    private val nowPlayingMovie = repo.getNowPlayingMovies()
+    private val airingTodaySeries = repo.getAiringTodaySeries()
 
     fun getTrendingSeries() = trendingSeries
     fun getTrendingMovies() = trendingMovies

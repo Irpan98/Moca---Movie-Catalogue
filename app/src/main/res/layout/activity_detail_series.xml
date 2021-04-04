@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".detail.DetailSeriesActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:context=".detail.DetailActivity">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/ivBack"
@@ -88,9 +88,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:paddingHorizontal="@dimen/padding_layout"
-                android:paddingTop="@dimen/padding_layout"
-
+                android:layout_marginHorizontal="@dimen/padding_layout"
+                android:layout_marginTop="@dimen/padding_layout"
+                android:lines="1"
                 tools:text="@tools:sample/lorem" />
         </HorizontalScrollView>
 
@@ -110,11 +110,11 @@
 
         <TextView
             android:id="@+id/tv_label_storyline"
-            style="@style/ItborneoText.Subtitle"
+            style="@style/ItborneoText.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/padding_layout"
-            android:paddingTop="@dimen/padding_layout"
+            android:layout_marginHorizontal="@dimen/padding_layout"
+            android:layout_marginTop="@dimen/padding_layout"
             android:text="@string/storyline"
             app:layout_constraintTop_toBottomOf="@id/tv_vote_average" />
 
@@ -123,7 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_layout"
-            android:paddingTop="@dimen/padding_layout_half"
+            android:layout_marginTop="@dimen/padding_layout_half"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_label_storyline"
@@ -132,21 +132,20 @@
 
         <TextView
             android:id="@+id/tv_label_cast"
-            style="@style/ItborneoText.Subtitle"
+            style="@style/ItborneoText.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_overview"
-            android:paddingHorizontal="@dimen/padding_layout"
-            android:paddingTop="@dimen/padding_layout"
-            android:text="@string/storyline"/>
+            android:layout_marginHorizontal="@dimen/padding_layout"
+            android:layout_marginTop="@dimen/padding_layout"
+            android:text="@string/casts"
+            app:layout_constraintTop_toBottomOf="@id/tv_overview" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_casts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_layout"
             android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/padding_layout"
-            android:paddingTop="@dimen/padding_layout"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

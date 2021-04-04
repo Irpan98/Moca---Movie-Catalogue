@@ -11,33 +11,32 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.factory.ViewModelFactory
-import id.itborneo.moca.core.model.MovieModel
 import id.itborneo.moca.core.model.detail.GenresItem
 import id.itborneo.moca.core.model.detail.MovieDetailModel
-import id.itborneo.moca.databinding.ActivityDetailBinding
+import id.itborneo.moca.databinding.ActivityDetailMoviesBinding
 
-class DetailActivity : AppCompatActivity() {
+class DetailMovieActivity : AppCompatActivity() {
 
 
     companion object {
-        const val EXTRA_MOVIE = "extra_movie"
+        const val EXTRA_ID_MOVIE = "extra_movie"
         private const val TAG = "DetailActivity"
 
-        fun getInstance(context: Context, data: MovieModel) {
-            val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra(EXTRA_MOVIE, data)
+        fun getInstance(context: Context, data: Int) {
+            val intent = Intent(context, DetailMovieActivity::class.java)
+            intent.putExtra(EXTRA_ID_MOVIE, data)
             context.startActivity(intent)
         }
 
     }
 
     private lateinit var creditsAdapter: CastAdapter
-    private lateinit var binding: ActivityDetailBinding
+    private lateinit var binding: ActivityDetailMoviesBinding
 
-    private var getIntentData: MovieModel? = null
+    private var getIntentId: Int? = null
 
     private val viewModel: DetailViewModel by viewModels {
-        ViewModelFactory(getIntentData)
+        ViewModelFactory(getIntentId)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,11 +92,11 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun retrieveData() {
-        getIntentData = intent.extras?.getParcelable(EXTRA_MOVIE)
+        getIntentId = intent.extras?.getInt(EXTRA_ID_MOVIE)
     }
 
     private fun initBinding() {
-        binding = ActivityDetailBinding.inflate(layoutInflater)
+        binding = ActivityDetailMoviesBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
     }

@@ -3,7 +3,7 @@ package id.itborneo.moca.core.model.response
 import com.google.gson.annotations.SerializedName
 import id.itborneo.moca.core.model.MovieModel
 
-data class MoviesResponse(
+data class MovieListResponse(
 
     @field:SerializedName("page")
     val page: Int? = null,

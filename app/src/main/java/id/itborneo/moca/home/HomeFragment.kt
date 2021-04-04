@@ -10,7 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.itborneo.moca.core.enums.Status
+import id.itborneo.moca.core.model.HomeItemModel
 import id.itborneo.moca.databinding.FragmentHomeBinding
+import id.itborneo.moca.detail.DetailMovieActivity
+import id.itborneo.moca.detail.DetailSeriesActivity
 
 
 class HomeFragment : Fragment() {
@@ -40,6 +43,55 @@ class HomeFragment : Fragment() {
         observerData()
     }
 
+    private fun initRecycler() {
+
+        initRecyclerviewTrendingMovie()
+        initRecyclerviewTrendingSeries()
+
+        initRecyclerviewPlayingMovie()
+        initRecyclerviewAiringToday()
+
+
+    }
+
+    private fun initRecyclerviewAiringToday() {
+
+        binding.rvAiringTodaySeries.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        airingTodaySeriesAdapter = HomeAdapter {
+            actionToDetailSeries(it.id)
+        }
+        binding.rvAiringTodaySeries.adapter = airingTodaySeriesAdapter
+    }
+
+    private fun initRecyclerviewPlayingMovie() {
+        binding.rvNowPlayingMovies.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        playingNowMovieAdapter = HomeAdapter {
+            actionToDetailMovie(it.id)
+        }
+        binding.rvNowPlayingMovies.adapter = playingNowMovieAdapter
+    }
+
+    private fun initRecyclerviewTrendingSeries() {
+
+        binding.rvHomeSeries.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        trendingSeriesAdapter = HomeAdapter {
+            actionToDetailSeries(it.id)
+        }
+        binding.rvHomeSeries.adapter = trendingSeriesAdapter
+    }
+
+    private fun initRecyclerviewTrendingMovie() {
+        binding.rvHomeMovies.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        trendingMovieAdapter = HomeAdapter {
+            actionToDetailMovie(it.id)
+        }
+        binding.rvHomeMovies.adapter = trendingMovieAdapter
+    }
+
     private fun observerData() {
 
         observerTrendingMovies()
@@ -49,13 +101,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun observerAiringTodaySeries() {
-        viewModel.getAiringTodaySeries().observe(viewLifecycleOwner) {
+        viewModel.getAiringTodaySeries().observe(viewLifecycleOwner) { it ->
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {
                         val result = it.data.results
                         if (result != null) {
-                            airingTodaySeriesAdapter.set(result)
+                            val items = result.map { model ->
+                                HomeItemModel(
+                                    model.id, model.posterPath
+                                )
+                            }
+                            airingTodaySeriesAdapter.set(items)
                         }
                     }
 //                    showLoading(false)
@@ -77,7 +134,12 @@ class HomeFragment : Fragment() {
                     if (it.data != null) {
                         val result = it.data.results
                         if (result != null) {
-                            playingNowMovieAdapter.set(result)
+                            val items = result.map { model ->
+                                HomeItemModel(
+                                    model.id, model.posterPath
+                                )
+                            }
+                            playingNowMovieAdapter.set(items)
                         }
                     }
 //                    showLoading(false)
@@ -99,7 +161,12 @@ class HomeFragment : Fragment() {
                     if (it.data != null) {
                         val result = it.data.results
                         if (result != null) {
-                            trendingSeriesAdapter.set(result)
+                            val items = result.map { model ->
+                                HomeItemModel(
+                                    model.id, model.posterPath
+                                )
+                            }
+                            trendingSeriesAdapter.set(items)
                         }
                     }
 //                    showLoading(false)
@@ -121,7 +188,12 @@ class HomeFragment : Fragment() {
                     if (it.data != null) {
                         val result = it.data.results
                         if (result != null) {
-                            trendingMovieAdapter.set(result)
+                            val items = result.map { model ->
+                                HomeItemModel(
+                                    model.id, model.posterPath
+                                )
+                            }
+                            trendingMovieAdapter.set(items)
                         }
                     }
 //                    showLoading(false)
@@ -136,37 +208,15 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun initRecycler() {
-        binding.rvHomeMovies.layoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        trendingMovieAdapter = HomeAdapter {
-//            actionToDetail(it)
+    private fun actionToDetailMovie(id: Int?) {
+        if (id != null) {
+            DetailMovieActivity.getInstance(requireContext(), id)
         }
-        binding.rvHomeMovies.adapter = trendingMovieAdapter
+    }
 
-        binding.rvHomeSeries.layoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        trendingSeriesAdapter = HomeAdapter {
-//            actionToDetail(it)
+    private fun actionToDetailSeries(id: Int?) {
+        if (id != null) {
+            DetailSeriesActivity.getInstance(requireContext(), id)
         }
-        binding.rvHomeSeries.adapter = trendingSeriesAdapter
-
-
-
-        binding.rvNowPlayingMovies.layoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        playingNowMovieAdapter = HomeAdapter {
-//            actionToDetail(it)
-        }
-        binding.rvNowPlayingMovies.adapter = playingNowMovieAdapter
-
-
-        binding.rvAiringTodaySeries.layoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        airingTodaySeriesAdapter = HomeAdapter {
-//            actionToDetail(it)
-        }
-        binding.rvAiringTodaySeries.adapter = airingTodaySeriesAdapter
-
     }
 }

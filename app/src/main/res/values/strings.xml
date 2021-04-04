@@ -11,9 +11,9 @@
     <string name="favorite">Favorite</string>
     <string name="trending_series">Trending Series</string>
     <string name="now_playing_movies">Now Playing Movies</string>
-    <string name="now_playing_series">Now Playing Series</string>
     <string name="airing_today">Airing Today</string>
     <string name="backdrop_poster">backdrop poster</string>
     <string name="storyline">Storyline</string>
     <string name="share_button">share button</string>
+    <string name="casts">Casts</string>
 </resources>

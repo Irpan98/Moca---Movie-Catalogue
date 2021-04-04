@@ -9,6 +9,25 @@ class RemoteDataSource {
 
     private val api = ApiConfig.apiService
 
+
+    fun getMovies() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = api.getMovies()))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
+    fun getSeries() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = api.getSeries()))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
     fun getDetailMovie(id: Int) =
         liveData(Dispatchers.IO) {
             emit(Resource.loading(data = null))
@@ -19,14 +38,15 @@ class RemoteDataSource {
             }
         }
 
-    fun getMovies() = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = api.getMovies()))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+    fun getDetailSeries(id: Int) =
+        liveData(Dispatchers.IO) {
+            emit(Resource.loading(data = null))
+            try {
+                emit(Resource.success(data = api.getDetailSeries(id)))
+            } catch (exception: Exception) {
+                emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            }
         }
-    }
 
     fun getTrendingMovies() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
