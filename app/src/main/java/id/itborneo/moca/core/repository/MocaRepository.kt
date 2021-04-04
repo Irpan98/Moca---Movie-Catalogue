@@ -12,4 +12,6 @@ class MocaRepository {
     fun getTrendingMovies() = remoteDataSource.getTrendingMovies()
     fun getTrendingSeries() = remoteDataSource.getTrendingSeries()
 
+    fun getNowPlayingMovies() = remoteDataSource.getNowPlayingMovies()
+    fun getAiringTodaySeries() = remoteDataSource.getAiringTodaySeries()
 }

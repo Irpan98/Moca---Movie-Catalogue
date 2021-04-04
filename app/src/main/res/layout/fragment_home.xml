@@ -78,10 +78,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_layout_2"
             android:paddingHorizontal="@dimen/padding_layout"
-            android:text="@string/now_playing_movies" />
+            android:text="@string/airing_today" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_now_playing_series"
+            android:id="@+id/rv_airing_today_series"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_layout"

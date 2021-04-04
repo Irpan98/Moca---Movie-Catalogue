@@ -19,6 +19,9 @@ class HomeFragment : Fragment() {
     private lateinit var trendingMovieAdapter: HomeAdapter
     private lateinit var trendingSeriesAdapter: HomeAdapter
 
+    private lateinit var playingNowMovieAdapter: HomeAdapter
+    private lateinit var airingTodaySeriesAdapter: HomeAdapter
+
     private lateinit var binding: FragmentHomeBinding
 
     private val viewModel: HomeViewModel by viewModels()
@@ -42,17 +45,17 @@ class HomeFragment : Fragment() {
         observerTrendingMovies()
         observerTrendingSeries()
         observerNowPlayingMovies()
-        observerNowPlayingSeries()
+        observerAiringTodaySeries()
     }
 
-    private fun observerNowPlayingSeries() {
-        viewModel.getTrendingSeries().observe(viewLifecycleOwner) {
+    private fun observerAiringTodaySeries() {
+        viewModel.getAiringTodaySeries().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {
                         val result = it.data.results
                         if (result != null) {
-                            trendingSeriesAdapter.set(result)
+                            airingTodaySeriesAdapter.set(result)
                         }
                     }
 //                    showLoading(false)
@@ -74,7 +77,7 @@ class HomeFragment : Fragment() {
                     if (it.data != null) {
                         val result = it.data.results
                         if (result != null) {
-                            trendingSeriesAdapter.set(result)
+                            playingNowMovieAdapter.set(result)
                         }
                     }
 //                    showLoading(false)
@@ -90,7 +93,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun observerTrendingSeries() {
-        viewModel.getNowPlayingSeries().observe(viewLifecycleOwner) {
+        viewModel.getTrendingSeries().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {
@@ -148,6 +151,22 @@ class HomeFragment : Fragment() {
         }
         binding.rvHomeSeries.adapter = trendingSeriesAdapter
 
+
+
+        binding.rvNowPlayingMovies.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        playingNowMovieAdapter = HomeAdapter {
+//            actionToDetail(it)
+        }
+        binding.rvNowPlayingMovies.adapter = playingNowMovieAdapter
+
+
+        binding.rvAiringTodaySeries.layoutManager =
+            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
+        airingTodaySeriesAdapter = HomeAdapter {
+//            actionToDetail(it)
+        }
+        binding.rvAiringTodaySeries.adapter = airingTodaySeriesAdapter
 
     }
 }

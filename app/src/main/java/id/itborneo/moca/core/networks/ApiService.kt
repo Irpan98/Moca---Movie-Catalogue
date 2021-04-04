@@ -21,5 +21,11 @@ interface ApiService {
 
     @GET("3/trending/tv/day")
     suspend fun getTrendingSeries(): MoviesResponse
+
+    @GET("3/movie/now_playing")
+    suspend fun getPlayingNowMovies(): MoviesResponse
+
+    @GET("3/tv/airing_today")
+    suspend fun getAiringTodaySeries(): MoviesResponse
 }
 

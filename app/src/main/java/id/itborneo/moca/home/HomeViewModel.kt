@@ -13,9 +13,13 @@ class HomeViewModel : ViewModel() {
     private val trendingMovies: LiveData<Resource<MoviesResponse>> = repo.getTrendingMovies()
     private val trendingSeries: LiveData<Resource<MoviesResponse>> = repo.getTrendingSeries()
 
+    private val nowPlayingMovie: LiveData<Resource<MoviesResponse>> = repo.getNowPlayingMovies()
+    private val airingTodaySeries: LiveData<Resource<MoviesResponse>> = repo.getAiringTodaySeries()
+
     fun getTrendingSeries() = trendingSeries
     fun getTrendingMovies() = trendingMovies
+
     fun getNowPlayingMovies() = nowPlayingMovie
-    fun getNowPlayingSeries() = nowPlayingSeries
+    fun getAiringTodaySeries() = airingTodaySeries
 
 }

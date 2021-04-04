@@ -12,4 +12,5 @@
     <string name="trending_series">Trending Series</string>
     <string name="now_playing_movies">Now Playing Movies</string>
     <string name="now_playing_series">Now Playing Series</string>
+    <string name="airing_today">Airing Today</string>
 </resources>
