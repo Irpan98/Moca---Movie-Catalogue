@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.factory.ViewModelFactory
 import id.itborneo.moca.core.model.MovieModel
@@ -85,12 +85,12 @@ class DetailActivity : AppCompatActivity() {
 
     private fun updateUI(data: MovieDetailModel) {
 
-        Picasso.get()
+        Glide.with(this)
             .load(
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.backdropPath}"
             )
             .into(binding.ivBackdrop)
-        Picasso.get()
+        Glide.with(this)
             .load(
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.posterPath}"
             )

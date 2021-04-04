@@ -41,11 +41,56 @@ class HomeFragment : Fragment() {
 
         observerTrendingMovies()
         observerTrendingSeries()
+        observerNowPlayingMovies()
+        observerNowPlayingSeries()
+    }
 
+    private fun observerNowPlayingSeries() {
+        viewModel.getTrendingSeries().observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    if (it.data != null) {
+                        val result = it.data.results
+                        if (result != null) {
+                            trendingSeriesAdapter.set(result)
+                        }
+                    }
+//                    showLoading(false)
+                }
+                Status.LOADING -> {
+//                    showLoading(true)
+                }
+                Status.ERROR -> {
+                    Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
+                }
+            }
+        }
+    }
+
+    private fun observerNowPlayingMovies() {
+        viewModel.getNowPlayingMovies().observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    if (it.data != null) {
+                        val result = it.data.results
+                        if (result != null) {
+                            trendingSeriesAdapter.set(result)
+                        }
+                    }
+//                    showLoading(false)
+                }
+                Status.LOADING -> {
+//                    showLoading(true)
+                }
+                Status.ERROR -> {
+                    Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
+                }
+            }
+        }
     }
 
     private fun observerTrendingSeries() {
-        viewModel.getTrendingSeries().observe(viewLifecycleOwner) {
+        viewModel.getNowPlayingSeries().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {
@@ -102,5 +147,7 @@ class HomeFragment : Fragment() {
 //            actionToDetail(it)
         }
         binding.rvHomeSeries.adapter = trendingSeriesAdapter
+
+
     }
 }

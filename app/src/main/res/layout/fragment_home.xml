@@ -1,38 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".home.HomeFragment">
+    android:layout_height="wrap_content">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="trending Movie" />
+        android:orientation="vertical"
+        tools:context=".home.HomeFragment">
 
+        <TextView
+            style="@style/ItborneoText.AppTitle"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:drawablePadding="@dimen/padding_layout_half"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/padding_layout"
+            android:text="@string/app_name"
+            app:drawableStartCompat="@drawable/ic_icon" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_home_movies"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_home" />
+        <TextView
+            style="@style/ItborneoText.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_layout_2"
+            android:paddingHorizontal="@dimen/padding_layout"
+            android:text="@string/trending_movies" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_home_movies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_home" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="trending Series" />
+        <TextView
+            style="@style/ItborneoText.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_layout_2"
+            android:paddingHorizontal="@dimen/padding_layout"
+            android:text="@string/trending_series" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_home_series"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_layout"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_home" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_home_series"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_home" />
-</LinearLayout>
+        <TextView
+            style="@style/ItborneoText.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_layout_2"
+            android:paddingHorizontal="@dimen/padding_layout"
+            android:text="@string/now_playing_series" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_now_playing_movies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_layout"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_home" />
+
+        <TextView
+            style="@style/ItborneoText.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_layout_2"
+            android:paddingHorizontal="@dimen/padding_layout"
+            android:text="@string/now_playing_movies" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_now_playing_series"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_layout"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_home" />
+    </LinearLayout>
+</ScrollView>

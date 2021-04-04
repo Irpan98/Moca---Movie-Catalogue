@@ -3,4 +3,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="movie_item">movie item</string>
+    <string name="image_poster">image poster</string>
+    <string name="trending_movies">Trending Movies</string>
+    <string name="home">Home</string>
+    <string name="movies">Movies</string>
+    <string name="series">Series</string>
+    <string name="favorite">Favorite</string>
+    <string name="trending_series">Trending Series</string>
+    <string name="now_playing_movies">Now Playing Movies</string>
+    <string name="now_playing_series">Now Playing Series</string>
 </resources>
