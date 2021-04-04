@@ -2,7 +2,7 @@
 <resources>
     <dimen name="padding_layout">10dp</dimen>
     <dimen name="padding_layout_2">12dp</dimen>
-    <dimen name="padding_layout_3">24dp</dimen>
+    <dimen name="padding_layout_3">18dp</dimen>
     <dimen name="padding_layout_half">7dp</dimen>
     <dimen name="card_radius">7dp</dimen>
 

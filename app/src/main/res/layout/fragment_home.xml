@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_layout_3"
         tools:context=".home.HomeFragment">
 
         <TextView
@@ -33,7 +34,7 @@
             android:id="@+id/rv_home_movies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/padding_layout"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_home" />
@@ -42,7 +43,7 @@
             style="@style/ItborneoText.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_layout_2"
+            android:layout_marginTop="@dimen/padding_layout_3"
             android:paddingHorizontal="@dimen/padding_layout"
             android:text="@string/trending_series" />
 
@@ -59,7 +60,7 @@
             style="@style/ItborneoText.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_layout_2"
+            android:layout_marginTop="@dimen/padding_layout_3"
             android:paddingHorizontal="@dimen/padding_layout"
             android:text="@string/now_playing_series" />
 
@@ -76,7 +77,7 @@
             style="@style/ItborneoText.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_layout_2"
+            android:layout_marginTop="@dimen/padding_layout_3"
             android:paddingHorizontal="@dimen/padding_layout"
             android:text="@string/airing_today" />
 
