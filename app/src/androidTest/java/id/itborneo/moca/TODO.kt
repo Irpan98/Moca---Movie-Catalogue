@@ -1,30 +1,44 @@
 package id.itborneo.moca
 
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.runner.RunWith
-
 /**
  * Instrumented test, which will execute on an Android device.
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-@RunWith(AndroidJUnit4::class)
 class TODO {
     /**
+     *
+     * Main Activity
+     * - can show bottom navigation
+     * - can show button movies
+     * - can show button series
+     * - can show button favorites
+     *
      *
      * Movie Fragment
      * - can open movie fragment
      * - can show list movie
-     * - cek if list not 0
      * - can scroll
      * - can click detail
+     * - Detail Movies
+     *      - can show title
+     *      - can show genres
+     *      - can show vote average
+     *      - can show Overview
+     *      - can show Casts
      *
      * Series Fragment
      * - can open movie fragment
      * - can show list movie
-     * - cek if list not 0
      * - can scroll
      * - can click detail
+     * - can show detail series name
+     * - Detail Movies
+     *      - can show title
+     *      - can show genres
+     *      - can show vote average
+     *      - can show Overview
+     *      - can show Casts
      *
      *
      * Home Fragment

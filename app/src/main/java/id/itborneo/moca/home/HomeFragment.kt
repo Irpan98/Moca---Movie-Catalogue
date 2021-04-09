@@ -50,8 +50,6 @@ class HomeFragment : Fragment() {
 
         initRecyclerviewPlayingMovie()
         initRecyclerviewAiringToday()
-
-
     }
 
     private fun initRecyclerviewAiringToday() {

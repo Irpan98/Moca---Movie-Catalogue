@@ -16,7 +16,7 @@
         android:label="fragment_movie"
         tools:layout="@layout/fragment_movie" />
     <fragment
-        android:id="@+id/tvShowFragment"
+        android:id="@+id/seriesFragment"
         android:name="id.itborneo.moca.series.SeriesFragment"
         android:label="fragment_tv_show"
         tools:layout="@layout/fragment_series" />
