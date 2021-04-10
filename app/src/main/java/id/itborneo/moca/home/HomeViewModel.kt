@@ -5,7 +5,7 @@ import id.itborneo.moca.core.repository.MocaRepository
 
 class HomeViewModel : ViewModel() {
 
-    private val repo = MocaRepository()
+    private val repo = MocaRepository
 
     private val trendingMovies = repo.getTrendingMovies()
     private val trendingSeries = repo.getTrendingSeries()

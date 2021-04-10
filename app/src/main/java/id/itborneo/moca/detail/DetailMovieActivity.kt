@@ -13,6 +13,7 @@ import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.factory.ViewModelFactory
 import id.itborneo.moca.core.model.detail.GenresItem
 import id.itborneo.moca.core.model.detail.MovieDetailModel
+import id.itborneo.moca.core.repository.MocaRepository
 import id.itborneo.moca.databinding.ActivityDetailMoviesBinding
 
 class DetailMovieActivity : AppCompatActivity() {
@@ -36,7 +37,9 @@ class DetailMovieActivity : AppCompatActivity() {
     private var getIntentId: Int? = null
 
     private val viewModel: DetailViewModel by viewModels {
-        ViewModelFactory(getIntentId)
+        val repo = MocaRepository
+
+        ViewModelFactory(repo, getIntentId)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

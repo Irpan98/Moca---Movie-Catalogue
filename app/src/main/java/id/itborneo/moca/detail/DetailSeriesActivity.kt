@@ -13,6 +13,7 @@ import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.factory.ViewModelFactory
 import id.itborneo.moca.core.model.detail.GenresItem
 import id.itborneo.moca.core.model.detail.SeriesDetailModel
+import id.itborneo.moca.core.repository.MocaRepository
 import id.itborneo.moca.databinding.ActivityDetailSeriesBinding
 
 class DetailSeriesActivity : AppCompatActivity() {
@@ -34,7 +35,9 @@ class DetailSeriesActivity : AppCompatActivity() {
     private var getIntentId: Int? = null
 
     private val viewModel: DetailSeriesViewModel by viewModels {
-        ViewModelFactory(getIntentId)
+        val repo = MocaRepository
+
+        ViewModelFactory(repo, getIntentId)
     }
 
 

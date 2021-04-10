@@ -9,6 +9,10 @@ buildscript {
         legacy_support_version = "1.0.0"
         junit_version = "4.13.2"
         androidx_junit_version = "1.1.2"
+        archLifecycleVersion = '2.1.0'
+        mockitoVersion = '3.6.0'
+        mockitoKotlinVersion = '2.2.0'
+
         espresso_version = "3.3.0"
         androidXTestVersion = '1.2.0'
         idleResourceVersion = '3.2.0'

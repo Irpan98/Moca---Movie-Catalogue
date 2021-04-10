@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.itborneo.moca.core.enums.Status
+import id.itborneo.moca.core.factory.ViewModelFactory
 import id.itborneo.moca.core.model.MovieModel
+import id.itborneo.moca.core.repository.MocaRepository
 import id.itborneo.moca.databinding.FragmentMovieBinding
 import id.itborneo.moca.detail.DetailMovieActivity
 
@@ -24,7 +26,13 @@ class MovieFragment : Fragment() {
     private lateinit var binding: FragmentMovieBinding
     private lateinit var adapter: MovieAdapter
 
-    private val viewModel: MovieViewModel by viewModels()
+    private val viewModel: MovieViewModel by viewModels {
+        val repo = MocaRepository
+
+        ViewModelFactory(repo)
+
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

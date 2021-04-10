@@ -1,29 +1,17 @@
 package id.itborneo.moca
 
-import android.os.Build
-import id.itborneo.moca.main.MainActivity
-import junit.framework.Assert.assertNotNull
-import org.hamcrest.CoreMatchers.equalTo
-import org.hamcrest.MatcherAssert.assertThat
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.Robolectric
-import org.robolectric.RobolectricTestRunner
-import org.robolectric.annotation.Config
 
-
-@RunWith(RobolectricTestRunner::class)
-@Config(sdk = [Build.VERSION_CODES.P])
+//@RunWith(RobolectricTestRunner::class)
+//@Config(sdk = [Build.VERSION_CODES.P])
 class RobolectricActivityTest {
-    private var activity: MainActivity? = null
-
-    @Before
-    @Throws(Exception::class)
-    fun setUp() {
-        activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
-
-    }
+//    private lateinit var activity: MainActivity
+//
+//    @Before
+//    @Throws(Exception::class)
+//    fun setUp() {
+//        activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
+//
+//    }
 
     //    @Test
 //    @Throws(Exception::class)
@@ -39,18 +27,32 @@ class RobolectricActivityTest {
 ////        assertEquals(10, leftMargin)
 //    }
 //
-    @Test
-    @Throws(Exception::class)
-    fun checkActivityNotNull() {
-        assertNotNull(activity)
-    }
+//    @Test
+//    @Throws(Exception::class)
+//    fun checkActivityNotNull() {
+//        assertNotNull(activity)
+//    }
+//
+//    @Test
+//    @Throws(Exception::class)
+//    fun shouldHaveCorrectAppName() {
+//        val hello: String = activity?.resources?.getString(R.string.app_name) ?: ""
+//        assertThat(hello, equalTo("Moca Jetpack"))
+//    }
+//
+//
+//    @Test
+//    @Throws(Exception::class)
+//
+//    fun homeFragment() {
+////        val homeFragment = launchFragmentInContainer<HomeFragment>()
+//        val homeFragment = FragmentScenario.launch(HomeFragment::class.java)
+//
+//        onView(withId(R.id.rv_movies)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+//
+//        assertNotNull(homeFragment)
+//    }
 
-    @Test
-    @Throws(Exception::class)
-    fun shouldHaveCorrectAppName() {
-        val hello: String = activity?.resources?.getString(R.string.app_name) ?:""
-        assertThat(hello, equalTo("Moca Jetpack"))
-    }
 //
 //    @Test
 //    @Throws(Exception::class)

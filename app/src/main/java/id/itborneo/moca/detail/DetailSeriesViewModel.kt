@@ -4,9 +4,8 @@ import androidx.lifecycle.ViewModel
 import id.itborneo.moca.core.model.SeriesModel
 import id.itborneo.moca.core.repository.MocaRepository
 
-class DetailSeriesViewModel(private val id: Int) : ViewModel() {
+class DetailSeriesViewModel(repo: MocaRepository,private val id: Int) : ViewModel() {
 
-    private val repo = MocaRepository()
 
     private var detail = repo.getDetailSeries(id)
     private var credits = repo.getCredits(id)

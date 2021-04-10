@@ -2,11 +2,11 @@ package id.itborneo.moca.core.repository
 
 import id.itborneo.moca.core.source.RemoteDataSource
 
-class MocaRepository {
+object MocaRepository {
 
     private val remoteDataSource = RemoteDataSource()
 
-    fun getMovies() = remoteDataSource.getMovies()
+     fun getMovies() = remoteDataSource.getMovies()
     fun getSeries() = remoteDataSource.getSeries()
 
 
