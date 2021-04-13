@@ -23,7 +23,6 @@ class HomeViewModelTest {
 
     private lateinit var viewModel: HomeViewModel
 
-
     @Mock
     private lateinit var repository: MocaRepository
 

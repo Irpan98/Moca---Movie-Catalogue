@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -70,7 +71,7 @@ class DetailMovieActivity : AppCompatActivity() {
         movieViewModel.getCredits().observe(this) {
             when (it.status) {
                 Status.SUCCESS -> {
-//                    showLoading(false)
+                    showLoading(false)
 
                     if (it.data != null) {
                         it.data.cast?.let { it1 -> creditsAdapter.set(it1) }
@@ -79,16 +80,16 @@ class DetailMovieActivity : AppCompatActivity() {
 //                        userDetail = it.data
                         Log.d(TAG, " getCredits ${it.status}, ${it.message} and ${it.data}")
                     } else {
-//                        showError()
+                        showError()
                     }
                 }
                 Status.LOADING -> {
-//                    showLoading(true)
+                    showLoading(true)
                 }
                 Status.ERROR -> {
-//                    showLoading(false)
+                    showLoading(false)
                     Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
-//                    showError()
+                    showError()
                 }
             }
         }
@@ -162,5 +163,25 @@ class DetailMovieActivity : AppCompatActivity() {
         }
 
         return stringGenre
+    }
+
+    private fun showLoading( showIt: Boolean = true) {
+        binding.incLoading.root.apply {
+            visibility = if (showIt) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        }
+    }
+
+    private fun showError(showIt: Boolean = true) {
+        binding.incError.root.apply {
+            visibility = if (showIt) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        }
     }
 }

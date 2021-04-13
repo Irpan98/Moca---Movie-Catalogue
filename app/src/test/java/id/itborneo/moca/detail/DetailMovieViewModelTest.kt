@@ -1,4 +1,4 @@
-package id.itborneo.moca.movie
+package id.itborneo.moca.detail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import id.itborneo.moca.core.repository.MocaRepository
@@ -17,64 +17,53 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
-class MovieViewModelTest {
-
+class DetailMovieViewModelTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var viewModel: MovieViewModel
+    private lateinit var viewModel: DetailMovieViewModel
 
     @Mock
     private lateinit var repository: MocaRepository
 
     @Before
     fun setUp() {
-        viewModel = MovieViewModel(repository)
+        viewModel = DetailMovieViewModel(
+            repository,
+            1
+        )
     }
 
     @Test
-    fun getMovieCoroutine() = runBlockingTest {
+    fun getDetailMovieCoroutine() = runBlockingTest {
 
-        Mockito.`when`(repository.getMovies()).thenReturn(DummyTestData.getMovies())
+        Mockito.`when`(repository.getDetailMovie(1)).thenReturn(DummyTestData.getDetailMovie())
 
         //check not null viewModel
         assertNotNull(viewModel)
 
-        // not null movies after called
-        viewModel.initMovies()
-        assertNotNull(viewModel.getMovies())
+        // not null movies after getDetailMovie
+        viewModel.initDetailMovie()
+        assertNotNull(viewModel.getDetailMovie())
 
-        //check title data getMovies
+        //check data get detail movie
         assertEquals(
-            viewModel.getMovies().value?.data?.results?.get(0)?.title,
-            DummyTestData.getMovies().value?.data?.results?.get(0)?.title
+            viewModel.getDetailMovie().value?.data,
+            DummyTestData.getDetailMovie().value?.data
         )
     }
 
-    @Test
-    fun getEmptyMovieCoroutine() = runBlockingTest {
-
-        Mockito.`when`(repository.getMovies()).thenReturn(DummyTestData.getMoviesEmpty())
-        viewModel.initMovies()
-
-        //check size data should be 0
-        assertEquals(
-            0,
-            viewModel.getMovies().value?.data?.results?.size,
-        )
-    }
 
     @Test
     fun getErrorMovieCoroutine() = runBlockingTest {
 
-        Mockito.`when`(repository.getMovies()).thenReturn(DummyTestData.getMoviesError())
-        viewModel.initMovies()
+        Mockito.`when`(repository.getDetailMovie(1)).thenReturn(DummyTestData.getDetailMoviesError())
+        viewModel.initDetailMovie()
 
         //check message, should get error message
         assertEquals(
             DummyTestData.getMoviesError().value?.message,
-            viewModel.getMovies().value?.message,
+            viewModel.getDetailMovie().value?.message,
         )
     }
-
 }

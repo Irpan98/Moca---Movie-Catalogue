@@ -45,7 +45,6 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
-//        initNav(view)
         observerData()
     }
 
@@ -59,12 +58,14 @@ class MovieFragment : Fragment() {
                             adapter.set(result)
                         }
                     }
-//                    showLoading(false)
+                    showLoading(false)
                 }
                 Status.LOADING -> {
-//                    showLoading(true)
+                    showLoading(true)
                 }
                 Status.ERROR -> {
+                    showLoading(false)
+                    showError()
                     Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
                 }
             }
@@ -84,6 +85,26 @@ class MovieFragment : Fragment() {
         if (movie.id != null) {
             DetailMovieActivity.getInstance(requireContext(), movie.id)
 
+        }
+    }
+
+    private fun showLoading( showIt: Boolean = true) {
+        binding.incLoading.root.apply {
+            visibility = if (showIt) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        }
+    }
+
+    private fun showError(showIt: Boolean = true) {
+        binding.incError.root.apply {
+            visibility = if (showIt) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
         }
     }
 

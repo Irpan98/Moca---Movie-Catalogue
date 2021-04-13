@@ -1,35 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    tools:context=".movie.MovieFragment"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".movie.MovieFragment">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/ItborneoText.AppTitle"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:drawablePadding="@dimen/padding_layout_half"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/padding_layout"
+                android:paddingBottom="@dimen/padding_layout_half"
+                android:text="@string/movies" />
+            <include
+                android:id="@+id/inc_loading"
+                layout="@layout/partial_loading_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_movies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/padding_layout_half"
+                android:overScrollMode="never"
+                android:visibility="visible"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_poster"
+                tools:spanCount="3" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/inc_error"
+        layout="@layout/partial_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:visibility="gone" />
 
-        <TextView
-            style="@style/ItborneoText.AppTitle"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:drawablePadding="@dimen/padding_layout_half"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="@dimen/padding_layout"
-            android:paddingBottom="@dimen/padding_layout_half"
-            android:text="@string/movies" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_movies"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/padding_layout_half"
-            android:overScrollMode="never"
-            android:visibility="visible"
-            tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:listitem="@layout/item_movie"
-            tools:spanCount="3" />
-
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+</FrameLayout>

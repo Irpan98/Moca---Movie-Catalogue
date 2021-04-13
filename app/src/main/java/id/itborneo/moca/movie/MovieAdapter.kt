@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import id.itborneo.moca.R
 import id.itborneo.moca.core.constant.ImageConstant
 import id.itborneo.moca.core.model.MovieModel
-import id.itborneo.moca.databinding.ItemMovieBinding
+import id.itborneo.moca.databinding.ItemPosterBinding
 
 
 class MovieAdapter(private val listener: (MovieModel) -> Unit) :
@@ -23,7 +24,7 @@ class MovieAdapter(private val listener: (MovieModel) -> Unit) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemBinding =
-            ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemPosterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(itemBinding)
     }
 
@@ -33,7 +34,7 @@ class MovieAdapter(private val listener: (MovieModel) -> Unit) :
 
     override fun getItemCount() = movies.size
 
-    inner class ViewHolder(private val itemBinding: ItemMovieBinding) :
+    inner class ViewHolder(private val itemBinding: ItemPosterBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(movie: MovieModel) {
             itemBinding.apply {
@@ -46,6 +47,7 @@ class MovieAdapter(private val listener: (MovieModel) -> Unit) :
 
                 Glide.with(root.context)
                     .load("${ImageConstant.BASE_IMAGE}${movie.posterPath}")
+                    .placeholder(R.drawable.ic_placeholder_image)
                     .transform(CenterCrop(), RoundedCorners(ImageConstant.IMAGE_RADIUS))
                     .into(ivPoster)
 //                tvName.text = user.login

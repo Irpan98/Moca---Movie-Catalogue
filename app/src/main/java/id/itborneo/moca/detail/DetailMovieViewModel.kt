@@ -1,15 +1,27 @@
 package id.itborneo.moca.detail
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import id.itborneo.moca.core.model.MovieModel
+import androidx.lifecycle.viewModelScope
+import id.itborneo.moca.core.model.credits.CreditsModel
+import id.itborneo.moca.core.model.detail.MovieDetailModel
 import id.itborneo.moca.core.repository.MocaRepository
+import id.itborneo.moca.core.utils.Resource
+import kotlinx.coroutines.launch
 
-class DetailMovieViewModel(repo: MocaRepository, private val id: Int) : ViewModel() {
+class DetailMovieViewModel(private val repo: MocaRepository, private val id: Int) : ViewModel() {
+    private lateinit var detail: LiveData<Resource<MovieDetailModel>>
+    private lateinit var credits: LiveData<Resource<CreditsModel>>
 
 
-    private var detail = repo.getDetailMovie(id ?: 0)
-    private var credits = repo.getCredits(id ?: 0)
+    init {
+        initDetailMovie()
+    }
 
+    fun initDetailMovie() = viewModelScope.launch {
+        detail = repo.getDetailMovie(id)
+        credits = repo.getCredits(id)
+    }
 
     fun getDetailMovie() = detail
 

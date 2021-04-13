@@ -29,10 +29,11 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private val viewModel: HomeViewModel by viewModels{
+    private val viewModel: HomeViewModel by viewModels {
         val repo = MocaRepository
         ViewModelFactory(repo)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -96,7 +97,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun observerData() {
-
         observerTrendingMovies()
         observerTrendingSeries()
         observerNowPlayingMovies()
@@ -118,13 +118,17 @@ class HomeFragment : Fragment() {
                             airingTodaySeriesAdapter.set(items)
                         }
                     }
-//                    showLoading(false)
+                    showLoading(binding.incAiringTodaySeriesLoading.root, false)
                 }
                 Status.LOADING -> {
-//                    showLoading(true)
+                    showLoading(binding.incAiringTodaySeriesLoading.root)
                 }
                 Status.ERROR -> {
+                    showLoading(binding.incAiringTodaySeriesLoading.root, false)
+
                     Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
+                    showError()
+
                 }
             }
         }
@@ -145,13 +149,16 @@ class HomeFragment : Fragment() {
                             playingNowMovieAdapter.set(items)
                         }
                     }
-//                    showLoading(false)
+                    showLoading(binding.incNowPlayingMoviesLoading.root, false)
                 }
                 Status.LOADING -> {
-//                    showLoading(true)
+                    showLoading(binding.incNowPlayingMoviesLoading.root)
                 }
                 Status.ERROR -> {
+                    showLoading(binding.incNowPlayingMoviesLoading.root, false)
                     Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
+                    showError()
+
                 }
             }
         }
@@ -172,13 +179,17 @@ class HomeFragment : Fragment() {
                             trendingSeriesAdapter.set(items)
                         }
                     }
-//                    showLoading(false)
+                    showLoading(binding.incTrendingSeriesLoading.root, false)
                 }
                 Status.LOADING -> {
-//                    showLoading(true)
+                    showLoading(binding.incTrendingSeriesLoading.root)
                 }
                 Status.ERROR -> {
+                    showError()
                     Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
+                    showLoading(binding.incTrendingSeriesLoading.root, true)
+
+
                 }
             }
         }
@@ -199,13 +210,15 @@ class HomeFragment : Fragment() {
                             trendingMovieAdapter.set(items)
                         }
                     }
-//                    showLoading(false)
+                    showLoading(binding.incTrendingMoviesLoading.root, false)
                 }
                 Status.LOADING -> {
-//                    showLoading(true)
+                    showLoading(binding.incTrendingMoviesLoading.root)
                 }
                 Status.ERROR -> {
+                    showLoading(binding.incTrendingMoviesLoading.root, false)
                     Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
+                    showError()
                 }
             }
         }
@@ -220,6 +233,26 @@ class HomeFragment : Fragment() {
     private fun actionToDetailSeries(id: Int?) {
         if (id != null) {
             DetailSeriesActivity.getInstance(requireContext(), id)
+        }
+    }
+
+    private fun showLoading(loadingView: ViewGroup, showIt: Boolean = true) {
+        loadingView.apply {
+            visibility = if (showIt) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        }
+    }
+
+    private fun showError(showIt: Boolean = true) {
+        binding.incError.root.apply {
+            visibility = if (showIt) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
         }
     }
 }

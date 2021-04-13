@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/padding_layout_half"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/padding_layout_2">
+
+    <View
+        android:id="@+id/iv_poster"
+        android:background="@color/grey_loading"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:contentDescription="@string/movie_item"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:background="@color/grey_loading"
+        android:id="@+id/tv_name"
+        style="@style/ItborneoText.ItemTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:layout_marginTop="3dp"
+        android:textSize="12sp"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/iv_poster" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,4 +51,31 @@ class SeriesViewModelTest {
         )
     }
 
+    @Test
+    fun getEmptySeriesCoroutine() = runBlockingTest {
+
+        Mockito.`when`(repository.getSeries()).thenReturn(DummyTestData.getSeriesEmpty())
+        viewModel.initSeries()
+
+        //check size data should be 0
+        assertEquals(
+            0,
+            viewModel.getSeries().value?.data?.results?.size,
+        )
+    }
+
+    @Test
+    fun getErrorMovieCoroutine() = runBlockingTest {
+
+        Mockito.`when`(repository.getSeries()).thenReturn(DummyTestData.getSeriesError())
+        viewModel.initSeries()
+
+        //check data, should have error meesage
+
+        assertEquals(
+            DummyTestData.getSeriesError().value?.message,
+            viewModel.getSeries().value?.message,
+        )
+    }
+
 }

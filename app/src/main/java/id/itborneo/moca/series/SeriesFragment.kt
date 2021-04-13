@@ -56,13 +56,15 @@ class SeriesFragment : Fragment() {
                             adapter.set(result)
                         }
                     }
-//                    showLoading(false)
+                    showLoading(false)
                 }
                 Status.LOADING -> {
-//                    showLoading(true)
+                    showLoading(true)
                 }
                 Status.ERROR -> {
                     Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
+                    showLoading(false)
+                    showError()
                 }
             }
         }
@@ -81,6 +83,26 @@ class SeriesFragment : Fragment() {
         val id = series.id
         if (id != null) {
             DetailSeriesActivity.getInstance(requireContext(), id)
+        }
+    }
+
+    private fun showLoading(showIt: Boolean = true) {
+        binding.incLoading.root.apply {
+            visibility = if (showIt) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        }
+    }
+
+    private fun showError(showIt: Boolean = true) {
+        binding.incError.root.apply {
+            visibility = if (showIt) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
         }
     }
 }
