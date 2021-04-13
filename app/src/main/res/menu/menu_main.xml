@@ -16,6 +16,6 @@
         android:title="@string/series" />
     <item
         android:id="@+id/favoriteFragment"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_favorite"
         android:title="@string/favorite" />
 </menu>

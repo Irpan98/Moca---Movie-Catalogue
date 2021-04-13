@@ -14,15 +14,16 @@
         android:theme="@style/Theme.MocaJetpack"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".detail.DetailSeriesActivity" />
-        <activity android:name=".detail.DetailMovieActivity" />
-        <activity android:name=".main.MainActivity">
+        <activity android:name=".splash.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".detail.DetailSeriesActivity" />
+        <activity android:name=".detail.DetailMovieActivity" />
+        <activity android:name=".main.MainActivity"/>
     </application>
 
 </manifest>
