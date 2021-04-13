@@ -16,7 +16,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class MovieFragmentTest {
+class DummyTestDataFragmentTest {
 
     @get:Rule
     var activityRule = ActivityScenarioRule(MainActivity::class.java)

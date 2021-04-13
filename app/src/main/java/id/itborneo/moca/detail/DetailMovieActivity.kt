@@ -36,7 +36,7 @@ class DetailMovieActivity : AppCompatActivity() {
 
     private var getIntentId: Int? = null
 
-    private val viewModel: DetailViewModel by viewModels {
+    private val movieViewModel: DetailMovieViewModel by viewModels {
         val repo = MocaRepository
 
         ViewModelFactory(repo, getIntentId)
@@ -67,7 +67,7 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
     private fun observerCredits() {
-        viewModel.getCredits().observe(this) {
+        movieViewModel.getCredits().observe(this) {
             when (it.status) {
                 Status.SUCCESS -> {
 //                    showLoading(false)
@@ -105,7 +105,7 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
     private fun observerDetailMovie() {
-        viewModel.getDetailMovie().observe(this) {
+        movieViewModel.getDetailMovie().observe(this) {
             when (it.status) {
                 Status.SUCCESS -> {
 //                    showLoading(false)

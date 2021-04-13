@@ -20,7 +20,6 @@ class MovieViewModel(private val repo: MocaRepository) : ViewModel() {
         listMovie = repo.getMovies()
     }
 
-    fun getMovies(): LiveData<Resource<MovieListResponse>> {
-        return listMovie
-    }
+    fun getMovies() = listMovie
+
 }

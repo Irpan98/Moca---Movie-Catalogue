@@ -28,7 +28,6 @@ class MovieFragment : Fragment() {
 
     private val viewModel: MovieViewModel by viewModels {
         val repo = MocaRepository
-
         ViewModelFactory(repo)
 
     }

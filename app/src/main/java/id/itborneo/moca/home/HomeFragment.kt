@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.itborneo.moca.core.enums.Status
+import id.itborneo.moca.core.factory.ViewModelFactory
 import id.itborneo.moca.core.model.HomeItemModel
+import id.itborneo.moca.core.repository.MocaRepository
 import id.itborneo.moca.databinding.FragmentHomeBinding
 import id.itborneo.moca.detail.DetailMovieActivity
 import id.itborneo.moca.detail.DetailSeriesActivity
@@ -27,7 +29,10 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val viewModel: HomeViewModel by viewModels{
+        val repo = MocaRepository
+        ViewModelFactory(repo)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

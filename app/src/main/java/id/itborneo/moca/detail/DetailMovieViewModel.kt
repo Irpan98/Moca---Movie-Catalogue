@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import id.itborneo.moca.core.model.MovieModel
 import id.itborneo.moca.core.repository.MocaRepository
 
-class DetailViewModel(repo: MocaRepository, private val id: Int) : ViewModel() {
+class DetailMovieViewModel(repo: MocaRepository, private val id: Int) : ViewModel() {
 
 
     private var detail = repo.getDetailMovie(id ?: 0)

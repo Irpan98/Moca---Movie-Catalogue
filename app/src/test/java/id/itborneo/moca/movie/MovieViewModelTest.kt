@@ -1,17 +1,12 @@
 package id.itborneo.moca.movie
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
-import id.itborneo.moca.core.model.MovieModel
-import id.itborneo.moca.core.model.response.MovieListResponse
 import id.itborneo.moca.core.repository.MocaRepository
-import id.itborneo.moca.core.utils.Resource
-import junit.framework.Assert.assertNotNull
-import kotlinx.coroutines.*
-import kotlinx.coroutines.test.resetMain
+import id.itborneo.moca.dummy.DummyTestData
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -29,103 +24,69 @@ class MovieViewModelTest {
 
     private lateinit var viewModel: MovieViewModel
 
-    //
     @Mock
     private lateinit var repository: MocaRepository
 
-
-    @ObsoleteCoroutinesApi
     @Before
     fun setUp() {
-//        repository = MocaRepository
         viewModel = MovieViewModel(repository)
-        Dispatchers.setMain(mainThreadSurrogate)
-
-
     }
 
-    @ObsoleteCoroutinesApi
-    private val mainThreadSurrogate = newSingleThreadContext("UI thread")
-
-
-    @ObsoleteCoroutinesApi
-    @After
-    fun tearDown() {
-        Dispatchers.resetMain() // reset main dispatcher to the original Main dispatcher
-        mainThreadSurrogate.close()
-    }
-
-//
-//    //    @Mock
-//    private lateinit var dummyMovie2: LiveData<Resource<MovieListResponse>>
-//
-//    @Mock
-//    private lateinit var observer: Observer<Resource<MovieListResponse>>
-//
-//    private lateinit var dummyMovie: LiveData<Resource<MovieListResponse>>
-
-
-    @ExperimentalCoroutinesApi
     @Test
-
     fun getMovieCoroutine() = runBlockingTest {
 
-        launch {
+        Mockito.`when`(repository.getMovies()).thenReturn(DummyTestData.getMovies())
 
-            val dummyMovie2 = MutableLiveData<Resource<MovieListResponse>>()
-            dummyMovie2.value = Resource.success(
-                MovieListResponse(results = listOf(MovieModel()))
-            )
+        //check not null viewModel
+        assertNotNull(viewModel)
 
-            Mockito.`when`(repository.getMovies()).thenReturn(dummyMovie2)
-//        assertEquals(repository.getMovies().value, dummyMovie2)
-            assertNotNull(viewModel)
-            viewModel.initMovies()
-            assertNotNull(viewModel.getMovies())
-        }
+        // not null movies after called
+        viewModel.initMovies()
+        assertNotNull(viewModel.getMovies())
+
+        //check title data getMovies
+        assertEquals(
+            viewModel.getMovies().value?.data?.results?.get(0)?.title,
+            DummyTestData.getMovies().value?.data?.results?.get(0)?.title
+        )
     }
 
-//    @Test
-//    fun getMovie() {
-////        coroutineR
-////        viewModel = MovieViewModel(repository)
-//
-//        dummyMovie2 = MutableLiveData<Resource<MovieListResponse>>()
-////        dummyMovie2.value = Resource.success(
-////            MovieListResponse(results = listOf(MovieModel()))
-////        )
-//
-////        Mockito.`when`(repository.getMovies()).thenReturn(dummyMovie2)
-////        Mockito.verify(repository).getMovies()
-////        assertEquals (repository.getMovies().value,dummyMovie2)
-//
-//
-////        Mockito.verify(repository).getMovies()
-//        assertNotNull(viewModel)
-//        assertNotNull(viewModel.getMovies())
-//
-//        assertEquals(viewModel.getMovies().value?.data, dummyMovie2)
-//
-////        assertNotNull(repository.getMovies())
-//
-//
-////        val dummyMovies = dummymovie
-////        val dummyListMovies = MutableLiveData<Resource<PagedList<MovieEntity>>>()
-////        dummyListMovies.value = dummyMovies
-////
-////        Mockito.`when`(repository.getMovies()).thenReturn(dummyListMovies)
-////        val movies = viewModel.getMovies()
-////        // memastikan repository di panggil
-////        Mockito.verify<Repository>(repository).getMovies()
-////
-////        //memastikan item yg didapat tidak null
-////        assertNotNull(movies)
-////
-////        //memastikan jumlah item sesuati yg diinput
-////        assertEquals(5, movies.value?.data?.size)
-////
-////        viewModel.getMovies().observeForever(observer)
-////        Mockito.verify(observer).onChanged(dummyMovies)
-//
-//    }
+    @Test
+    fun getEmptyMovieCoroutine() = runBlockingTest {
+
+        Mockito.`when`(repository.getMovies()).thenReturn(DummyTestData.getMoviesEmpty())
+
+        //check not null viewModel
+        assertNotNull(viewModel)
+
+        // not null movies after called
+        viewModel.initMovies()
+        assertNotNull(viewModel.getMovies())
+
+        //check size data should be 0
+        assertEquals(
+            0,
+            viewModel.getMovies().value?.data?.results?.size,
+        )
+    }
+
+    @Test
+    fun getErrorMovieCoroutine() = runBlockingTest {
+
+        Mockito.`when`(repository.getMovies()).thenReturn(DummyTestData.getMoviesError())
+
+        //check not null viewModel
+        assertNotNull(viewModel)
+
+        // not null movies after called
+        viewModel.initMovies()
+        assertNotNull(viewModel.getMovies())
+
+        //check message, should get error message
+        assertEquals(
+            DummyTestData.getMoviesError().value?.message,
+            viewModel.getMovies().value?.message,
+        )
+    }
+
 }
