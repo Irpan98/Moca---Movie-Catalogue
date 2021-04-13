@@ -18,7 +18,6 @@ import id.itborneo.moca.detail.DetailMovieActivity
 
 class MovieFragment : Fragment() {
 
-
     companion object {
         private const val TAG = "MovieFragment"
     }
@@ -29,9 +28,7 @@ class MovieFragment : Fragment() {
     private val viewModel: MovieViewModel by viewModels {
         val repo = MocaRepository
         ViewModelFactory(repo)
-
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +37,6 @@ class MovieFragment : Fragment() {
         binding = FragmentMovieBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -84,11 +80,10 @@ class MovieFragment : Fragment() {
     private fun actionToDetail(movie: MovieModel) {
         if (movie.id != null) {
             DetailMovieActivity.getInstance(requireContext(), movie.id)
-
         }
     }
 
-    private fun showLoading( showIt: Boolean = true) {
+    private fun showLoading(showIt: Boolean = true) {
         binding.incLoading.root.apply {
             visibility = if (showIt) {
                 View.VISIBLE
@@ -107,6 +102,4 @@ class MovieFragment : Fragment() {
             }
         }
     }
-
-
 }

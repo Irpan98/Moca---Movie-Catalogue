@@ -9,5 +9,5 @@
     android:gravity="center"
     android:maxLines="2"
     android:padding="@dimen/padding_layout"
-    android:text="Error, Please Try Again Later" />
+    android:text="@string/try_again_later" />
 

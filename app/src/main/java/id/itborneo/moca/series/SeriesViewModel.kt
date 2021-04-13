@@ -13,7 +13,6 @@ class SeriesViewModel(private val repo: MocaRepository) : ViewModel() {
 
     private lateinit var series: LiveData<Resource<SeriesListResponse>>
 
-
     init {
         initSeries()
     }

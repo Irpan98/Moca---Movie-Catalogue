@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,9 +48,7 @@ class DetailSeriesActivity : AppCompatActivity() {
         initBinding()
         initCreditsRecycler()
         retrieveData()
-//        initToolbar()
-//        initTabLayout()
-//        buttonListener()
+
         observerDetailMovie()
         observerCredits()
     }
@@ -64,9 +63,7 @@ class DetailSeriesActivity : AppCompatActivity() {
 
         binding.rvCasts.layoutManager =
             LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        creditsAdapter = CastAdapter {
-//            actionToDetail(it)
-        }
+        creditsAdapter = CastAdapter()
         binding.rvCasts.adapter = creditsAdapter
 
     }
@@ -75,25 +72,18 @@ class DetailSeriesActivity : AppCompatActivity() {
         viewModel.getCredits().observe(this) {
             when (it.status) {
                 Status.SUCCESS -> {
-//                    showLoading(false)
+                    showLoading(false)
 
                     if (it.data != null) {
                         it.data.cast?.let { it1 -> creditsAdapter.set(it1) }
-
-//                        updateUI(it.data)
-//                        userDetail = it.data
-                        Log.d(TAG, " getCredits ${it.status}, ${it.message} and ${it.data}")
-                    } else {
-//                        showError()
                     }
                 }
                 Status.LOADING -> {
-//                    showLoading(true)
+                    showLoading(true)
                 }
                 Status.ERROR -> {
-//                    showLoading(false)
+                    showLoading(false)
                     Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
-//                    showError()
                 }
             }
         }
@@ -108,23 +98,21 @@ class DetailSeriesActivity : AppCompatActivity() {
         viewModel.getDetail().observe(this) {
             when (it.status) {
                 Status.SUCCESS -> {
-//                    showLoading(false)
+                    showLoading(false)
 
                     if (it.data != null) {
                         updateUI(it.data)
-//                        userDetail = it.data
-                        Log.d(TAG, "${it.status}, ${it.message} and ${it.data}")
                     } else {
-//                        showError()
+                        showError()
                     }
                 }
                 Status.LOADING -> {
-//                    showLoading(true)
+                    showLoading(true)
                 }
                 Status.ERROR -> {
-//                    showLoading(false)
+                    showLoading(false)
                     Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
-//                    showError()
+                    showError()
                 }
             }
         }
@@ -134,18 +122,18 @@ class DetailSeriesActivity : AppCompatActivity() {
 
         Glide.with(this)
             .load(
-                "https://image.tmdb.org/t/p/w500${data?.backdropPath}"
+                "https://image.tmdb.org/t/p/w500${data.backdropPath}"
             )
             .into(binding.ivBackdrop)
         Glide.with(this)
             .load(
-                "https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data?.posterPath}"
+                "https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.posterPath}"
             )
             .into(binding.ivPoster)
 
 
         binding.tvGenres.text = getGenres(data.genres)
-        binding.tvOverview.text = data?.overview.toString()
+        binding.tvOverview.text = data.overview.toString()
         binding.tvTitle.text = data.name
         binding.tvVoteAverage.text = data.voteAverage.toString()
 
@@ -164,4 +152,24 @@ class DetailSeriesActivity : AppCompatActivity() {
         return stringGenre
     }
 
+
+    private fun showLoading(showIt: Boolean = true) {
+        binding.incLoading.root.apply {
+            visibility = if (showIt) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        }
+    }
+
+    private fun showError(showIt: Boolean = true) {
+        binding.incError.root.apply {
+            visibility = if (showIt) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        }
+    }
 }

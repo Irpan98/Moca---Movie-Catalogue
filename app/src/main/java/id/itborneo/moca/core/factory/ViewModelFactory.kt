@@ -13,9 +13,7 @@ import id.itborneo.moca.series.SeriesViewModel
 class ViewModelFactory(
     private val repository: MocaRepository,
     private val any: Any? = null,
-    private val any2: Any? = null,
-
-    ) : ViewModelProvider.NewInstanceFactory() {
+) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when {

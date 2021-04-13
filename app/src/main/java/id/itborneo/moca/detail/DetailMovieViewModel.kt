@@ -13,7 +13,6 @@ class DetailMovieViewModel(private val repo: MocaRepository, private val id: Int
     private lateinit var detail: LiveData<Resource<MovieDetailModel>>
     private lateinit var credits: LiveData<Resource<CreditsModel>>
 
-
     init {
         initDetailMovie()
     }

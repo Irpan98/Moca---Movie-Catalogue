@@ -49,9 +49,6 @@ class DetailMovieActivity : AppCompatActivity() {
         initBinding()
         initCreditsRecycler()
         retrieveData()
-//        initToolbar()
-//        initTabLayout()
-//        buttonListener()
         observerDetailMovie()
         observerCredits()
     }
@@ -60,9 +57,7 @@ class DetailMovieActivity : AppCompatActivity() {
 
         binding.rvCasts.layoutManager =
             LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        creditsAdapter = CastAdapter {
-//            actionToDetail(it)
-        }
+        creditsAdapter = CastAdapter()
         binding.rvCasts.adapter = creditsAdapter
 
     }
@@ -72,24 +67,18 @@ class DetailMovieActivity : AppCompatActivity() {
             when (it.status) {
                 Status.SUCCESS -> {
                     showLoading(false)
-
                     if (it.data != null) {
                         it.data.cast?.let { it1 -> creditsAdapter.set(it1) }
-
-//                        updateUI(it.data)
-//                        userDetail = it.data
-                        Log.d(TAG, " getCredits ${it.status}, ${it.message} and ${it.data}")
                     } else {
                         showError()
                     }
                 }
                 Status.LOADING -> {
-                    showLoading(true)
+                    showLoading()
                 }
                 Status.ERROR -> {
                     showLoading(false)
                     Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
-                    showError()
                 }
             }
         }
@@ -109,23 +98,21 @@ class DetailMovieActivity : AppCompatActivity() {
         movieViewModel.getDetailMovie().observe(this) {
             when (it.status) {
                 Status.SUCCESS -> {
-//                    showLoading(false)
+                    showLoading(false)
 
                     if (it.data != null) {
                         updateUI(it.data)
-//                        userDetail = it.data
-                        Log.d(TAG, "${it.status}, ${it.message} and ${it.data}")
                     } else {
-//                        showError()
+                        showError()
                     }
                 }
                 Status.LOADING -> {
-//                    showLoading(true)
+                    showLoading(true)
                 }
                 Status.ERROR -> {
-//                    showLoading(false)
+                    showLoading(false)
                     Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
-//                    showError()
+                    showError()
                 }
             }
         }
@@ -165,7 +152,7 @@ class DetailMovieActivity : AppCompatActivity() {
         return stringGenre
     }
 
-    private fun showLoading( showIt: Boolean = true) {
+    private fun showLoading(showIt: Boolean = true) {
         binding.incLoading.root.apply {
             visibility = if (showIt) {
                 View.VISIBLE

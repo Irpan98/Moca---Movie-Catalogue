@@ -11,7 +11,7 @@ class RemoteDataSource {
     private val api = ApiConfig.apiService
 
 
-     fun getMovies() = liveData(Dispatchers.IO) {
+    fun getMovies() = liveData(Dispatchers.IO) {
 
         emit(Resource.loading(data = null))
         EspressoIdlingResource.increment()
@@ -23,7 +23,6 @@ class RemoteDataSource {
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
             EspressoIdlingResource.decrement()
-
         }
     }
 
@@ -38,7 +37,6 @@ class RemoteDataSource {
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
             EspressoIdlingResource.decrement()
-
         }
     }
 
@@ -54,7 +52,6 @@ class RemoteDataSource {
             } catch (exception: Exception) {
                 emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
                 EspressoIdlingResource.decrement()
-
             }
         }
 
@@ -70,7 +67,6 @@ class RemoteDataSource {
             } catch (exception: Exception) {
                 emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
                 EspressoIdlingResource.decrement()
-
             }
         }
 
@@ -78,14 +74,12 @@ class RemoteDataSource {
         emit(Resource.loading(data = null))
         EspressoIdlingResource.increment()
         try {
-
             emit(Resource.success(data = api.getTrendingMovie()))
             EspressoIdlingResource.decrement()
 
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
             EspressoIdlingResource.decrement()
-
         }
     }
 
@@ -100,7 +94,6 @@ class RemoteDataSource {
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
             EspressoIdlingResource.decrement()
-
         }
     }
 
@@ -131,7 +124,6 @@ class RemoteDataSource {
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
             EspressoIdlingResource.decrement()
-
         }
     }
 
@@ -147,7 +139,6 @@ class RemoteDataSource {
             } catch (exception: Exception) {
                 emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
                 EspressoIdlingResource.decrement()
-
             }
         }
 }

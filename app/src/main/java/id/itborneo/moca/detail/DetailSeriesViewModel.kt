@@ -10,9 +10,9 @@ import id.itborneo.moca.core.utils.Resource
 import kotlinx.coroutines.launch
 
 class DetailSeriesViewModel(private val repo: MocaRepository, private val id: Int) : ViewModel() {
+
     private lateinit var detail: LiveData<Resource<SeriesDetailModel>>
     private lateinit var credits: LiveData<Resource<CreditsModel>>
-
 
     init {
         initDetailSeries()
@@ -23,11 +23,7 @@ class DetailSeriesViewModel(private val repo: MocaRepository, private val id: In
         credits = repo.getCredits(id)
     }
 
-
     fun getDetail() = detail
-
     fun getCredits() = credits
-
-
 }
 
