@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import id.itborneo.moca.R
 import id.itborneo.moca.core.constant.ImageConstant
 import id.itborneo.moca.core.model.HomeItemModel
@@ -41,7 +42,9 @@ class HomeAdapter(private val listener: (HomeItemModel) -> Unit) :
 
                 Glide.with(root.context)
                     .load("${ImageConstant.BASE_IMAGE}${movie.posterPath}")
-                    .placeholder(R.drawable.ic_placeholder_image)
+                    .apply(RequestOptions().dontTransform().placeholder(R.drawable.ic_placeholder_image))
+                    .fitCenter()
+                    .centerCrop()
                     .transform(CenterCrop(), RoundedCorners(ImageConstant.IMAGE_RADIUS))
                     .into(ivPoster)
                 root.setOnClickListener {

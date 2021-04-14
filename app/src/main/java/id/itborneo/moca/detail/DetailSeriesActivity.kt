@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import id.itborneo.moca.R
 import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.factory.ViewModelFactory
 import id.itborneo.moca.core.model.detail.GenresItem
@@ -49,7 +51,7 @@ class DetailSeriesActivity : AppCompatActivity() {
         initCreditsRecycler()
         retrieveData()
 
-        observerDetailMovie()
+        observerDetailSeries()
         observerCredits()
     }
 
@@ -94,7 +96,7 @@ class DetailSeriesActivity : AppCompatActivity() {
     }
 
 
-    private fun observerDetailMovie() {
+    private fun observerDetailSeries() {
         viewModel.getDetail().observe(this) {
             when (it.status) {
                 Status.SUCCESS -> {
@@ -122,21 +124,17 @@ class DetailSeriesActivity : AppCompatActivity() {
 
         Glide.with(this)
             .load(
-                "https://image.tmdb.org/t/p/w500${data.backdropPath}"
-            )
-            .into(binding.ivBackdrop)
-        Glide.with(this)
-            .load(
                 "https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.posterPath}"
             )
+            .apply(RequestOptions().dontTransform().placeholder(R.drawable.ic_placeholder_image))
+            .fitCenter()
+            .centerCrop()
             .into(binding.ivPoster)
-
 
         binding.tvGenres.text = getGenres(data.genres)
         binding.tvOverview.text = data.overview.toString()
         binding.tvTitle.text = data.name
         binding.tvVoteAverage.text = data.voteAverage.toString()
-
     }
 
     private fun getGenres(genres: List<GenresItem?>?): String {

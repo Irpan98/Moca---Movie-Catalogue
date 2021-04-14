@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import id.itborneo.moca.R
 import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.factory.ViewModelFactory
 import id.itborneo.moca.core.model.detail.GenresItem
@@ -121,14 +123,10 @@ class DetailMovieActivity : AppCompatActivity() {
     private fun updateUI(data: MovieDetailModel) {
 
         Glide.with(this)
-            .load(
-                "https://image.tmdb.org/t/p/w500${data.backdropPath}"
-            )
-            .into(binding.ivBackdrop)
-        Glide.with(this)
-            .load(
-                "https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.posterPath}"
-            )
+            .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.posterPath}")
+            .apply(RequestOptions().dontTransform().placeholder(R.drawable.ic_placeholder_image))
+            .fitCenter()
+            .centerCrop()
             .into(binding.ivPoster)
 
 

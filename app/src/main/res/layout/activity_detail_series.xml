@@ -12,8 +12,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/ivBack"
@@ -44,22 +43,10 @@
                 app:tint="@color/white" />
 
             <ImageView
-                android:id="@+id/iv_backdrop"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:contentDescription="@string/backdrop_poster"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/backgrounds/scenic" />
-
-            <ImageView
                 android:id="@+id/iv_poster"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
                 android:contentDescription="@string/image_poster"
-                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -79,25 +66,21 @@
                 app:layout_constraintTop_toBottomOf="@id/iv_poster"
                 tools:text="@tools:sample/lorem" />
 
-            <HorizontalScrollView
-                android:id="@+id/scroll_genre"
+
+            <TextView
+                android:id="@+id/tv_genres"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/padding_layout"
+                android:layout_marginTop="@dimen/padding_layout"
+                android:gravity="center_horizontal"
+                android:lines="1"
+                android:maxLines="3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_title">
-
-                <TextView
-                    android:id="@+id/tv_genres"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginHorizontal="@dimen/padding_layout"
-                    android:layout_marginTop="@dimen/padding_layout"
-                    android:lines="1"
-                    tools:text="@tools:sample/lorem" />
-            </HorizontalScrollView>
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                tools:text="@tools:sample/lorem" />
 
 
             <TextView
@@ -110,7 +93,7 @@
                 android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/scroll_genre"
+                app:layout_constraintTop_toBottomOf="@id/tv_genres"
                 tools:text="8.8" />
 
             <TextView
@@ -171,7 +154,7 @@
 
     <include
         android:id="@+id/inc_loading"
-        layout="@layout/partial_loading_grid"
+        layout="@layout/partial_loading_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone" />
