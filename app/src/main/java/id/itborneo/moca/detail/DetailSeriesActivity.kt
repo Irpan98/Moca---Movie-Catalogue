@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import es.dmoral.toasty.Toasty
 import id.itborneo.moca.R
 import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.model.detail.GenreModel
 import id.itborneo.moca.core.model.detail.SeriesDetailModel
+import id.itborneo.moca.core.utils.DataMapperModel
 import id.itborneo.moca.databinding.ActivityDetailSeriesBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -34,6 +36,7 @@ class DetailSeriesActivity : AppCompatActivity() {
 
     private lateinit var creditsAdapter: CastAdapter
     private lateinit var binding: ActivityDetailSeriesBinding
+    private lateinit var detailSeries: SeriesDetailModel
 
     private var getIntentId: Int? = null
 
@@ -45,9 +48,11 @@ class DetailSeriesActivity : AppCompatActivity() {
         initBinding()
         initAppbarListener()
         initCreditsRecycler()
+        initFavorite()
         retrieveData()
         observerDetailSeries()
         observerCredits()
+        observerFavoriteStatus()
     }
 
     private fun initAppbarListener() {
@@ -59,10 +64,25 @@ class DetailSeriesActivity : AppCompatActivity() {
         }
     }
 
+
     private fun initBinding() {
         binding = ActivityDetailSeriesBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+    }
+
+    private fun initFavorite() {
+        binding.btnFavorite.setOnClickListener {
+            viewModel.apply {
+                if (isFavorite.value == true) {
+                    viewModel.removeFavorite(DataMapperModel.detailSeriesToFavorite(detailSeries))
+                    showToastFavoriteStatus(false)
+                } else {
+                    viewModel.addFavorite(DataMapperModel.detailSeriesToFavorite(detailSeries))
+                    showToastFavoriteStatus(true)
+                }
+            }
+        }
     }
 
     private fun initCreditsRecycler() {
@@ -172,6 +192,32 @@ class DetailSeriesActivity : AppCompatActivity() {
             } else {
                 View.GONE
             }
+        }
+    }
+
+    private fun observerFavoriteStatus() {
+        viewModel.isFavorite.observe(this) {
+            updateFavoriteStatusUI(it)
+        }
+    }
+
+    private fun updateFavoriteStatusUI(isFavorite: Boolean) {
+        if (isFavorite) {
+            binding.btnFavorite.setImageResource(R.drawable.ic_favorite_active)
+        } else {
+            binding.btnFavorite.setImageResource(R.drawable.ic_favorite_inactive)
+        }
+    }
+
+    private fun showToastFavoriteStatus(isFavorite: Boolean) {
+        if (isFavorite) {
+            Toasty.normal(this, getString(R.string.added_to_favorite))
+                .show()
+        } else {
+            Toasty.normal(
+                this,
+                getString(R.string.removed_from_favorite),
+            ).show()
         }
     }
 }

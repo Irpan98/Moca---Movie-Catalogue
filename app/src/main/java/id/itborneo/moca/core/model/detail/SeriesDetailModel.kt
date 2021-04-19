@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class SeriesDetailModel(
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Int,
 
 	@field:SerializedName("genres")
 	val genres: List<GenreModel?>? = null,

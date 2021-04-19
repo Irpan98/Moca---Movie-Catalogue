@@ -1,6 +1,7 @@
 package id.itborneo.moca.core.repository
 
 import id.itborneo.moca.core.local.enitity.FavoriteMovieEntity
+import id.itborneo.moca.core.local.enitity.FavoriteSeriesEntity
 import id.itborneo.moca.core.source.LocalDataSource
 import id.itborneo.moca.core.source.RemoteDataSource
 
@@ -29,6 +30,13 @@ class MocaRepository(
     fun removeMovieFavorite(movieFavorite: FavoriteMovieEntity) =
         localDataSource.removeMovieFavorite (movieFavorite)
 
-
     fun getSingleMovieFavorite(id: Int) = localDataSource.getSingleMovieFavorite(id)
+
+    fun addSeriesFavorite(SeriesFavorite: FavoriteSeriesEntity) =
+        localDataSource.addSeriesFavorite(SeriesFavorite)
+
+    fun removeSeriesFavorite(SeriesFavorite: FavoriteSeriesEntity) =
+        localDataSource.removeSeriesFavorite (SeriesFavorite)
+
+    fun getSingleSeriesFavorite(id: Int) = localDataSource.getSingleSeriesFavorite(id)
 }

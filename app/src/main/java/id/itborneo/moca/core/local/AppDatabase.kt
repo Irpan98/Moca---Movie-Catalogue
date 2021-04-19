@@ -5,9 +5,10 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import id.itborneo.moca.core.local.enitity.FavoriteMovieEntity
+import id.itborneo.moca.core.local.enitity.FavoriteSeriesEntity
 
 @Database(
-    entities = [FavoriteMovieEntity::class],
+    entities = [FavoriteMovieEntity::class, FavoriteSeriesEntity::class],
     version = 1,
     exportSchema = false
 )
