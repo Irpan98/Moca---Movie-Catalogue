@@ -6,25 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.factory.ViewModelFactory
 import id.itborneo.moca.core.model.HomeItemModel
-import id.itborneo.moca.core.repository.MocaRepository
 import id.itborneo.moca.databinding.FragmentHomeBinding
 import id.itborneo.moca.detail.DetailMovieActivity
 import id.itborneo.moca.detail.DetailSeriesActivity
-import id.itborneo.moca.movie.MovieViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
 class HomeFragment : Fragment() {
 
     companion object {
-        private val TAG = "HomeFragment"
-
+        private const val TAG = "HomeFragment"
     }
 
     private lateinit var trendingMovieAdapter: HomeAdapter

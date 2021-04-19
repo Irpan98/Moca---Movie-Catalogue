@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import id.itborneo.moca.R
 import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.model.detail.GenresItem
+import id.itborneo.moca.core.model.detail.GenreModel
 import id.itborneo.moca.core.model.detail.SeriesDetailModel
 import id.itborneo.moca.databinding.ActivityDetailSeriesBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -141,7 +141,7 @@ class DetailSeriesActivity : AppCompatActivity() {
         binding.tvVoteAverage.text = data.voteAverage.toString()
     }
 
-    private fun getGenres(genres: List<GenresItem?>?): String {
+    private fun getGenres(genres: List<GenreModel?>?): String {
         var stringGenre = ""
         genres?.forEachIndexed { index, genresItem ->
             stringGenre += if (index != genres.lastIndex) {

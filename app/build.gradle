@@ -80,7 +80,7 @@ dependencies {
     //Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
 
     //Coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
@@ -111,8 +111,6 @@ dependencies {
     implementation "org.koin:koin-android:$koinVersion"
     implementation "org.koin:koin-android-viewmodel:$koinVersion"
 
-    //Room
-    implementation "androidx.room:room-runtime:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
+
 
 }

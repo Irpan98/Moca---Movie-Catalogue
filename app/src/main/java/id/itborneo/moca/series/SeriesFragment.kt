@@ -18,7 +18,7 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 class SeriesFragment : Fragment() {
 
     companion object {
-        private const val TAG = "MovieFragment"
+        private const val TAG = "SeriesFragment"
     }
 
     private lateinit var binding: FragmentSeriesBinding

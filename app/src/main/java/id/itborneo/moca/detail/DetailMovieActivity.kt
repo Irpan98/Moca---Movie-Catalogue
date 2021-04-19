@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import id.itborneo.moca.R
 import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.model.detail.GenresItem
+import id.itborneo.moca.core.model.detail.GenreModel
 import id.itborneo.moca.core.model.detail.MovieDetailModel
 import id.itborneo.moca.databinding.ActivityDetailMoviesBinding
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -143,7 +143,7 @@ class DetailMovieActivity : AppCompatActivity() {
 
     }
 
-    private fun getGenres(genres: List<GenresItem?>?): String {
+    private fun getGenres(genres: List<GenreModel?>?): String {
         var stringGenre = ""
         genres?.forEachIndexed { index, genresItem ->
             stringGenre += if (index != genres.lastIndex) {

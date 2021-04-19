@@ -17,6 +17,7 @@ import org.junit.Rule
 import org.junit.Test
 
 class SeriesFragmentTest {
+
     @get:Rule
     var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
@@ -36,7 +37,7 @@ class SeriesFragmentTest {
         //click to series fragment
         Espresso.onView(ViewMatchers.withId(R.id.seriesFragment)).perform(ViewActions.click())
 
-        val position = 3
+        val position = 2
         val recyclerViewTest = Espresso.onView(ViewMatchers.withId(R.id.rv_series))
 
         //show recyclerview
