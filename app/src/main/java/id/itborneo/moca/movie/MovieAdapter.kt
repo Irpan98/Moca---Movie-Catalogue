@@ -39,22 +39,11 @@ class MovieAdapter(private val listener: (MovieModel) -> Unit) :
         fun bind(movie: MovieModel) {
             itemBinding.apply {
                 tvName.text = movie.title
-//                Picasso.get()
-//                    .load(
-//                        "https://image.tmdb.org/t/p/w600_and_h900_bestv2/${movie.posterPath}"
-//                    )
-//                    .into(ivPoster)
-
                 Glide.with(root.context)
                     .load("${ImageConstant.BASE_IMAGE}${movie.posterPath}")
                     .placeholder(R.drawable.ic_placeholder_image)
                     .transform(CenterCrop(), RoundedCorners(ImageConstant.IMAGE_RADIUS))
                     .into(ivPoster)
-//                tvName.text = user.login
-//                tvSubtitle.text = user.htmlUrl?.removeRange(0, 8)
-//                Picasso.get()
-//                    .load(user.avatarUrl)
-//                    .into(ivImage)
                 root.setOnClickListener {
                     listener(movie)
                 }

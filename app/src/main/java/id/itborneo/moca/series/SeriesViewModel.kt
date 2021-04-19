@@ -3,7 +3,6 @@ package id.itborneo.moca.series
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import id.itborneo.moca.core.model.response.MovieListResponse
 import id.itborneo.moca.core.model.response.SeriesListResponse
 import id.itborneo.moca.core.repository.MocaRepository
 import id.itborneo.moca.core.utils.Resource

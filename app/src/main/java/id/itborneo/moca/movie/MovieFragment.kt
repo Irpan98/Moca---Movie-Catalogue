@@ -6,15 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.factory.ViewModelFactory
 import id.itborneo.moca.core.model.MovieModel
-import id.itborneo.moca.core.repository.MocaRepository
 import id.itborneo.moca.databinding.FragmentMovieBinding
 import id.itborneo.moca.detail.DetailMovieActivity
+import org.koin.android.viewmodel.ext.android.sharedViewModel
+
 
 class MovieFragment : Fragment() {
 
@@ -25,10 +24,7 @@ class MovieFragment : Fragment() {
     private lateinit var binding: FragmentMovieBinding
     private lateinit var adapter: MovieAdapter
 
-    private val viewModel: MovieViewModel by viewModels {
-        val repo = MocaRepository
-        ViewModelFactory(repo)
-    }
+    private val viewModel: MovieViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,13 +44,14 @@ class MovieFragment : Fragment() {
         viewModel.getMovies().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
+                    showLoading(false)
+
                     if (it.data != null) {
                         val result = it.data.results
                         if (result != null) {
                             adapter.set(result)
                         }
                     }
-                    showLoading(false)
                 }
                 Status.LOADING -> {
                     showLoading(true)
