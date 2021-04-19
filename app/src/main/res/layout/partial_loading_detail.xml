@@ -65,7 +65,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/tv_title_loading"
             style="@style/ItborneoText.AppTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
             tools:text="@tools:sample/lorem" />
 
         <TextView
-            android:id="@+id/tv_genres"
+            android:id="@+id/tv_genres_loading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -91,12 +91,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_loading"
             tools:text="@tools:sample/lorem" />
 
 
         <TextView
-            android:id="@+id/tv_vote_average"
+            android:id="@+id/tv_vote_average_loading"
             style="@style/ItborneoText.Title"
             android:layout_width="42dp"
             android:layout_height="43dp"
@@ -105,7 +105,7 @@
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_genres"
+            app:layout_constraintTop_toBottomOf="@id/tv_genres_loading"
             tools:text="8.8" />
 
         <TextView
@@ -116,10 +116,10 @@
             android:layout_marginHorizontal="@dimen/padding_layout"
             android:layout_marginTop="@dimen/padding_layout"
             android:text="@string/storyline"
-            app:layout_constraintTop_toBottomOf="@id/tv_vote_average" />
+            app:layout_constraintTop_toBottomOf="@id/tv_vote_average_loading" />
 
         <TextView
-            android:id="@+id/tv_overview"
+            android:id="@+id/tv_overview_loading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_layout"
@@ -132,17 +132,17 @@
             tools:text="@tools:sample/lorem/random" />
 
         <TextView
-            android:id="@+id/tv_label_cast"
+            android:id="@+id/tv_label_cast_loading"
             style="@style/ItborneoText.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_layout"
             android:layout_marginTop="@dimen/padding_layout"
             android:text="@string/casts"
-            app:layout_constraintTop_toBottomOf="@id/tv_overview" />
+            app:layout_constraintTop_toBottomOf="@id/tv_overview_loading" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_casts"
+            android:id="@+id/rv_casts_loading"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_layout"
@@ -151,7 +151,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_label_cast"
+            app:layout_constraintTop_toBottomOf="@id/tv_label_cast_loading"
             tools:listitem="@layout/item_cast"
             tools:text="@tools:sample/lorem" />
 

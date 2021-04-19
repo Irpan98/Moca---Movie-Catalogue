@@ -6,15 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.factory.ViewModelFactory
 import id.itborneo.moca.core.model.SeriesModel
-import id.itborneo.moca.core.repository.MocaRepository
 import id.itborneo.moca.databinding.FragmentSeriesBinding
 import id.itborneo.moca.detail.DetailSeriesActivity
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
 class SeriesFragment : Fragment() {
@@ -26,10 +24,7 @@ class SeriesFragment : Fragment() {
     private lateinit var binding: FragmentSeriesBinding
     private lateinit var adapter: SeriesAdapter
 
-    private val viewModel: SeriesViewModel by viewModels {
-        val repo = MocaRepository
-        ViewModelFactory(repo)
-    }
+    private val viewModel: SeriesViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -17,23 +17,23 @@ class ViewModelFactory(
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when {
-            modelClass.isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(
-                repository,
-            ) as T
-            modelClass.isAssignableFrom(MovieViewModel::class.java) -> MovieViewModel(
-                repository,
-            ) as T
-            modelClass.isAssignableFrom(SeriesViewModel::class.java) -> SeriesViewModel(
-                repository,
-            ) as T
-            modelClass.isAssignableFrom(DetailMovieViewModel::class.java) -> DetailMovieViewModel(
-                repository,
-                any as Int
-            ) as T
-            modelClass.isAssignableFrom(DetailSeriesViewModel::class.java) -> DetailSeriesViewModel(
-                repository,
-                any as Int
-            ) as T
+//            modelClass.isAssignableFrom(HomeViewModel::class.java) -> HomeViewModel(
+//                repository,
+//            ) as T
+//            modelClass.isAssignableFrom(MovieViewModel::class.java) -> MovieViewModel(
+//                repository,
+//            ) as T
+//            modelClass.isAssignableFrom(SeriesViewModel::class.java) -> SeriesViewModel(
+//                repository,
+//            ) as T
+//            modelClass.isAssignableFrom(DetailMovieViewModel::class.java) -> DetailMovieViewModel(
+//                repository,
+//                any as Int
+//            ) as T
+//            modelClass.isAssignableFrom(DetailSeriesViewModel::class.java) -> DetailSeriesViewModel(
+//                repository,
+//                any as Int
+//            ) as T
             else -> throw IllegalArgumentException()
         }
 

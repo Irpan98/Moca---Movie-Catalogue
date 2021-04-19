@@ -16,11 +16,17 @@ import id.itborneo.moca.core.repository.MocaRepository
 import id.itborneo.moca.databinding.FragmentHomeBinding
 import id.itborneo.moca.detail.DetailMovieActivity
 import id.itborneo.moca.detail.DetailSeriesActivity
+import id.itborneo.moca.movie.MovieViewModel
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
 class HomeFragment : Fragment() {
 
-    private val TAG = "HomeFragment"
+    companion object {
+        private val TAG = "HomeFragment"
+
+    }
+
     private lateinit var trendingMovieAdapter: HomeAdapter
     private lateinit var trendingSeriesAdapter: HomeAdapter
 
@@ -29,10 +35,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private val viewModel: HomeViewModel by viewModels {
-        val repo = MocaRepository
-        ViewModelFactory(repo)
-    }
+    private val viewModel: HomeViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -104,7 +107,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun observerAiringTodaySeries() {
-        viewModel.getAiringTodaySeries().observe(viewLifecycleOwner) { it ->
+        viewModel.getAiringTodaySeries().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {

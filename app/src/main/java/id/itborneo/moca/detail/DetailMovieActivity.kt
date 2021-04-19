@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.viewModels
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,11 +13,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import id.itborneo.moca.R
 import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.factory.ViewModelFactory
 import id.itborneo.moca.core.model.detail.GenresItem
 import id.itborneo.moca.core.model.detail.MovieDetailModel
-import id.itborneo.moca.core.repository.MocaRepository
 import id.itborneo.moca.databinding.ActivityDetailMoviesBinding
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class DetailMovieActivity : AppCompatActivity() {
 
@@ -39,20 +39,26 @@ class DetailMovieActivity : AppCompatActivity() {
 
     private var getIntentId: Int? = null
 
-    private val movieViewModel: DetailMovieViewModel by viewModels {
-        val repo = MocaRepository
-
-        ViewModelFactory(repo, getIntentId)
-    }
+    private val viewModel: DetailMovieViewModel by viewModel { parametersOf(getIntentId) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initBinding()
+        initAppbarListener()
         initCreditsRecycler()
         retrieveData()
         observerDetailMovie()
         observerCredits()
+    }
+
+    private fun initAppbarListener() {
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
+        binding.ivShare.setOnClickListener {
+            Toast.makeText(this, getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initCreditsRecycler() {
@@ -65,7 +71,7 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
     private fun observerCredits() {
-        movieViewModel.getCredits().observe(this) {
+        viewModel.getCredits().observe(this) {
             when (it.status) {
                 Status.SUCCESS -> {
                     showLoading(false)
@@ -97,7 +103,7 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
     private fun observerDetailMovie() {
-        movieViewModel.getDetailMovie().observe(this) {
+        viewModel.getDetailMovie().observe(this) {
             when (it.status) {
                 Status.SUCCESS -> {
                     showLoading(false)
