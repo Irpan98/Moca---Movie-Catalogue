@@ -8,12 +8,12 @@ import kotlinx.parcelize.Parcelize
 data class MovieModel(
 
     @field:SerializedName("id")
-    val id: Int? = null,
+    val id: Int,
 
     @field:SerializedName("title")
-    val title: String? = null,
+    val title: String,
 
     @field:SerializedName("poster_path")
-    val posterPath: String? = null
+    val posterPath: String
 
 ) : Parcelable

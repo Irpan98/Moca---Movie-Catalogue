@@ -111,6 +111,12 @@ dependencies {
     implementation "org.koin:koin-android:$koinVersion"
     implementation "org.koin:koin-android-viewmodel:$koinVersion"
 
+    //Room
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
 
+
+    //Toasty
+    implementation "com.github.GrenderG:Toasty:$toastyVersion"
 
 }

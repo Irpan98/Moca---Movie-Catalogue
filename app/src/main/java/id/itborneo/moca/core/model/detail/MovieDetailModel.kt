@@ -14,7 +14,7 @@ data class MovieDetailModel(
 	val genres: List<GenreModel?>? = null,
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: Int,
 
 	@field:SerializedName("vote_count")
 	val voteCount: Int? = null,
@@ -28,7 +28,7 @@ data class MovieDetailModel(
 	@field:SerializedName("vote_average")
 	val voteAverage: Double? = null,
 
-) : Parcelable
+	) : Parcelable
 
 
 

@@ -28,6 +28,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageButton
+                android:elevation="1dp"
+                android:id="@+id/btnFavorite"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/favorite"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_favorite_active"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_poster"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
+
             <ImageView
                 android:id="@+id/iv_share"
                 android:layout_width="wrap_content"
@@ -44,6 +57,7 @@
                 app:tint="@color/white" />
 
             <ImageView
+                tools:scaleType="centerCrop"
                 android:id="@+id/iv_poster"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
@@ -52,6 +66,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/backgrounds/scenic" />
+
 
             <TextView
                 android:id="@+id/tv_title"
@@ -63,10 +78,10 @@
                 android:paddingTop="@dimen/padding_layout"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_poster"
                 tools:text="@tools:sample/lorem" />
-
 
             <TextView
                 android:id="@+id/tv_genres"

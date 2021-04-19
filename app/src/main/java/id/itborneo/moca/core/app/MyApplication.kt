@@ -2,6 +2,7 @@ package id.itborneo.moca.core.app
 
 import android.app.Application
 import androidx.annotation.Keep
+import id.itborneo.moca.core.di.databaseModule
 import id.itborneo.moca.core.di.repositoryModule
 import id.itborneo.moca.core.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -19,6 +20,7 @@ class MyApplication : Application() {
             modules(
                 listOf(
                     repositoryModule,
+                    databaseModule,
                     viewModelModule
                 )
             )
