@@ -55,20 +55,19 @@ class RemoteDataSource {
             }
         }
 
-    fun getDetailSeries(id: Int) =
-        liveData(Dispatchers.IO) {
-            emit(Resource.loading(data = null))
-            EspressoIdlingResource.increment()
+    fun getDetailSeries(id: Int) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        EspressoIdlingResource.increment()
 
-            try {
-                emit(Resource.success(data = api.getDetailSeries(id)))
-                EspressoIdlingResource.decrement()
+        try {
+            emit(Resource.success(data = api.getDetailSeries(id)))
+            EspressoIdlingResource.decrement()
 
-            } catch (exception: Exception) {
-                emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-                EspressoIdlingResource.decrement()
-            }
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            EspressoIdlingResource.decrement()
         }
+    }
 
     fun getTrendingMovies() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
@@ -127,20 +126,19 @@ class RemoteDataSource {
         }
     }
 
-    fun getCreditsMovie(id: Int) =
-        liveData(Dispatchers.IO) {
-            emit(Resource.loading(data = null))
-            EspressoIdlingResource.increment()
+    fun getCreditsMovie(id: Int) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        EspressoIdlingResource.increment()
 
-            try {
-                emit(Resource.success(data = api.getCreditsMovie(id)))
-                EspressoIdlingResource.decrement()
+        try {
+            emit(Resource.success(data = api.getCreditsMovie(id)))
+            EspressoIdlingResource.decrement()
 
-            } catch (exception: Exception) {
-                emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-                EspressoIdlingResource.decrement()
-            }
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            EspressoIdlingResource.decrement()
         }
+    }
 }
 
 
