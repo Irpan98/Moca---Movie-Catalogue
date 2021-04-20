@@ -11,27 +11,13 @@ object DataMapperModel {
         FavoriteMovieEntity(
             title = item.title ?: "N/A",
             id = item.id,
-            posterPath = item.posterPath
+            posterPath = item.posterPath ?: "\"N/A\""
         )
 
     fun detailSeriesToFavorite(item: SeriesDetailModel) =
         FavoriteSeriesEntity(
             title = item.name ?: "N/A",
             id = item.id,
-            posterPath = item.posterPath
+            posterPath = item.posterPath?:"\"N/A\""
         )
-//    fun singleDetailUserToFavorite(item: UserDetailModel) =
-//        FavoriteModel(
-//            item.id ?: 0,
-//            item.login ?: "",
-//            item.company ?: "",
-//            item.reposUrl ?: "",
-//            item.email ?: "",
-//            item.followers ?: 0,
-//            item.avatarUrl ?: "",
-//            item.htmlUrl ?: "",
-//            item.following ?: 0,
-//            item.name ?: "",
-//            item.location ?: ""
-//        )
 }

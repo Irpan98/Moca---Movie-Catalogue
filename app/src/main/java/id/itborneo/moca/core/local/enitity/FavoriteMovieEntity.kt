@@ -14,5 +14,5 @@ data class FavoriteMovieEntity(
     val title: String,
 
     @ColumnInfo(name = " poster_path")
-    val posterPath: String? = null
+    val posterPath: String
 )

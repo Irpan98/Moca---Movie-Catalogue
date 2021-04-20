@@ -15,14 +15,14 @@
             android:layout_height="wrap_content">
 
             <ImageButton
-                android:elevation="1dp"
                 android:id="@+id/btnFavorite"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/favorite"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_favorite_active"
+                android:elevation="1dp"
+                tools:scaleType="centerCrop"
+                android:src="@drawable/ic_favorite_inactive"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_poster"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
@@ -56,11 +56,11 @@
                 app:tint="@color/white" />
 
             <ImageView
-                android:scaleType="centerCrop"
                 android:id="@+id/iv_poster"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
                 android:contentDescription="@string/image_poster"
+                tools:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

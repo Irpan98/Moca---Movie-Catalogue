@@ -86,12 +86,10 @@ class DetailSeriesActivity : AppCompatActivity() {
     }
 
     private fun initCreditsRecycler() {
-
         binding.rvCasts.layoutManager =
             LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         creditsAdapter = CastAdapter()
         binding.rvCasts.adapter = creditsAdapter
-
     }
 
     private fun observerCredits() {
@@ -127,7 +125,8 @@ class DetailSeriesActivity : AppCompatActivity() {
                     showLoading(false)
 
                     if (it.data != null) {
-                        updateUI(it.data)
+                        detailSeries = it.data
+                        updateUI(detailSeries)
                     } else {
                         showError()
                     }
@@ -147,9 +146,7 @@ class DetailSeriesActivity : AppCompatActivity() {
     private fun updateUI(data: SeriesDetailModel) {
 
         Glide.with(this)
-            .load(
-                "https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.posterPath}"
-            )
+            .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.posterPath}")
             .apply(RequestOptions().dontTransform().placeholder(R.drawable.ic_placeholder_image))
             .fitCenter()
             .centerCrop()

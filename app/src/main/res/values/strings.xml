@@ -21,4 +21,9 @@
     <string name="try_again_later">Error, Please Try Again Later</string>
     <string name="added_to_favorite">Added to Favorite</string>
     <string name="removed_from_favorite">Removed from Favorite</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="find_movie">Find movies you looking for . . </string>
+    <string name="find_series">Find Series you looking for . . </string>
+
 </resources>

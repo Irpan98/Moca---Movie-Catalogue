@@ -1,8 +1,6 @@
 package id.itborneo.moca.series
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import id.itborneo.moca.core.model.response.SeriesListResponse
 import id.itborneo.moca.core.repository.MocaRepository
 import id.itborneo.moca.core.utils.Resource
@@ -11,6 +9,10 @@ import kotlinx.coroutines.launch
 class SeriesViewModel(private val repo: MocaRepository) : ViewModel() {
 
     private lateinit var series: LiveData<Resource<SeriesListResponse>>
+    private val searchQuery = MutableLiveData<String>()
+    private var searchedSeries = Transformations.switchMap(searchQuery) {
+        repo.searchSeries(it)
+    } as MutableLiveData<Resource<SeriesListResponse>>
 
     init {
         initSeries()
@@ -20,6 +22,13 @@ class SeriesViewModel(private val repo: MocaRepository) : ViewModel() {
         series = repo.getSeries()
     }
 
+    fun setSearch(query: String) {
+        searchQuery.postValue(query)
+    }
+
     fun getSeries() = series
+
+    fun getSearched() = searchedSeries
+
 
 }

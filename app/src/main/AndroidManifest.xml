@@ -24,7 +24,9 @@
         </activity>
         <activity android:name=".detail.DetailSeriesActivity" />
         <activity android:name=".detail.DetailMovieActivity" />
-        <activity android:name=".main.MainActivity" />
+        <activity
+            android:name=".main.MainActivity"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

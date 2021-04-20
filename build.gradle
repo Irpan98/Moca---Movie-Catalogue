@@ -35,6 +35,8 @@ buildscript {
 
         toastyVersion = "1.5.0"
 
+        pagingVersion  = "2.1.1"
+
     }
     repositories {
         google()

@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,11 +38,40 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
+        initSearch()
         observerData()
+        observerSearch()
+
     }
 
     private fun observerData() {
         viewModel.getMovies().observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    showLoading(false)
+
+                    if (it.data != null) {
+                        val result = it.data.results
+                        if (result != null) {
+                            adapter.set(result)
+                        }
+                    }
+                }
+                Status.LOADING -> {
+                    showLoading(true)
+                }
+                Status.ERROR -> {
+                    showLoading(false)
+                    showError()
+                    Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
+                }
+            }
+        }
+    }
+
+
+    private fun observerSearch() {
+        viewModel.getSearched().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     showLoading(false)
@@ -75,9 +105,7 @@ class MovieFragment : Fragment() {
     }
 
     private fun actionToDetail(movie: MovieModel) {
-        if (movie.id != null) {
-            DetailMovieActivity.getInstance(requireContext(), movie.id)
-        }
+        DetailMovieActivity.getInstance(requireContext(), movie.id)
     }
 
     private fun showLoading(showIt: Boolean = true) {
@@ -97,6 +125,28 @@ class MovieFragment : Fragment() {
             } else {
                 View.GONE
             }
+        }
+    }
+
+    private fun initSearch() {
+        binding.sbUsers.apply {
+            setOnClickListener {
+                onActionViewExpanded()
+            }
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText != null && newText.isNotEmpty()) {
+                        viewModel.setSearch(newText)
+                    } else {
+                       viewModel.initMovies()
+                    }
+                    return true
+                }
+            })
         }
     }
 }

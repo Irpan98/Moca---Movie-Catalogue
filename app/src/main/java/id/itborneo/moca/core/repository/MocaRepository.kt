@@ -1,5 +1,7 @@
 package id.itborneo.moca.core.repository
 
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import id.itborneo.moca.core.local.enitity.FavoriteMovieEntity
 import id.itborneo.moca.core.local.enitity.FavoriteSeriesEntity
 import id.itborneo.moca.core.source.LocalDataSource
@@ -28,7 +30,7 @@ class MocaRepository(
         localDataSource.addMovieFavorite(movieFavorite)
 
     fun removeMovieFavorite(movieFavorite: FavoriteMovieEntity) =
-        localDataSource.removeMovieFavorite (movieFavorite)
+        localDataSource.removeMovieFavorite(movieFavorite)
 
     fun getSingleMovieFavorite(id: Int) = localDataSource.getSingleMovieFavorite(id)
 
@@ -36,7 +38,25 @@ class MocaRepository(
         localDataSource.addSeriesFavorite(SeriesFavorite)
 
     fun removeSeriesFavorite(SeriesFavorite: FavoriteSeriesEntity) =
-        localDataSource.removeSeriesFavorite (SeriesFavorite)
+        localDataSource.removeSeriesFavorite(SeriesFavorite)
 
     fun getSingleSeriesFavorite(id: Int) = localDataSource.getSingleSeriesFavorite(id)
+
+    fun getMovieFavorite() =
+        LivePagedListBuilder(localDataSource.getMovieFavorites(), config()).build()
+
+    fun getSeriesFavorite() =
+        LivePagedListBuilder(localDataSource.getSeriesFavorites(), config()).build()
+
+    private fun config(): PagedList.Config {
+        return PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(4)
+            .setPageSize(4)
+            .build()
+    }
+
+    fun searchMovies(query: String) = remoteDataSource.searchMovies(query)
+    fun searchSeries(query: String) = remoteDataSource.searchSeries(query)
+
 }

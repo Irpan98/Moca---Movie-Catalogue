@@ -1,6 +1,6 @@
 package id.itborneo.moca.core.local
 
-import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.*
 import id.itborneo.moca.core.local.enitity.FavoriteMovieEntity
 import id.itborneo.moca.core.local.enitity.FavoriteSeriesEntity
@@ -27,8 +27,11 @@ interface MocaDao {
     @Delete
     fun removeSeriesFavorite(favoriteSeries: FavoriteSeriesEntity)
 
-
     @Query("SELECT * FROM movie_favorite")
-    fun getMovieFavorites(): LiveData<List<FavoriteMovieEntity>>
+    fun getMovieFavorites(): DataSource.Factory<Int, FavoriteMovieEntity>
+
+    @Query("SELECT * FROM series_favorite")
+    fun getSeriesFavorites(): DataSource.Factory<Int, FavoriteSeriesEntity>
+
 
 }

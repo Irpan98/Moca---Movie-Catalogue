@@ -139,6 +139,37 @@ class RemoteDataSource {
             EspressoIdlingResource.decrement()
         }
     }
+
+
+    fun searchMovies(query: String) = liveData(Dispatchers.IO) {
+
+        emit(Resource.loading(data = null))
+        EspressoIdlingResource.increment()
+
+        try {
+            emit(Resource.success(data = api.searchMovies(query)))
+            EspressoIdlingResource.decrement()
+
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            EspressoIdlingResource.decrement()
+        }
+    }
+
+    fun searchSeries(query: String) = liveData(Dispatchers.IO) {
+
+        emit(Resource.loading(data = null))
+        EspressoIdlingResource.increment()
+
+        try {
+            emit(Resource.success(data = api.searchSeries(query)))
+            EspressoIdlingResource.decrement()
+
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+            EspressoIdlingResource.decrement()
+        }
+    }
 }
 
 

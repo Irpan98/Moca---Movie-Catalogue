@@ -21,19 +21,22 @@ class DetailSeriesViewModel(private val repo: MocaRepository, private val id: In
 
     init {
         initDetailSeries()
+        isFavoriteCheck()
+
     }
+
 
     private fun isFavoriteCheck() = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-            val SeriesFavorite = repo.getSingleSeriesFavorite(id)
-            if (SeriesFavorite != null) {
+            val seriesFavorite = repo.getSingleSeriesFavorite(id)
+            if (seriesFavorite != null) {
                 isFavorite.postValue(true)
             } else {
                 isFavorite.postValue(false)
             }
         }
     }
-    
+
     fun initDetailSeries() = viewModelScope.launch {
         detail = repo.getDetailSeries(id)
         credits = repo.getCredits(id)

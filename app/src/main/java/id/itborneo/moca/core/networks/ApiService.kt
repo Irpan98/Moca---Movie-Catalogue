@@ -7,6 +7,7 @@ import id.itborneo.moca.core.model.response.MovieListResponse
 import id.itborneo.moca.core.model.response.SeriesListResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 interface ApiService {
@@ -44,5 +45,15 @@ interface ApiService {
         @Path("id") id: Int
     ): CreditsModel
 
+
+    @GET("3/search/movie")
+    suspend fun searchMovies(
+        @Query("query") query: String
+    ): MovieListResponse
+
+    @GET("3/search/tv")
+    suspend fun searchSeries(
+        @Query("query") query: String
+    ): SeriesListResponse
 }
 
