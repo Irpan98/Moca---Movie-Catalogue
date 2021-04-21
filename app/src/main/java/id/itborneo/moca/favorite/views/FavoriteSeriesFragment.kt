@@ -5,27 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.itborneo.moca.core.local.enitity.FavoriteSeriesEntity
 import id.itborneo.moca.databinding.FragmentFavoriteSeriesBinding
 import id.itborneo.moca.detail.DetailSeriesActivity
 import id.itborneo.moca.favorite.adapters.FavoriteSeriesPagedAdapter
-import id.itborneo.moca.favorite.adapters.FavoriteSeriesAdapter
 import id.itborneo.moca.favorite.viewmodels.FavoriteSeriesViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
 class FavoriteSeriesFragment : Fragment() {
 
-    companion object {
-        private const val TAG = "SeriesFragment"
-    }
-
     private lateinit var binding: FragmentFavoriteSeriesBinding
     private lateinit var adapter: FavoriteSeriesPagedAdapter
 
     private val viewModel: FavoriteSeriesViewModel by sharedViewModel()
+    private val isEmpty = MutableLiveData(true)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,10 +37,27 @@ class FavoriteSeriesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
         observerData()
+        observerIsEmpty()
+    }
+
+    private fun observerIsEmpty() {
+        isEmpty.observe(viewLifecycleOwner) {
+            showEmptyFavorite(it)
+        }
+    }
+
+    private fun showEmptyFavorite(showIt: Boolean) {
+        if (showIt) {
+            binding.incEmptyFavorite.root.visibility = View.VISIBLE
+        } else {
+            binding.incEmptyFavorite.root.visibility = View.GONE
+        }
     }
 
     private fun observerData() {
         viewModel.getSeries().observe(viewLifecycleOwner) {
+
+            isEmpty.value = it.size == 0
             adapter.submitList(it)
         }
     }

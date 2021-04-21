@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".favorite.views.FavoriteSeriesFragment">
 
+    <include
+        android:id="@+id/inc_empty_favorite"
+        layout="@layout/partial_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_series"
         android:layout_width="match_parent"

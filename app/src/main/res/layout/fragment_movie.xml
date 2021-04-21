@@ -48,6 +48,13 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
 
+            <include
+                android:id="@+id/inc_not_found"
+                layout="@layout/partial_not_found"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_movies"
                 android:layout_width="match_parent"

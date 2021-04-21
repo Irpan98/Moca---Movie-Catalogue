@@ -78,9 +78,14 @@ class MovieFragment : Fragment() {
 
                     if (it.data != null) {
                         val result = it.data.results
-                        if (result != null) {
+                        if (!result.isNullOrEmpty()) {
+                            showNotFound(false)
                             adapter.set(result)
+                        } else {
+                            showNotFound()
                         }
+                    } else {
+                        showError()
                     }
                 }
                 Status.LOADING -> {
@@ -92,6 +97,17 @@ class MovieFragment : Fragment() {
                     Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
                 }
             }
+        }
+    }
+
+    private fun showNotFound(showIt: Boolean = true) {
+        if (showIt) {
+            binding.incNotFound.root.visibility = View.VISIBLE
+            binding.rvMovies.visibility = View.GONE
+        } else {
+            binding.incNotFound.root.visibility = View.GONE
+            binding.rvMovies.visibility = View.VISIBLE
+
         }
     }
 
@@ -142,7 +158,7 @@ class MovieFragment : Fragment() {
                     if (newText != null && newText.isNotEmpty()) {
                         viewModel.setSearch(newText)
                     } else {
-                       viewModel.initMovies()
+                        viewModel.initMovies()
                     }
                     return true
                 }

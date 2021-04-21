@@ -58,7 +58,7 @@ class SeriesFragment : Fragment() {
                             } else {
                                 showError()
                             }
-                        }else{
+                        } else {
                             showError()
                         }
                     }
@@ -132,6 +132,11 @@ class SeriesFragment : Fragment() {
                 }
             })
 
+            setOnCloseListener {
+                viewModel.initSeries()
+                true
+            }
+
         }
     }
 
@@ -143,9 +148,14 @@ class SeriesFragment : Fragment() {
 
                     if (it.data != null) {
                         val result = it.data.results
-                        if (result != null) {
+                        if (!result.isNullOrEmpty()) {
+                            showNotFound(false)
                             adapter.set(result)
+                        } else {
+                            showNotFound()
                         }
+                    } else {
+                        showError()
                     }
                 }
                 Status.LOADING -> {
@@ -157,6 +167,18 @@ class SeriesFragment : Fragment() {
                     Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
                 }
             }
+        }
+
+    }
+
+    private fun showNotFound(showIt: Boolean = true) {
+        if (showIt) {
+            binding.incNotFound.root.visibility = View.VISIBLE
+            binding.rvSeries.visibility = View.GONE
+        } else {
+            binding.incNotFound.root.visibility = View.GONE
+            binding.rvSeries.visibility = View.VISIBLE
+
         }
     }
 }
