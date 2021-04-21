@@ -24,7 +24,7 @@ class MocaRepository(
     fun getNowPlayingMovies() = remoteDataSource.getNowPlayingMovies()
     fun getAiringTodaySeries() = remoteDataSource.getAiringTodaySeries()
 
-    fun getCredits(id: Int) = remoteDataSource.getCreditsMovie(id)
+    fun getCredits(id: Int) = remoteDataSource.getCredits(id)
 
     fun addMovieFavorite(movieFavorite: FavoriteMovieEntity) =
         localDataSource.addMovieFavorite(movieFavorite)

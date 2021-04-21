@@ -119,7 +119,7 @@ dependencies {
     //Toasty
     implementation "com.github.GrenderG:Toasty:$toastyVersion"
 
-    implementation "androidx.paging:paging-runtime:$pagingVersion"
+    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
 
 
 }

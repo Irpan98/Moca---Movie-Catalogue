@@ -24,9 +24,10 @@ class MovieViewModel(private val repo: MocaRepository) : ViewModel() {
     }
 
 
-    fun setSearch(query: String) {
+    fun setSearch(query: String) = viewModelScope.launch {
         searchQuery.postValue(query)
     }
+
 
     fun getMovies() = listMovie
     fun getSearched() = searchedMovies

@@ -37,7 +37,7 @@ class SeriesFragmentTest {
         //click to series fragment
         Espresso.onView(ViewMatchers.withId(R.id.seriesFragment)).perform(ViewActions.click())
 
-        val position = 2
+        val position = 3
         val recyclerViewTest = Espresso.onView(ViewMatchers.withId(R.id.rv_series))
 
         //show recyclerview

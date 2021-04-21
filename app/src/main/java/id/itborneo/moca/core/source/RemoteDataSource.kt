@@ -126,7 +126,7 @@ class RemoteDataSource {
         }
     }
 
-    fun getCreditsMovie(id: Int) = liveData(Dispatchers.IO) {
+    fun getCredits(id: Int) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         EspressoIdlingResource.increment()
 
