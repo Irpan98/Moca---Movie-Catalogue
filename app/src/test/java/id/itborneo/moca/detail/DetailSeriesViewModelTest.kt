@@ -1,6 +1,7 @@
 package id.itborneo.moca.detail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.asFlow
 import id.itborneo.moca.core.repository.MocaRepository
 import id.itborneo.moca.dummy.DummyTestData
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -37,7 +38,7 @@ class DetailSeriesViewModelTest {
     @Test
     fun getDetailSeriesCoroutine() = runBlockingTest {
 
-        Mockito.`when`(repository.getDetailSeries(1)).thenReturn(DummyTestData.getDetailSeries())
+        Mockito.`when`(repository.getDetailSeries(1)).thenReturn(DummyTestData.getDetailSeries().asFlow())
 
         //check not null viewModel
         assertNotNull(viewModel)
@@ -58,7 +59,7 @@ class DetailSeriesViewModelTest {
     fun getErrorMovieCoroutine() = runBlockingTest {
 
         Mockito.`when`(repository.getDetailSeries(1))
-            .thenReturn(DummyTestData.getDetailSeriesError())
+            .thenReturn(DummyTestData.getDetailSeriesError().asFlow())
         viewModel.initDetailSeries()
 
         //check message, should get error message

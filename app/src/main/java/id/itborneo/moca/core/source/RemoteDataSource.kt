@@ -1,5 +1,6 @@
 package id.itborneo.moca.core.source
 
+import android.util.Log
 import id.itborneo.moca.core.networks.ApiConfig
 import id.itborneo.moca.core.utils.Resource
 import id.itborneo.moca.core.utils.testing.EspressoIdlingResource
@@ -142,7 +143,6 @@ class RemoteDataSource {
 
 
     fun searchMovies(query: String) = flow {
-
         emit(Resource.loading(data = null))
         EspressoIdlingResource.increment()
 

@@ -13,9 +13,10 @@ import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.model.MovieModel
 import id.itborneo.moca.databinding.FragmentMovieBinding
 import id.itborneo.moca.detail.DetailMovieActivity
+import kotlinx.coroutines.FlowPreview
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
-
+@FlowPreview
 class MovieFragment : Fragment() {
 
     companion object {

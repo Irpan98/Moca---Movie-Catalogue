@@ -1,6 +1,7 @@
 package id.itborneo.moca.dummy
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asFlow
 import androidx.paging.PagedList
 import id.itborneo.moca.core.local.enitity.FavoriteMovieEntity
 import id.itborneo.moca.core.local.enitity.FavoriteSeriesEntity
@@ -12,6 +13,7 @@ import id.itborneo.moca.core.model.detail.SeriesDetailModel
 import id.itborneo.moca.core.model.response.MovieListResponse
 import id.itborneo.moca.core.model.response.SeriesListResponse
 import id.itborneo.moca.core.utils.Resource
+import kotlinx.coroutines.flow.Flow
 
 object DummyTestData {
 
@@ -67,7 +69,7 @@ object DummyTestData {
         return movie
     }
 
-    fun getSeries(): MutableLiveData<Resource<SeriesListResponse>> {
+    fun getSeries(): Flow<Resource<SeriesListResponse>> {
         val series = MutableLiveData<Resource<SeriesListResponse>>()
         series.value = Resource.success(
             SeriesListResponse(
@@ -79,7 +81,7 @@ object DummyTestData {
             )
         )
 
-        return series
+        return series.asFlow()
     }
 
     fun getSeriesEmpty(): MutableLiveData<Resource<SeriesListResponse>> {

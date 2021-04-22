@@ -13,6 +13,7 @@ import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.model.SeriesModel
 import id.itborneo.moca.databinding.FragmentSeriesBinding
 import id.itborneo.moca.detail.DetailSeriesActivity
+import kotlinx.coroutines.FlowPreview
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
@@ -140,6 +141,7 @@ class SeriesFragment : Fragment() {
         }
     }
 
+    @FlowPreview
     private fun observerSearch() {
         viewModel.getSearched().observe(viewLifecycleOwner) {
             when (it.status) {
