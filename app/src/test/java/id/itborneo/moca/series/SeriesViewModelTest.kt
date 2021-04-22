@@ -15,7 +15,6 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
 
-
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
 class SeriesViewModelTest {
@@ -70,8 +69,7 @@ class SeriesViewModelTest {
         Mockito.`when`(repository.getSeries()).thenReturn(DummyTestData.getSeriesError())
         viewModel.initSeries()
 
-        //check data, should have error meesage
-
+        //check data, should have error message
         assertEquals(
             DummyTestData.getSeriesError().value?.message,
             viewModel.getSeries().value?.message,

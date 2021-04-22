@@ -12,12 +12,11 @@ import id.itborneo.moca.R
 import id.itborneo.moca.core.utils.testing.EspressoIdlingResource
 import id.itborneo.moca.main.MainActivity
 import org.junit.After
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class HomeFragmentTest{
+class HomeFragmentTest {
     @get:Rule
     var activityRule = ActivityScenarioRule(MainActivity::class.java)
 

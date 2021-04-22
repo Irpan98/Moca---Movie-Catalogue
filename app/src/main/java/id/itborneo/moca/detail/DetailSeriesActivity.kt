@@ -5,19 +5,21 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.viewModels
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import es.dmoral.toasty.Toasty
 import id.itborneo.moca.R
 import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.factory.ViewModelFactory
-import id.itborneo.moca.core.model.detail.GenresItem
+import id.itborneo.moca.core.model.detail.GenreModel
 import id.itborneo.moca.core.model.detail.SeriesDetailModel
-import id.itborneo.moca.core.repository.MocaRepository
+import id.itborneo.moca.core.utils.DataMapperModel
 import id.itborneo.moca.databinding.ActivityDetailSeriesBinding
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class DetailSeriesActivity : AppCompatActivity() {
     companion object {
@@ -34,26 +36,34 @@ class DetailSeriesActivity : AppCompatActivity() {
 
     private lateinit var creditsAdapter: CastAdapter
     private lateinit var binding: ActivityDetailSeriesBinding
+    private lateinit var detailSeries: SeriesDetailModel
 
     private var getIntentId: Int? = null
 
-    private val viewModel: DetailSeriesViewModel by viewModels {
-        val repo = MocaRepository
-
-        ViewModelFactory(repo, getIntentId)
-    }
-
+    private val viewModel: DetailSeriesViewModel by viewModel { parametersOf(getIntentId) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initBinding()
+        initAppbarListener()
         initCreditsRecycler()
+        initFavorite()
         retrieveData()
-
         observerDetailSeries()
         observerCredits()
+        observerFavoriteStatus()
     }
+
+    private fun initAppbarListener() {
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
+        binding.ivShare.setOnClickListener {
+            Toast.makeText(this, getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     private fun initBinding() {
         binding = ActivityDetailSeriesBinding.inflate(layoutInflater)
@@ -61,13 +71,25 @@ class DetailSeriesActivity : AppCompatActivity() {
         setContentView(view)
     }
 
-    private fun initCreditsRecycler() {
+    private fun initFavorite() {
+        binding.btnFavorite.setOnClickListener {
+            viewModel.apply {
+                if (isFavorite.value == true) {
+                    viewModel.removeFavorite(DataMapperModel.detailSeriesToFavorite(detailSeries))
+                    showToastFavoriteStatus(false)
+                } else {
+                    viewModel.addFavorite(DataMapperModel.detailSeriesToFavorite(detailSeries))
+                    showToastFavoriteStatus(true)
+                }
+            }
+        }
+    }
 
+    private fun initCreditsRecycler() {
         binding.rvCasts.layoutManager =
             LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         creditsAdapter = CastAdapter()
         binding.rvCasts.adapter = creditsAdapter
-
     }
 
     private fun observerCredits() {
@@ -103,7 +125,8 @@ class DetailSeriesActivity : AppCompatActivity() {
                     showLoading(false)
 
                     if (it.data != null) {
-                        updateUI(it.data)
+                        detailSeries = it.data
+                        updateUI(detailSeries)
                     } else {
                         showError()
                     }
@@ -123,9 +146,7 @@ class DetailSeriesActivity : AppCompatActivity() {
     private fun updateUI(data: SeriesDetailModel) {
 
         Glide.with(this)
-            .load(
-                "https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.posterPath}"
-            )
+            .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.posterPath}")
             .apply(RequestOptions().dontTransform().placeholder(R.drawable.ic_placeholder_image))
             .fitCenter()
             .centerCrop()
@@ -137,7 +158,7 @@ class DetailSeriesActivity : AppCompatActivity() {
         binding.tvVoteAverage.text = data.voteAverage.toString()
     }
 
-    private fun getGenres(genres: List<GenresItem?>?): String {
+    private fun getGenres(genres: List<GenreModel?>?): String {
         var stringGenre = ""
         genres?.forEachIndexed { index, genresItem ->
             stringGenre += if (index != genres.lastIndex) {
@@ -168,6 +189,32 @@ class DetailSeriesActivity : AppCompatActivity() {
             } else {
                 View.GONE
             }
+        }
+    }
+
+    private fun observerFavoriteStatus() {
+        viewModel.isFavorite.observe(this) {
+            updateFavoriteStatusUI(it)
+        }
+    }
+
+    private fun updateFavoriteStatusUI(isFavorite: Boolean) {
+        if (isFavorite) {
+            binding.btnFavorite.setImageResource(R.drawable.ic_favorite_active)
+        } else {
+            binding.btnFavorite.setImageResource(R.drawable.ic_favorite_inactive)
+        }
+    }
+
+    private fun showToastFavoriteStatus(isFavorite: Boolean) {
+        if (isFavorite) {
+            Toasty.normal(this, getString(R.string.added_to_favorite))
+                .show()
+        } else {
+            Toasty.normal(
+                this,
+                getString(R.string.removed_from_favorite),
+            ).show()
         }
     }
 }

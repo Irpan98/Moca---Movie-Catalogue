@@ -12,11 +12,10 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/ivBack"
+                android:id="@+id/iv_back"
                 android:layout_width="wrap_content"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_margin="@dimen/padding_layout"
@@ -28,8 +27,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageButton
+                android:elevation="1dp"
+                android:id="@+id/btnFavorite"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/favorite"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_favorite_inactive"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_poster"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_poster" />
+
             <ImageView
-                android:id="@+id/ivShare"
+                android:id="@+id/iv_share"
                 android:layout_width="wrap_content"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_margin="@dimen/padding_layout"
@@ -44,6 +56,7 @@
                 app:tint="@color/white" />
 
             <ImageView
+                tools:scaleType="centerCrop"
                 android:id="@+id/iv_poster"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
@@ -52,6 +65,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/backgrounds/scenic" />
+
 
             <TextView
                 android:id="@+id/tv_title"
@@ -63,19 +77,18 @@
                 android:paddingTop="@dimen/padding_layout"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_poster"
                 tools:text="@tools:sample/lorem" />
 
-
             <TextView
                 android:id="@+id/tv_genres"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:gravity="center_horizontal"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="@dimen/padding_layout"
                 android:layout_marginTop="@dimen/padding_layout"
-                android:lines="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"

@@ -2,6 +2,7 @@ package id.itborneo.moca.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import id.itborneo.moca.core.model.response.MovieListResponse
 import id.itborneo.moca.core.model.response.SeriesListResponse
@@ -23,11 +24,11 @@ class HomeViewModel(private val repo: MocaRepository) : ViewModel() {
     }
 
     fun initData() = viewModelScope.launch {
-        trendingMovies = repo.getTrendingMovies()
-        trendingSeries = repo.getTrendingSeries()
+        trendingMovies = repo.getTrendingMovies().asLiveData()
+        trendingSeries = repo.getTrendingSeries().asLiveData()
 
-        nowPlayingMovie = repo.getNowPlayingMovies()
-        airingTodaySeries = repo.getAiringTodaySeries()
+        nowPlayingMovie = repo.getNowPlayingMovies().asLiveData()
+        airingTodaySeries = repo.getAiringTodaySeries().asLiveData()
     }
 
 

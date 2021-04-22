@@ -17,6 +17,7 @@ import org.junit.Rule
 import org.junit.Test
 
 class SeriesFragmentTest {
+
     @get:Rule
     var activityRule = ActivityScenarioRule(MainActivity::class.java)
 

@@ -5,16 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.factory.ViewModelFactory
 import id.itborneo.moca.core.model.MovieModel
-import id.itborneo.moca.core.repository.MocaRepository
 import id.itborneo.moca.databinding.FragmentMovieBinding
 import id.itborneo.moca.detail.DetailMovieActivity
+import org.koin.android.viewmodel.ext.android.sharedViewModel
+
 
 class MovieFragment : Fragment() {
 
@@ -25,10 +25,7 @@ class MovieFragment : Fragment() {
     private lateinit var binding: FragmentMovieBinding
     private lateinit var adapter: MovieAdapter
 
-    private val viewModel: MovieViewModel by viewModels {
-        val repo = MocaRepository
-        ViewModelFactory(repo)
-    }
+    private val viewModel: MovieViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,20 +38,28 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
+        initSearch()
         observerData()
+        observerSearch()
+
     }
 
     private fun observerData() {
         viewModel.getMovies().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
+                    showLoading(false)
+
                     if (it.data != null) {
                         val result = it.data.results
                         if (result != null) {
                             adapter.set(result)
+                        } else {
+                            showError()
                         }
+                    } else {
+                        showError()
                     }
-                    showLoading(false)
                 }
                 Status.LOADING -> {
                     showLoading(true)
@@ -68,6 +73,48 @@ class MovieFragment : Fragment() {
         }
     }
 
+
+    private fun observerSearch() {
+        viewModel.getSearched().observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    showLoading(false)
+
+                    if (it.data != null) {
+                        val result = it.data.results
+                        if (!result.isNullOrEmpty()) {
+                            showNotFound(false)
+                            adapter.set(result)
+                        } else {
+                            showNotFound()
+                        }
+                    } else {
+                        showError()
+                    }
+                }
+                Status.LOADING -> {
+                    showLoading(true)
+                }
+                Status.ERROR -> {
+                    showLoading(false)
+                    showError()
+                    Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
+                }
+            }
+        }
+    }
+
+    private fun showNotFound(showIt: Boolean = true) {
+        if (showIt) {
+            binding.incNotFound.root.visibility = View.VISIBLE
+            binding.rvMovies.visibility = View.GONE
+        } else {
+            binding.incNotFound.root.visibility = View.GONE
+            binding.rvMovies.visibility = View.VISIBLE
+
+        }
+    }
+
     private fun initRecycler() {
         binding.rvMovies.layoutManager = LinearLayoutManager(requireContext())
         adapter = MovieAdapter {
@@ -78,9 +125,7 @@ class MovieFragment : Fragment() {
     }
 
     private fun actionToDetail(movie: MovieModel) {
-        if (movie.id != null) {
-            DetailMovieActivity.getInstance(requireContext(), movie.id)
-        }
+        DetailMovieActivity.getInstance(requireContext(), movie.id)
     }
 
     private fun showLoading(showIt: Boolean = true) {
@@ -100,6 +145,28 @@ class MovieFragment : Fragment() {
             } else {
                 View.GONE
             }
+        }
+    }
+
+    private fun initSearch() {
+        binding.sbUsers.apply {
+            setOnClickListener {
+                onActionViewExpanded()
+            }
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText != null && newText.isNotEmpty()) {
+                        viewModel.setSearch(newText)
+                    } else {
+                        viewModel.initMovies()
+                    }
+                    return true
+                }
+            })
         }
     }
 }

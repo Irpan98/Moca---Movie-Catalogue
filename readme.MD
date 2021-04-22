@@ -1,4 +1,5 @@
-ugitUser
+Moca 
+Movie Catalogue
 
 Need update later ReadMe
 
@@ -10,10 +11,6 @@ Features
 - List Series
 - Detail From Listing
 - awesome UI and UX
-- Favorites. 
-    - Adding Favorite
-    - Remove Favorite
-    - List Favorites
 - Get Data From API / Internet
     - Trending Movies
     - Trending Series
@@ -26,11 +23,8 @@ Features
     - Cast
 - support Landscape and Portrait
 - keep data even change orientation
-
-
 - Jetpack Navigation
 - Bottom Navigation
-
 - Retrofit Network
 - View Binding
 - Glide
@@ -38,13 +32,22 @@ Features
 - LiveData
 - LiveCycle
 - ViewModel Factory
-
+- Unit Testing
+- Instruments Testing
+- Coroutine Unit Testing
+- Espresso Testing
+- Mockito Testing
+- Shimmer Loading
+- Koin DI
 
 Later
 - Room database
+- Favorites. 
+    - Adding Favorite
+    - Remove Favorite
+    - List Favorites
 - support 2 language
 - Lottie Animation
 - Open Movie link
-- Shimmer Loading
 - Updated dependencies
 - handle When Error

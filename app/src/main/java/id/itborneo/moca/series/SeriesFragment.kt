@@ -5,31 +5,27 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.factory.ViewModelFactory
 import id.itborneo.moca.core.model.SeriesModel
-import id.itborneo.moca.core.repository.MocaRepository
 import id.itborneo.moca.databinding.FragmentSeriesBinding
 import id.itborneo.moca.detail.DetailSeriesActivity
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
 class SeriesFragment : Fragment() {
 
     companion object {
-        private const val TAG = "MovieFragment"
+        private const val TAG = "SeriesFragment"
     }
 
     private lateinit var binding: FragmentSeriesBinding
     private lateinit var adapter: SeriesAdapter
 
-    private val viewModel: SeriesViewModel by viewModels {
-        val repo = MocaRepository
-        ViewModelFactory(repo)
-    }
+    private val viewModel: SeriesViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +39,12 @@ class SeriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
+        initSearch()
+
         observerData()
+        observerSearch()
     }
+
 
     private fun observerData() {
         viewModel.getSeries().observe(viewLifecycleOwner) {
@@ -53,7 +53,13 @@ class SeriesFragment : Fragment() {
                     if (it.data != null) {
                         val result = it.data.results
                         if (result != null) {
-                            adapter.set(result)
+                            if (result.isNotEmpty()) {
+                                adapter.set(result)
+                            } else {
+                                showError()
+                            }
+                        } else {
+                            showError()
                         }
                     }
                     showLoading(false)
@@ -103,6 +109,76 @@ class SeriesFragment : Fragment() {
             } else {
                 View.GONE
             }
+        }
+    }
+
+    private fun initSearch() {
+        binding.sbUsers.apply {
+            setOnClickListener {
+                onActionViewExpanded()
+            }
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText != null && newText.isNotEmpty()) {
+                        viewModel.setSearch(newText)
+                    } else {
+                        viewModel.initSeries()
+                    }
+                    return true
+                }
+            })
+
+            setOnCloseListener {
+                viewModel.initSeries()
+                true
+            }
+
+        }
+    }
+
+    private fun observerSearch() {
+        viewModel.getSearched().observe(viewLifecycleOwner) {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    showLoading(false)
+
+                    if (it.data != null) {
+                        val result = it.data.results
+                        if (!result.isNullOrEmpty()) {
+                            showNotFound(false)
+                            adapter.set(result)
+                        } else {
+                            showNotFound()
+                        }
+                    } else {
+                        showError()
+                    }
+                }
+                Status.LOADING -> {
+                    showLoading(true)
+                }
+                Status.ERROR -> {
+                    showLoading(false)
+                    showError()
+                    Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
+                }
+            }
+        }
+
+    }
+
+    private fun showNotFound(showIt: Boolean = true) {
+        if (showIt) {
+            binding.incNotFound.root.visibility = View.VISIBLE
+            binding.rvSeries.visibility = View.GONE
+        } else {
+            binding.incNotFound.root.visibility = View.GONE
+            binding.rvSeries.visibility = View.VISIBLE
+
         }
     }
 }

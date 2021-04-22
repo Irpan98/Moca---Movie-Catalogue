@@ -77,11 +77,11 @@ class HomeViewModelTest {
         //check not null viewModel
         assertNotNull(viewModel)
 
-        // not null movies after called
+        // not null series after called
         viewModel.initData()
         assertNotNull(viewModel.getTrendingSeries())
 
-        //check title data getMovies
+        //check name data get Series
         assertEquals(
             viewModel.getTrendingSeries().value?.data?.results?.get(0)?.name,
             DummyTestData.getSeries().value?.data?.results?.get(0)?.name
