@@ -15,13 +15,11 @@ class LocalDataSource(private val dao: MocaDao) {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addSeriesFavorite(it: FavoriteSeriesEntity) = dao.addSeriesFavorite(it)
 
-
     @Delete
     fun removeMovieFavorite(it: FavoriteMovieEntity) = dao.removeMovieFavorite(it)
 
     @Delete
     fun removeSeriesFavorite(it: FavoriteSeriesEntity) = dao.removeSeriesFavorite(it)
-
 
     fun getSingleMovieFavorite(id: Int) = dao.getSingleMovieFavorite(id)
     fun getSingleSeriesFavorite(id: Int) = dao.getSingleSeriesFavorite(id)

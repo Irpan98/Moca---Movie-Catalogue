@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.model.MovieModel
 import id.itborneo.moca.databinding.FragmentMovieBinding
-import id.itborneo.moca.detail.DetailMovieActivity
+import id.itborneo.moca.detail.views.DetailMovieActivity
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 

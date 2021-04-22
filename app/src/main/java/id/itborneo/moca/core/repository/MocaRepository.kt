@@ -58,5 +58,4 @@ class MocaRepository(
 
     fun searchMovies(query: String) = remoteDataSource.searchMovies(query)
     fun searchSeries(query: String) = remoteDataSource.searchSeries(query)
-
 }

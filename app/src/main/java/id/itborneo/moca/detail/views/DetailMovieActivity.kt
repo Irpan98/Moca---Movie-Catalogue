@@ -1,4 +1,4 @@
-package id.itborneo.moca.detail
+package id.itborneo.moca.detail.views
 
 import android.content.Context
 import android.content.Intent
@@ -15,32 +15,36 @@ import es.dmoral.toasty.Toasty
 import id.itborneo.moca.R
 import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.model.detail.GenreModel
-import id.itborneo.moca.core.model.detail.SeriesDetailModel
+import id.itborneo.moca.core.model.detail.MovieDetailModel
 import id.itborneo.moca.core.utils.DataMapperModel
-import id.itborneo.moca.databinding.ActivityDetailSeriesBinding
+import id.itborneo.moca.databinding.ActivityDetailMoviesBinding
+import id.itborneo.moca.detail.adapter.CastAdapter
+import id.itborneo.moca.detail.viewmodel.DetailMovieViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class DetailSeriesActivity : AppCompatActivity() {
+class DetailMovieActivity : AppCompatActivity() {
+
+
     companion object {
-        const val EXTRA_ID_SERIES = "extra_series"
-        private const val TAG = "DetailSeriesActivity"
+        const val EXTRA_ID_MOVIE = "extra_movie"
+        private const val TAG = "DetailActivity"
 
         fun getInstance(context: Context, data: Int) {
-            val intent = Intent(context, DetailSeriesActivity::class.java)
-            intent.putExtra(EXTRA_ID_SERIES, data)
+            val intent = Intent(context, DetailMovieActivity::class.java)
+            intent.putExtra(EXTRA_ID_MOVIE, data)
             context.startActivity(intent)
         }
 
     }
 
     private lateinit var creditsAdapter: CastAdapter
-    private lateinit var binding: ActivityDetailSeriesBinding
-    private lateinit var detailSeries: SeriesDetailModel
+    private lateinit var binding: ActivityDetailMoviesBinding
+    private lateinit var detailMovie: MovieDetailModel
 
     private var getIntentId: Int? = null
 
-    private val viewModel: DetailSeriesViewModel by viewModel { parametersOf(getIntentId) }
+    private val viewModel: DetailMovieViewModel by viewModel { parametersOf(getIntentId) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,9 +54,23 @@ class DetailSeriesActivity : AppCompatActivity() {
         initCreditsRecycler()
         initFavorite()
         retrieveData()
-        observerDetailSeries()
+        observerDetailMovie()
         observerCredits()
         observerFavoriteStatus()
+    }
+
+    private fun initFavorite() {
+        binding.btnFavorite.setOnClickListener {
+            viewModel.apply {
+                if (isFavorite.value == true) {
+                    viewModel.removeFavorite(DataMapperModel.detailMovieToFavorite(detailMovie))
+                    showToastFavoriteStatus(false)
+                } else {
+                    viewModel.addFavorite(DataMapperModel.detailMovieToFavorite(detailMovie))
+                    showToastFavoriteStatus(true)
+                }
+            }
+        }
     }
 
     private fun initAppbarListener() {
@@ -64,32 +82,13 @@ class DetailSeriesActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun initBinding() {
-        binding = ActivityDetailSeriesBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
-    }
-
-    private fun initFavorite() {
-        binding.btnFavorite.setOnClickListener {
-            viewModel.apply {
-                if (isFavorite.value == true) {
-                    viewModel.removeFavorite(DataMapperModel.detailSeriesToFavorite(detailSeries))
-                    showToastFavoriteStatus(false)
-                } else {
-                    viewModel.addFavorite(DataMapperModel.detailSeriesToFavorite(detailSeries))
-                    showToastFavoriteStatus(true)
-                }
-            }
-        }
-    }
-
     private fun initCreditsRecycler() {
+
         binding.rvCasts.layoutManager =
             LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         creditsAdapter = CastAdapter()
         binding.rvCasts.adapter = creditsAdapter
+
     }
 
     private fun observerCredits() {
@@ -97,13 +96,14 @@ class DetailSeriesActivity : AppCompatActivity() {
             when (it.status) {
                 Status.SUCCESS -> {
                     showLoading(false)
-
                     if (it.data != null) {
                         it.data.cast?.let { it1 -> creditsAdapter.set(it1) }
+                    } else {
+                        showError()
                     }
                 }
                 Status.LOADING -> {
-                    showLoading(true)
+                    showLoading()
                 }
                 Status.ERROR -> {
                     showLoading(false)
@@ -114,19 +114,24 @@ class DetailSeriesActivity : AppCompatActivity() {
     }
 
     private fun retrieveData() {
-        getIntentId = intent.extras?.getInt(EXTRA_ID_SERIES)
+        getIntentId = intent.extras?.getInt(EXTRA_ID_MOVIE)
     }
 
+    private fun initBinding() {
+        binding = ActivityDetailMoviesBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+    }
 
-    private fun observerDetailSeries() {
-        viewModel.getDetail().observe(this) {
+    private fun observerDetailMovie() {
+        viewModel.getDetailMovie().observe(this) {
             when (it.status) {
                 Status.SUCCESS -> {
                     showLoading(false)
 
                     if (it.data != null) {
-                        detailSeries = it.data
-                        updateUI(detailSeries)
+                        detailMovie = it.data
+                        updateUI(detailMovie)
                     } else {
                         showError()
                     }
@@ -143,7 +148,7 @@ class DetailSeriesActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateUI(data: SeriesDetailModel) {
+    private fun updateUI(data: MovieDetailModel) {
 
         Glide.with(this)
             .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.posterPath}")
@@ -152,10 +157,12 @@ class DetailSeriesActivity : AppCompatActivity() {
             .centerCrop()
             .into(binding.ivPoster)
 
+
         binding.tvGenres.text = getGenres(data.genres)
         binding.tvOverview.text = data.overview.toString()
-        binding.tvTitle.text = data.name
+        binding.tvTitle.text = data.title
         binding.tvVoteAverage.text = data.voteAverage.toString()
+
     }
 
     private fun getGenres(genres: List<GenreModel?>?): String {
@@ -170,7 +177,6 @@ class DetailSeriesActivity : AppCompatActivity() {
 
         return stringGenre
     }
-
 
     private fun showLoading(showIt: Boolean = true) {
         binding.incLoading.root.apply {

@@ -2,6 +2,7 @@ package id.itborneo.moca.detail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import id.itborneo.moca.core.repository.MocaRepository
+import id.itborneo.moca.detail.viewmodel.DetailSeriesViewModel
 import id.itborneo.moca.dummy.DummyTestData
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest

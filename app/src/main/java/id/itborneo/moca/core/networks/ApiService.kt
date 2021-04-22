@@ -45,7 +45,6 @@ interface ApiService {
         @Path("id") id: Int
     ): CreditsModel
 
-
     @GET("3/search/movie")
     suspend fun searchMovies(
         @Query("query") query: String

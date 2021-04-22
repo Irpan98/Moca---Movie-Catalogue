@@ -10,7 +10,6 @@ class RemoteDataSource {
 
     private val api = ApiConfig.apiService
 
-
     fun getMovies() = liveData(Dispatchers.IO) {
 
         emit(Resource.loading(data = null))

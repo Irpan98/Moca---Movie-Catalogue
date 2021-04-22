@@ -13,7 +13,6 @@ import id.itborneo.moca.core.constant.ImageConstant
 import id.itborneo.moca.core.local.enitity.FavoriteMovieEntity
 import id.itborneo.moca.databinding.ItemPosterBinding
 
-
 class FavoriteMoviePagedAdapter(
     val listener: (FavoriteMovieEntity) -> Unit
 ) : PagedListAdapter<FavoriteMovieEntity, FavoriteMoviePagedAdapter.ViewHolder>(DIFF_CALLBACK) {
@@ -35,9 +34,7 @@ class FavoriteMoviePagedAdapter(
             ): Boolean {
                 return oldItem == oldItem
             }
-
         }
-
     }
 
 
@@ -55,7 +52,6 @@ class FavoriteMoviePagedAdapter(
         }
     }
 
-
     inner class ViewHolder(private val itemBinding: ItemPosterBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bind(movie: FavoriteMovieEntity) {
@@ -72,6 +68,4 @@ class FavoriteMoviePagedAdapter(
             }
         }
     }
-
-
 }

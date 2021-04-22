@@ -1,4 +1,4 @@
-package id.itborneo.moca.detail
+package id.itborneo.moca.detail.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

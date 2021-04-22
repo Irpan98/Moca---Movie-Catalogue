@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.model.SeriesModel
 import id.itborneo.moca.databinding.FragmentSeriesBinding
-import id.itborneo.moca.detail.DetailSeriesActivity
+import id.itborneo.moca.detail.views.DetailSeriesActivity
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 

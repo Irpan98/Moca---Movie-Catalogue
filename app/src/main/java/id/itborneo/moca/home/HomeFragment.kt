@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.core.model.HomeItemModel
 import id.itborneo.moca.databinding.FragmentHomeBinding
-import id.itborneo.moca.detail.DetailMovieActivity
-import id.itborneo.moca.detail.DetailSeriesActivity
+import id.itborneo.moca.detail.views.DetailMovieActivity
+import id.itborneo.moca.detail.views.DetailSeriesActivity
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 

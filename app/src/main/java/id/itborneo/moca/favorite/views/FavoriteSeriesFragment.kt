@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.itborneo.moca.core.local.enitity.FavoriteSeriesEntity
 import id.itborneo.moca.databinding.FragmentFavoriteSeriesBinding
-import id.itborneo.moca.detail.DetailSeriesActivity
+import id.itborneo.moca.detail.views.DetailSeriesActivity
 import id.itborneo.moca.favorite.adapters.FavoriteSeriesPagedAdapter
 import id.itborneo.moca.favorite.viewmodels.FavoriteSeriesViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -56,7 +56,6 @@ class FavoriteSeriesFragment : Fragment() {
 
     private fun observerData() {
         viewModel.getSeries().observe(viewLifecycleOwner) {
-
             isEmpty.value = it.size == 0
             adapter.submitList(it)
         }

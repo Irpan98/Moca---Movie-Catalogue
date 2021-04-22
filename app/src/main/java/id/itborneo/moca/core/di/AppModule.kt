@@ -1,7 +1,7 @@
 package id.itborneo.moca.core.di
 
-import id.itborneo.moca.detail.DetailMovieViewModel
-import id.itborneo.moca.detail.DetailSeriesViewModel
+import id.itborneo.moca.detail.viewmodel.DetailMovieViewModel
+import id.itborneo.moca.detail.viewmodel.DetailSeriesViewModel
 import id.itborneo.moca.favorite.viewmodels.FavoriteMovieViewModel
 import id.itborneo.moca.favorite.viewmodels.FavoriteSeriesViewModel
 import id.itborneo.moca.home.HomeViewModel
@@ -20,7 +20,6 @@ val viewModelModule = module {
     viewModel {
         SeriesViewModel(get())
     }
-
     viewModel {
         FavoriteMovieViewModel(get())
     }
