@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:visibility="gone" />
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_movies"
         android:layout_width="match_parent"
@@ -22,6 +23,5 @@
         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:listitem="@layout/item_poster"
         tools:spanCount="3" />
-
 
 </FrameLayout>

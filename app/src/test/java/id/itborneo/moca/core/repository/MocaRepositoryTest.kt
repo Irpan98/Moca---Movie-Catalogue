@@ -49,32 +49,6 @@ class MocaRepositoryTest {
     }
 
     @Test
-    fun getDetailMovie() = runBlockingTest {
-
-        val dummyDetailMovie = DummyTestData.getDetailMovie()
-        val id = dummyDetailMovie.value?.data?.id ?: 0
-        Mockito.`when`(remote.getDetailMovie(id))
-            .thenReturn(dummyDetailMovie)
-        val getDummyMovie = mocaRepository.getDetailMovie(id)
-        verify(remote).getDetailMovie(id)
-        assertNotNull(getDummyMovie)
-        assertEquals(dummyDetailMovie, getDummyMovie)
-    }
-
-    @Test
-    fun getDetailSeries() = runBlockingTest {
-
-        val dummyDetailSeries = DummyTestData.getDetailSeries()
-        val id = dummyDetailSeries.value?.data?.id ?: 0
-        Mockito.`when`(remote.getDetailSeries(id))
-            .thenReturn(dummyDetailSeries)
-        val getDummySeries = mocaRepository.getDetailSeries(id)
-        verify(remote).getDetailSeries(id)
-        assertNotNull(getDummySeries)
-        assertEquals(dummyDetailSeries, getDummySeries)
-    }
-
-    @Test
     fun getTrendingMovie() = runBlockingTest {
 
         val dummyTrendingMovies = DummyTestData.getMovies()
@@ -97,6 +71,7 @@ class MocaRepositoryTest {
         assertNotNull(getDummySeries)
         assertEquals(dummyTrendingSeries, getDummySeries)
     }
+
 
 
     @Test
@@ -122,6 +97,33 @@ class MocaRepositoryTest {
         assertNotNull(getDummySeries)
         assertEquals(dummyAiringTodaySeries, getDummySeries)
     }
+
+    @Test
+    fun getDetailMovie() = runBlockingTest {
+
+        val dummyDetailMovie = DummyTestData.getDetailMovie()
+        val id = dummyDetailMovie.value?.data?.id ?: 0
+        Mockito.`when`(remote.getDetailMovie(id))
+            .thenReturn(dummyDetailMovie)
+        val getDummyMovie = mocaRepository.getDetailMovie(id)
+        verify(remote).getDetailMovie(id)
+        assertNotNull(getDummyMovie)
+        assertEquals(dummyDetailMovie, getDummyMovie)
+    }
+
+    @Test
+    fun getDetailSeries() = runBlockingTest {
+
+        val dummyDetailSeries = DummyTestData.getDetailSeries()
+        val id = dummyDetailSeries.value?.data?.id ?: 0
+        Mockito.`when`(remote.getDetailSeries(id))
+            .thenReturn(dummyDetailSeries)
+        val getDummySeries = mocaRepository.getDetailSeries(id)
+        verify(remote).getDetailSeries(id)
+        assertNotNull(getDummySeries)
+        assertEquals(dummyDetailSeries, getDummySeries)
+    }
+
 
     @Test
     fun getCredits() = runBlockingTest {
