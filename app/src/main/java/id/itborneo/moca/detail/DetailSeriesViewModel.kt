@@ -1,9 +1,6 @@
 package id.itborneo.moca.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import id.itborneo.moca.core.local.enitity.FavoriteSeriesEntity
 import id.itborneo.moca.core.model.credits.CreditsModel
 import id.itborneo.moca.core.model.detail.SeriesDetailModel
@@ -38,8 +35,8 @@ class DetailSeriesViewModel(private val repo: MocaRepository, private val id: In
     }
 
     fun initDetailSeries() = viewModelScope.launch {
-        detail = repo.getDetailSeries(id)
-        credits = repo.getCredits(id)
+        detail = repo.getDetailSeries(id).asLiveData()
+        credits = repo.getCredits(id).asLiveData()
     }
 
     fun getDetail() = detail

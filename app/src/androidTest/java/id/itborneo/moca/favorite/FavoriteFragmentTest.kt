@@ -34,11 +34,10 @@ class FavoriteFragmentTest {
     @Test
     fun movieAddRemoveFavorite() {
 
-        //click to movies fragment
-        Espresso.onView(ViewMatchers.withId(R.id.movieFragment)).perform(ViewActions.click())
-
         val position = 1
         val recyclerViewTest = Espresso.onView(ViewMatchers.withId(R.id.rv_movies))
+
+        Espresso.onView(ViewMatchers.withId(R.id.movieFragment)).perform(ViewActions.click())
         recyclerViewTest.perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 position,
@@ -48,9 +47,7 @@ class FavoriteFragmentTest {
 
         addFavorite()
         Espresso.pressBack()
-
         listFavoriteMovieTest()
-
         Espresso.pressBack()
         Espresso.onView(ViewMatchers.withId(R.id.movieFragment)).perform(ViewActions.click())
 
@@ -68,25 +65,23 @@ class FavoriteFragmentTest {
     @Test
     fun seriesAddRemoveFavorite() {
 
-        //click to movies fragment
-        Espresso.onView(ViewMatchers.withId(R.id.seriesFragment)).perform(ViewActions.click())
-
         val position = 1
         val recyclerViewTest = Espresso.onView(ViewMatchers.withId(R.id.rv_series))
+
+        Espresso.onView(ViewMatchers.withId(R.id.seriesFragment)).perform(ViewActions.click())
         recyclerViewTest.perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 position,
                 ViewActions.click()
             )
         )
+
         addFavorite()
         Espresso.pressBack()
-
         listFavoriteSeriesTest()
-
         Espresso.pressBack()
-        Espresso.onView(ViewMatchers.withId(R.id.seriesFragment)).perform(ViewActions.click())
 
+        Espresso.onView(ViewMatchers.withId(R.id.seriesFragment)).perform(ViewActions.click())
         recyclerViewTest.perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 position,
@@ -99,13 +94,6 @@ class FavoriteFragmentTest {
     private fun listFavoriteSeriesTest() {
         Espresso.onView(ViewMatchers.withId(R.id.favoriteFragment)).perform(ViewActions.click())
         Espresso.onView(ViewMatchers.withId(R.id.view_pager)).perform(swipeLeft())
-
-
-//        Espresso.onView(ViewMatchers.withId(R.id.rv_series))
-//            .perform(
-//                scrollTo()
-//            )
-
         Espresso.onView(ViewMatchers.withId(R.id.rv_series))
             .perform(
                 RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
@@ -117,12 +105,9 @@ class FavoriteFragmentTest {
 
     private fun listFavoriteMovieTest() {
         Espresso.onView(ViewMatchers.withId(R.id.favoriteFragment)).perform(ViewActions.click())
-
-        val position = 0
-        val recyclerViewTest = Espresso.onView(ViewMatchers.withId(R.id.rv_movies))
-        recyclerViewTest.perform(
+        Espresso.onView(ViewMatchers.withId(R.id.rv_movies)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                position,
+                0,
                 ViewActions.click()
             )
         )

@@ -1,6 +1,7 @@
 package id.itborneo.moca.core.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.asFlow
 import com.nhaarman.mockitokotlin2.verify
 import id.itborneo.moca.core.source.LocalDataSource
 import id.itborneo.moca.core.source.RemoteDataSource
@@ -53,7 +54,7 @@ class MocaRepositoryTest {
 
         val dummyTrendingMovies = DummyTestData.getMovies()
         Mockito.`when`(remote.getTrendingMovies())
-            .thenReturn(dummyTrendingMovies)
+            .thenReturn(dummyTrendingMovies.asFlow())
         val getDummyMovies = mocaRepository.getTrendingMovies()
         verify(remote).getTrendingMovies()
         assertNotNull(getDummyMovies)
@@ -71,7 +72,6 @@ class MocaRepositoryTest {
         assertNotNull(getDummySeries)
         assertEquals(dummyTrendingSeries, getDummySeries)
     }
-
 
 
     @Test

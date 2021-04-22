@@ -12,7 +12,7 @@ class MovieViewModel(private val repo: MocaRepository) : ViewModel() {
 
     private val searchQuery = MutableLiveData<String>()
     private var searchedMovies = Transformations.switchMap(searchQuery) {
-        repo.searchMovies(it)
+        repo.searchMovies(it).asLiveData()
     } as MutableLiveData<Resource<MovieListResponse>>
 
     init {
@@ -20,7 +20,7 @@ class MovieViewModel(private val repo: MocaRepository) : ViewModel() {
     }
 
     fun initMovies() = viewModelScope.launch {
-        listMovie = repo.getMovies()
+        listMovie = repo.getMovies().asLiveData()
     }
 
 

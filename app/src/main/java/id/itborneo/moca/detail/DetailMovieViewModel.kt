@@ -1,9 +1,6 @@
 package id.itborneo.moca.detail
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import id.itborneo.moca.core.local.enitity.FavoriteMovieEntity
 import id.itborneo.moca.core.model.credits.CreditsModel
 import id.itborneo.moca.core.model.detail.MovieDetailModel
@@ -36,8 +33,8 @@ class DetailMovieViewModel(private val repo: MocaRepository, private val id: Int
     }
 
     fun initDetailMovie() = viewModelScope.launch {
-        detail = repo.getDetailMovie(id)
-        credits = repo.getCredits(id)
+        detail = repo.getDetailMovie(id).asLiveData()
+        credits = repo.getCredits(id).asLiveData()
     }
 
     fun getDetailMovie() = detail

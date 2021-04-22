@@ -54,7 +54,11 @@ class MovieFragment : Fragment() {
                         val result = it.data.results
                         if (result != null) {
                             adapter.set(result)
+                        } else {
+                            showError()
                         }
+                    } else {
+                        showError()
                     }
                 }
                 Status.LOADING -> {

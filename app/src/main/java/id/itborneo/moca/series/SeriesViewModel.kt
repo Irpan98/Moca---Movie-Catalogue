@@ -11,7 +11,7 @@ class SeriesViewModel(private val repo: MocaRepository) : ViewModel() {
     private lateinit var series: LiveData<Resource<SeriesListResponse>>
     private val searchQuery = MutableLiveData<String>()
     private var searchedSeries = Transformations.switchMap(searchQuery) {
-        repo.searchSeries(it)
+        repo.searchSeries(it).asLiveData()
     } as MutableLiveData<Resource<SeriesListResponse>>
 
     init {
@@ -19,7 +19,7 @@ class SeriesViewModel(private val repo: MocaRepository) : ViewModel() {
     }
 
     fun initSeries() = viewModelScope.launch {
-        series = repo.getSeries()
+        series = repo.getSeries().asLiveData()
     }
 
     fun setSearch(query: String) {
