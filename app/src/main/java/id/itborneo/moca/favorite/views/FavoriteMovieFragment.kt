@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.itborneo.moca.core.local.enitity.FavoriteMovieEntity
+import id.itborneo.moca.core.data.local.database.enitity.FavoriteMovieEntity
 import id.itborneo.moca.databinding.FragmentFavoriteMovieBinding
-import id.itborneo.moca.detail.DetailMovieActivity
+import id.itborneo.moca.detail.views.DetailMovieActivity
 import id.itborneo.moca.favorite.adapters.FavoriteMoviePagedAdapter
 import id.itborneo.moca.favorite.viewmodels.FavoriteMovieViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel

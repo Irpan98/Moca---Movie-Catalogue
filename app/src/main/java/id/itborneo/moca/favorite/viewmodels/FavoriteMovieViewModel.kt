@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagedList
-import id.itborneo.moca.core.local.enitity.FavoriteMovieEntity
-import id.itborneo.moca.core.repository.MocaRepository
+import id.itborneo.moca.core.data.local.database.enitity.FavoriteMovieEntity
+import id.itborneo.moca.core.domain.usecase.MocaUseCase
 import kotlinx.coroutines.launch
 
-class FavoriteMovieViewModel(private val repo: MocaRepository) : ViewModel() {
+class FavoriteMovieViewModel(private val useCase: MocaUseCase) : ViewModel() {
 
     private lateinit var listMovie: LiveData<PagedList<FavoriteMovieEntity>>
 
@@ -17,7 +17,7 @@ class FavoriteMovieViewModel(private val repo: MocaRepository) : ViewModel() {
     }
 
     private fun initMovies() = viewModelScope.launch {
-        listMovie = repo.getMovieFavorite()
+//        listMovie = useCase.getMovieFavorite()
     }
 
     fun getMovies() = listMovie

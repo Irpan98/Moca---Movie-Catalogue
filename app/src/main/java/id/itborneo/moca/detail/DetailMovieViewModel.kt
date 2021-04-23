@@ -1,16 +1,16 @@
 package id.itborneo.moca.detail
 
 import androidx.lifecycle.*
-import id.itborneo.moca.core.local.enitity.FavoriteMovieEntity
-import id.itborneo.moca.core.model.credits.CreditsModel
-import id.itborneo.moca.core.model.detail.MovieDetailModel
-import id.itborneo.moca.core.repository.MocaRepository
+import id.itborneo.moca.core.data.local.database.enitity.FavoriteMovieEntity
+import id.itborneo.moca.core.domain.model.credits.CreditsModel
+import id.itborneo.moca.core.domain.model.detail.MovieDetailModel
+import id.itborneo.moca.core.domain.usecase.MocaUseCase
 import id.itborneo.moca.core.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class DetailMovieViewModel(private val repo: MocaRepository, private val id: Int) : ViewModel() {
+class DetailMovieViewModel(private val useCase: MocaUseCase, private val id: Int) : ViewModel() {
     private lateinit var detail: LiveData<Resource<MovieDetailModel>>
     private lateinit var credits: LiveData<Resource<CreditsModel>>
 
@@ -23,18 +23,18 @@ class DetailMovieViewModel(private val repo: MocaRepository, private val id: Int
 
     private fun isFavoriteCheck() = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-            val movieFavorite = repo.getSingleMovieFavorite(id)
-            if (movieFavorite != null) {
-                isFavorite.postValue(true)
-            } else {
-                isFavorite.postValue(false)
-            }
+//            val movieFavorite = useCase.getSingleMovieFavorite(id)
+//            if (movieFavorite != null) {
+//                isFavorite.postValue(true)
+//            } else {
+//                isFavorite.postValue(false)
+//            }
         }
     }
 
     fun initDetailMovie() = viewModelScope.launch {
-        detail = repo.getDetailMovie(id).asLiveData()
-        credits = repo.getCredits(id).asLiveData()
+//        detail = useCase.getDetailMovie(id).asLiveData()
+//        credits = useCase.getCredits(id).asLiveData()
     }
 
     fun getDetailMovie() = detail
@@ -43,14 +43,14 @@ class DetailMovieViewModel(private val repo: MocaRepository, private val id: Int
 
     fun addFavorite(favorite: FavoriteMovieEntity) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-            repo.addMovieFavorite(favorite)
+//            useCase.addMovieFavorite(favorite)
             isFavorite.postValue(true)
         }
     }
 
     fun removeFavorite(favorite: FavoriteMovieEntity) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-            repo.removeMovieFavorite(favorite)
+//            useCase.removeMovieFavorite(favorite)
             isFavorite.postValue(false)
         }
     }

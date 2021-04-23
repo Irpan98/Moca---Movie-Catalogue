@@ -9,10 +9,10 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.itborneo.moca.core.domain.model.MovieModel
 import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.model.MovieModel
 import id.itborneo.moca.databinding.FragmentMovieBinding
-import id.itborneo.moca.detail.DetailMovieActivity
+import id.itborneo.moca.detail.views.DetailMovieActivity
 import kotlinx.coroutines.FlowPreview
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
@@ -52,12 +52,7 @@ class MovieFragment : Fragment() {
                     showLoading(false)
 
                     if (it.data != null) {
-                        val result = it.data.results
-                        if (result != null) {
-                            adapter.set(result)
-                        } else {
-                            showError()
-                        }
+                        adapter.set(it.data)
                     } else {
                         showError()
                     }
@@ -77,31 +72,31 @@ class MovieFragment : Fragment() {
 
     private fun observerSearch() {
         viewModel.getSearched().observe(viewLifecycleOwner) {
-            when (it.status) {
-                Status.SUCCESS -> {
-                    showLoading(false)
-
-                    if (it.data != null) {
-                        val result = it.data.results
-                        if (!result.isNullOrEmpty()) {
-                            showNotFound(false)
-                            adapter.set(result)
-                        } else {
-                            showNotFound()
-                        }
-                    } else {
-                        showError()
-                    }
-                }
-                Status.LOADING -> {
-                    showLoading(true)
-                }
-                Status.ERROR -> {
-                    showLoading(false)
-                    showError()
-                    Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
-                }
-            }
+//            when (it.status) {
+//                Status.SUCCESS -> {
+//                    showLoading(false)
+//
+//                    if (it.data != null) {
+//                        val result = it.data.results
+//                        if (!result.isNullOrEmpty()) {
+//                            showNotFound(false)
+//                            adapter.set(result)
+//                        } else {
+//                            showNotFound()
+//                        }
+//                    } else {
+//                        showError()
+//                    }
+//                }
+//                Status.LOADING -> {
+//                    showLoading(true)
+//                }
+//                Status.ERROR -> {
+//                    showLoading(false)
+//                    showError()
+//                    Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
+//                }
+//            }
         }
     }
 

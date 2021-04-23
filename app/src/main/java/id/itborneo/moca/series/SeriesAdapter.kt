@@ -8,7 +8,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import id.itborneo.moca.R
 import id.itborneo.moca.core.constant.ImageConstant
-import id.itborneo.moca.core.model.SeriesModel
+import id.itborneo.moca.core.domain.model.SeriesModel
 import id.itborneo.moca.databinding.ItemPosterBinding
 
 

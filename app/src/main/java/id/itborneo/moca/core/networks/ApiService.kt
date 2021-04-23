@@ -1,10 +1,10 @@
 package id.itborneo.moca.core.networks
 
-import id.itborneo.moca.core.model.credits.CreditsModel
-import id.itborneo.moca.core.model.detail.MovieDetailModel
-import id.itborneo.moca.core.model.detail.SeriesDetailModel
-import id.itborneo.moca.core.model.response.MovieListResponse
-import id.itborneo.moca.core.model.response.SeriesListResponse
+import id.itborneo.moca.core.data.remote.response.MovieListResponse
+import id.itborneo.moca.core.data.remote.response.SeriesListResponse
+import id.itborneo.moca.core.data.remote.response.credits.CreditsResponse
+import id.itborneo.moca.core.data.remote.response.detail.MovieDetailResponse
+import id.itborneo.moca.core.data.remote.response.detail.SeriesDetailResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -21,12 +21,12 @@ interface ApiService {
     @GET("3/movie/{id}")
     suspend fun getDetailMovie(
         @Path("id") id: Int
-    ): MovieDetailModel
+    ): MovieDetailResponse
 
     @GET("3/tv/{id}")
     suspend fun getDetailSeries(
         @Path("id") id: Int
-    ): SeriesDetailModel
+    ): SeriesDetailResponse
 
     @GET("3/trending/movie/day")
     suspend fun getTrendingMovie(): MovieListResponse
@@ -43,7 +43,7 @@ interface ApiService {
     @GET("3/movie/{id}/credits")
     suspend fun getCreditsMovie(
         @Path("id") id: Int
-    ): CreditsModel
+    ): CreditsResponse
 
 
     @GET("3/search/movie")

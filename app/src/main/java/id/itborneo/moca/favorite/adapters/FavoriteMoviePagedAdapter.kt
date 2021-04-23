@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import id.itborneo.moca.R
 import id.itborneo.moca.core.constant.ImageConstant
-import id.itborneo.moca.core.local.enitity.FavoriteMovieEntity
+import id.itborneo.moca.core.data.local.database.enitity.FavoriteMovieEntity
 import id.itborneo.moca.databinding.ItemPosterBinding
 
 

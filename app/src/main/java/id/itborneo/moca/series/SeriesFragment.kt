@@ -9,14 +9,15 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.itborneo.moca.core.domain.model.SeriesModel
 import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.model.SeriesModel
 import id.itborneo.moca.databinding.FragmentSeriesBinding
-import id.itborneo.moca.detail.DetailSeriesActivity
+import id.itborneo.moca.detail.views.DetailSeriesActivity
 import kotlinx.coroutines.FlowPreview
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
+@FlowPreview
 class SeriesFragment : Fragment() {
 
     companion object {
@@ -54,11 +55,11 @@ class SeriesFragment : Fragment() {
                     if (it.data != null) {
                         val result = it.data.results
                         if (result != null) {
-                            if (result.isNotEmpty()) {
-                                adapter.set(result)
-                            } else {
-                                showError()
-                            }
+//                            if (result.isNotEmpty()) {
+//                                adapter.set(result)
+//                            } else {
+//                                showError()
+//                            }
                         } else {
                             showError()
                         }
@@ -150,12 +151,12 @@ class SeriesFragment : Fragment() {
 
                     if (it.data != null) {
                         val result = it.data.results
-                        if (!result.isNullOrEmpty()) {
-                            showNotFound(false)
-                            adapter.set(result)
-                        } else {
-                            showNotFound()
-                        }
+//                        if (!result.isNullOrEmpty()) {
+//                            showNotFound(false)
+//                            adapter.set(result)
+//                        } else {
+//                            showNotFound()
+//                        }
                     } else {
                         showError()
                     }

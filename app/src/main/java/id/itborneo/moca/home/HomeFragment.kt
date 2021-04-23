@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import id.itborneo.moca.core.domain.model.HomeItemModel
 import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.model.HomeItemModel
 import id.itborneo.moca.databinding.FragmentHomeBinding
-import id.itborneo.moca.detail.DetailMovieActivity
-import id.itborneo.moca.detail.DetailSeriesActivity
+import id.itborneo.moca.detail.views.DetailMovieActivity
+import id.itborneo.moca.detail.views.DetailSeriesActivity
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
@@ -95,10 +95,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun observerData() {
-        observerTrendingMovies()
-        observerTrendingSeries()
-        observerNowPlayingMovies()
-        observerAiringTodaySeries()
+//        observerTrendingMovies()
+//        observerTrendingSeries()
+//        observerNowPlayingMovies()
+//        observerAiringTodaySeries()
     }
 
     private fun observerAiringTodaySeries() {

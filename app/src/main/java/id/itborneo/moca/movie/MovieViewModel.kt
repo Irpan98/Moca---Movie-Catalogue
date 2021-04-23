@@ -1,34 +1,32 @@
 package id.itborneo.moca.movie
 
 import androidx.lifecycle.*
-import id.itborneo.moca.core.model.response.MovieListResponse
-import id.itborneo.moca.core.repository.MocaRepository
+import id.itborneo.moca.core.data.remote.response.MovieListResponse
+import id.itborneo.moca.core.domain.model.MovieModel
+import id.itborneo.moca.core.domain.usecase.MocaUseCase
 import id.itborneo.moca.core.utils.Resource
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 @FlowPreview
-class MovieViewModel(private val repo: MocaRepository) : ViewModel() {
+class MovieViewModel(private val useCase: MocaUseCase) : ViewModel() {
 
-    private lateinit var listMovie: LiveData<Resource<MovieListResponse>>
+    private lateinit var listMovie: LiveData<Resource<List<MovieModel>>>
 
     private val searchQuery = MutableLiveData<String>()
     private val searchedMovies = object : MutableLiveData<Resource<MovieListResponse>>() {
         override fun onActive() {
-            value?.let { return }
-            viewModelScope.launch {
-                searchQuery.asFlow()
-                    .debounce(300) // Wait
-                    .distinctUntilChanged() // Ignore same value (This is the default operator)
-                    .collect {
-                        repo.searchMovies(it).collect { getValue ->
-                            value = getValue
-                        }
-                    }
-            }
+//            value?.let { return }
+//            viewModelScope.launch {
+//                searchQuery.asFlow()
+//                    .debounce(300) // Wait
+//                    .distinctUntilChanged() // Ignore same value (This is the default operator)
+//                    .collect {
+//                        useCase.searchMovies(it).collect { getValue ->
+//                            value = getValue
+//                        }
+//                    }
+//            }
         }
     }
 
@@ -37,15 +35,11 @@ class MovieViewModel(private val repo: MocaRepository) : ViewModel() {
     }
 
     fun initMovies() = viewModelScope.launch {
-        listMovie = repo.getMovies().asLiveData()
+        listMovie = useCase.getMovies().asLiveData()
     }
 
 
-    fun setSearch(query: String) = viewModelScope.launch {
-        searchQuery.postValue(query)
-    }
-
-
+    fun setSearch(query: String): Unit = searchQuery.postValue(query)
     fun getMovies() = listMovie
     fun getSearched() = searchedMovies
 
