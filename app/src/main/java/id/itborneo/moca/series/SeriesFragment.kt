@@ -53,16 +53,9 @@ class SeriesFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {
-                        val result = it.data.results
-                        if (result != null) {
-//                            if (result.isNotEmpty()) {
-//                                adapter.set(result)
-//                            } else {
-//                                showError()
-//                            }
-                        } else {
-                            showError()
-                        }
+                        adapter.set(it.data)
+                    } else {
+                        showError()
                     }
                     showLoading(false)
                 }
@@ -133,7 +126,6 @@ class SeriesFragment : Fragment() {
                     return true
                 }
             })
-
             setOnCloseListener {
                 viewModel.initSeries()
                 true
@@ -150,13 +142,13 @@ class SeriesFragment : Fragment() {
                     showLoading(false)
 
                     if (it.data != null) {
-                        val result = it.data.results
-//                        if (!result.isNullOrEmpty()) {
-//                            showNotFound(false)
-//                            adapter.set(result)
-//                        } else {
-//                            showNotFound()
-//                        }
+                        val data = it.data
+                        if (!data.isNullOrEmpty()) {
+                            showNotFound(false)
+                            adapter.set(data)
+                        } else {
+                            showNotFound()
+                        }
                     } else {
                         showError()
                     }

@@ -72,31 +72,31 @@ class MovieFragment : Fragment() {
 
     private fun observerSearch() {
         viewModel.getSearched().observe(viewLifecycleOwner) {
-//            when (it.status) {
-//                Status.SUCCESS -> {
-//                    showLoading(false)
-//
-//                    if (it.data != null) {
-//                        val result = it.data.results
-//                        if (!result.isNullOrEmpty()) {
-//                            showNotFound(false)
-//                            adapter.set(result)
-//                        } else {
-//                            showNotFound()
-//                        }
-//                    } else {
-//                        showError()
-//                    }
-//                }
-//                Status.LOADING -> {
-//                    showLoading(true)
-//                }
-//                Status.ERROR -> {
-//                    showLoading(false)
-//                    showError()
-//                    Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
-//                }
-//            }
+            when (it.status) {
+                Status.SUCCESS -> {
+                    showLoading(false)
+
+                    if (it.data != null) {
+                        val result = it.data
+                        if (!result.isNullOrEmpty()) {
+                            showNotFound(false)
+                            adapter.set(result)
+                        } else {
+                            showNotFound()
+                        }
+                    } else {
+                        showError()
+                    }
+                }
+                Status.LOADING -> {
+                    showLoading(true)
+                }
+                Status.ERROR -> {
+                    showLoading(false)
+                    showError()
+                    Log.e(TAG, "${it.status}, ${it.message} and ${it.data}")
+                }
+            }
         }
     }
 

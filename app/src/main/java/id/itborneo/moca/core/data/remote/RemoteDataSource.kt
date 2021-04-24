@@ -2,8 +2,11 @@ package id.itborneo.moca.core.data.remote
 
 import id.itborneo.moca.core.networks.ApiConfig
 import id.itborneo.moca.core.utils.Resource
+import id.itborneo.moca.core.utils.extension.toCreditsModel
+import id.itborneo.moca.core.utils.extension.toDetailModel
+import id.itborneo.moca.core.utils.extension.toListMovieModel
+import id.itborneo.moca.core.utils.extension.toListSeriesModel
 import id.itborneo.moca.core.utils.testing.EspressoIdlingResource
-import id.itborneo.moca.core.utils.toMovieModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -17,7 +20,7 @@ class RemoteDataSource {
         EspressoIdlingResource.increment()
         try {
             val results = api.getMovies().results
-            emit(Resource.success(data = results.toMovieModel()))
+            emit(Resource.success(data = results.toListMovieModel()))
             EspressoIdlingResource.decrement()
 
         } catch (exception: Exception) {
@@ -31,7 +34,7 @@ class RemoteDataSource {
         EspressoIdlingResource.increment()
 
         try {
-            emit(Resource.success(data = api.getSeries()))
+            emit(Resource.success(data = api.getSeries().results.toListSeriesModel()))
             EspressoIdlingResource.decrement()
 
         } catch (exception: Exception) {
@@ -45,7 +48,7 @@ class RemoteDataSource {
         EspressoIdlingResource.increment()
 
         try {
-            emit(Resource.success(data = api.getDetailMovie(id)))
+            emit(Resource.success(data = api.getDetailMovie(id).toDetailModel()))
             EspressoIdlingResource.decrement()
 
         } catch (exception: Exception) {
@@ -59,7 +62,7 @@ class RemoteDataSource {
         EspressoIdlingResource.increment()
 
         try {
-            emit(Resource.success(data = api.getDetailSeries(id)))
+            emit(Resource.success(data = api.getDetailSeries(id).toDetailModel()))
             EspressoIdlingResource.decrement()
 
         } catch (exception: Exception) {
@@ -72,7 +75,7 @@ class RemoteDataSource {
         emit(Resource.loading(data = null))
         EspressoIdlingResource.increment()
         try {
-            emit(Resource.success(data = api.getTrendingMovie()))
+            emit(Resource.success(data = api.getTrendingMovie().results.toListMovieModel()))
             EspressoIdlingResource.decrement()
 
         } catch (exception: Exception) {
@@ -86,7 +89,7 @@ class RemoteDataSource {
         EspressoIdlingResource.increment()
 
         try {
-            emit(Resource.success(data = api.getTrendingSeries()))
+            emit(Resource.success(data = api.getTrendingSeries().results.toListSeriesModel()))
             EspressoIdlingResource.decrement()
 
         } catch (exception: Exception) {
@@ -101,7 +104,7 @@ class RemoteDataSource {
         EspressoIdlingResource.increment()
 
         try {
-            emit(Resource.success(data = api.getPlayingNowMovies()))
+            emit(Resource.success(data = api.getPlayingNowMovies().results.toListMovieModel()))
             EspressoIdlingResource.decrement()
 
         } catch (exception: Exception) {
@@ -116,7 +119,7 @@ class RemoteDataSource {
         EspressoIdlingResource.increment()
 
         try {
-            emit(Resource.success(data = api.getAiringTodaySeries()))
+            emit(Resource.success(data = api.getAiringTodaySeries().results.toListSeriesModel()))
             EspressoIdlingResource.decrement()
 
         } catch (exception: Exception) {
@@ -130,7 +133,7 @@ class RemoteDataSource {
         EspressoIdlingResource.increment()
 
         try {
-            emit(Resource.success(data = api.getCreditsMovie(id)))
+            emit(Resource.success(data = api.getCreditsMovie(id).toCreditsModel()))
             EspressoIdlingResource.decrement()
 
         } catch (exception: Exception) {
@@ -145,7 +148,7 @@ class RemoteDataSource {
         EspressoIdlingResource.increment()
 
         try {
-            emit(Resource.success(data = api.searchMovies(query)))
+            emit(Resource.success(data = api.searchMovies(query).results.toListMovieModel()))
             EspressoIdlingResource.decrement()
 
         } catch (exception: Exception) {
@@ -160,7 +163,7 @@ class RemoteDataSource {
         EspressoIdlingResource.increment()
 
         try {
-            emit(Resource.success(data = api.searchSeries(query)))
+            emit(Resource.success(data = api.searchSeries(query).results.toListSeriesModel()))
             EspressoIdlingResource.decrement()
 
         } catch (exception: Exception) {

@@ -14,20 +14,19 @@ class MocaRepository(
 ) : IMocaRepository {
 
     override fun getMovies() = remoteDataSource.getMovies()
+    override fun getSeries() = remoteDataSource.getSeries()
 
-//    override fun getSeries() = remoteDataSource.getSeries()
-//
-//    override fun getDetailMovie(id: Int) = remoteDataSource.getDetailMovie(id)
-//    override fun getDetailSeries(id: Int) = remoteDataSource.getDetailSeries(id)
-//
-//    override fun getTrendingMovies() = remoteDataSource.getTrendingMovies()
-//    override fun getTrendingSeries() = remoteDataSource.getTrendingSeries()
-//
-//    override fun getNowPlayingMovies() = remoteDataSource.getNowPlayingMovies()
-//    override fun getAiringTodaySeries() = remoteDataSource.getAiringTodaySeries()
-//
-//    override fun getCredits(id: Int) = remoteDataSource.getCredits(id)
-//
+    override fun getDetailMovie(id: Int) = remoteDataSource.getDetailMovie(id)
+    override fun getDetailSeries(id: Int) = remoteDataSource.getDetailSeries(id)
+
+    override fun getTrendingMovies() = remoteDataSource.getTrendingMovies()
+    override fun getTrendingSeries() = remoteDataSource.getTrendingSeries()
+
+    override fun getNowPlayingMovies() = remoteDataSource.getNowPlayingMovies()
+    override fun getAiringTodaySeries() = remoteDataSource.getAiringTodaySeries()
+
+    override fun getCredits(id: Int) = remoteDataSource.getCredits(id)
+
 //    override fun addMovieFavorite(movieFavorite: FavoriteMovieEntity) =
 //        localDataSource.addMovieFavorite(movieFavorite)
 //
@@ -50,7 +49,7 @@ class MocaRepository(
 //    override fun getSeriesFavorite() =
 //        LivePagedListBuilder(localDataSource.getSeriesFavorites(), PagedListUtils.config()).build()
 //
-//    override fun searchMovies(query: String) = remoteDataSource.searchMovies(query)
-//    override fun searchSeries(query: String) = remoteDataSource.searchSeries(query)
+    override fun searchMovies(query: String) = remoteDataSource.searchMovies(query)
+    override fun searchSeries(query: String) = remoteDataSource.searchSeries(query)
 
 }

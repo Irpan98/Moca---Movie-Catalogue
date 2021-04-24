@@ -25,12 +25,3 @@ object DataMapper {
         )
 }
 
-fun List<MovieModelResponse>.toMovieModel(): List<MovieModel> {
-    return map {
-        MovieModel(
-            id = it.id,
-            title = it.title,
-            posterPath = it.posterPath
-        )
-    }
-}

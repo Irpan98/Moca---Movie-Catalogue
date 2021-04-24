@@ -95,10 +95,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun observerData() {
-//        observerTrendingMovies()
-//        observerTrendingSeries()
-//        observerNowPlayingMovies()
-//        observerAiringTodaySeries()
+        observerTrendingMovies()
+        observerTrendingSeries()
+        observerNowPlayingMovies()
+        observerAiringTodaySeries()
     }
 
     private fun observerAiringTodaySeries() {
@@ -106,15 +106,10 @@ class HomeFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {
-                        val result = it.data.results
-                        if (result != null) {
-                            val items = result.map { model ->
-                                HomeItemModel(
-                                    model.id, model.posterPath
-                                )
-                            }
-                            airingTodaySeriesAdapter.set(items)
+                        val items = it.data.map { model ->
+                            HomeItemModel(model.id, model.posterPath)
                         }
+                        airingTodaySeriesAdapter.set(items)
                     }
                     showLoading(binding.incAiringTodaySeriesLoading.root, false)
                 }
@@ -137,15 +132,13 @@ class HomeFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {
-                        val result = it.data.results
-                        if (result != null) {
-                            val items = result.map { model ->
-                                HomeItemModel(
-                                    model.id, model.posterPath
-                                )
-                            }
-                            playingNowMovieAdapter.set(items)
+                        val data = it.data
+                        val items = data.map { model ->
+                            HomeItemModel(
+                                model.id, model.posterPath
+                            )
                         }
+                        playingNowMovieAdapter.set(items)
                     }
                     showLoading(binding.incNowPlayingMoviesLoading.root, false)
                 }
@@ -167,15 +160,13 @@ class HomeFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {
-                        val result = it.data.results
-                        if (result != null) {
-                            val items = result.map { model ->
-                                HomeItemModel(
-                                    model.id, model.posterPath
-                                )
-                            }
-                            trendingSeriesAdapter.set(items)
+                        val data = it.data
+                        val items = data.map { model ->
+                            HomeItemModel(
+                                model.id, model.posterPath
+                            )
                         }
+                        trendingSeriesAdapter.set(items)
                     }
                     showLoading(binding.incTrendingSeriesLoading.root, false)
                 }
@@ -198,15 +189,13 @@ class HomeFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {
-                        val result = it.data.results
-                        if (result != null) {
-                            val items = result.map { model ->
-                                HomeItemModel(
-                                    model.id, model.posterPath
-                                )
-                            }
-                            trendingMovieAdapter.set(items)
+                        val data = it.data
+                        val items = data.map { model ->
+                            HomeItemModel(
+                                model.id, model.posterPath
+                            )
                         }
+                        trendingMovieAdapter.set(items)
                     }
                     showLoading(binding.incTrendingMoviesLoading.root, false)
                 }
