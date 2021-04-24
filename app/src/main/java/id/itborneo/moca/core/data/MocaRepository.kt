@@ -1,12 +1,15 @@
 package id.itborneo.moca.core.data
 
 import androidx.paging.LivePagedListBuilder
-import id.itborneo.moca.core.data.local.database.enitity.FavoriteMovieEntity
-import id.itborneo.moca.core.data.local.database.enitity.FavoriteSeriesEntity
-import id.itborneo.moca.core.domain.repository.IMocaRepository
 import id.itborneo.moca.core.data.local.LocalDataSource
 import id.itborneo.moca.core.data.remote.RemoteDataSource
+import id.itborneo.moca.core.domain.model.detail.MovieDetailModel
+import id.itborneo.moca.core.domain.model.detail.SeriesDetailModel
+import id.itborneo.moca.core.domain.repository.IMocaRepository
+import id.itborneo.moca.core.utils.DataMapper
 import id.itborneo.moca.core.utils.PagedListUtils
+import id.itborneo.moca.core.utils.extension.toListFavoriteMovieModel
+import id.itborneo.moca.core.utils.extension.toListFavoriteSeriesModel
 
 class MocaRepository(
     private val remoteDataSource: RemoteDataSource,
@@ -27,28 +30,35 @@ class MocaRepository(
 
     override fun getCredits(id: Int) = remoteDataSource.getCredits(id)
 
-//    override fun addMovieFavorite(movieFavorite: FavoriteMovieEntity) =
-//        localDataSource.addMovieFavorite(movieFavorite)
-//
-//    override fun removeMovieFavorite(movieFavorite: FavoriteMovieEntity) =
-//        localDataSource.removeMovieFavorite(movieFavorite)
-//
-//    override fun getSingleMovieFavorite(id: Int) = localDataSource.getSingleMovieFavorite(id)
-//
-//    override fun addSeriesFavorite(SeriesFavorite: FavoriteSeriesEntity) =
-//        localDataSource.addSeriesFavorite(SeriesFavorite)
-//
-//    override fun removeSeriesFavorite(SeriesFavorite: FavoriteSeriesEntity) =
-//        localDataSource.removeSeriesFavorite(SeriesFavorite)
-//
-//    override fun getSingleSeriesFavorite(id: Int) = localDataSource.getSingleSeriesFavorite(id)
-//
-//    override fun getMovieFavorite() =
-//        LivePagedListBuilder(localDataSource.getMovieFavorites(), PagedListUtils.config()).build()
-//
-//    override fun getSeriesFavorite() =
-//        LivePagedListBuilder(localDataSource.getSeriesFavorites(), PagedListUtils.config()).build()
-//
+    override fun addMovieFavorite(movieFavorite: MovieDetailModel) =
+        localDataSource.addMovieFavorite(DataMapper.detailMovieToFavorite(movieFavorite))
+
+    override fun addSeriesFavorite(SeriesFavorite: SeriesDetailModel) =
+        localDataSource.addSeriesFavorite(DataMapper.detailSeriesToFavorite(SeriesFavorite))
+
+
+    override fun removeMovieFavorite(movieFavorite: MovieDetailModel) =
+        localDataSource.removeMovieFavorite(DataMapper.detailMovieToFavorite(movieFavorite))
+
+    override fun removeSeriesFavorite(SeriesFavorite: SeriesDetailModel) =
+        localDataSource.removeSeriesFavorite(DataMapper.detailSeriesToFavorite(SeriesFavorite))
+
+    override fun getSingleMovieFavorite(id: Int) =
+        localDataSource.getSingleMovieFavorite(id)?.toListFavoriteMovieModel()
+
+    override fun getSingleSeriesFavorite(id: Int) =
+        localDataSource.getSingleSeriesFavorite(id)?.toListFavoriteSeriesModel()
+
+    override fun getMovieFavorite() =
+        LivePagedListBuilder(localDataSource.getMovieFavorites().map {
+            it.toListFavoriteMovieModel()
+        }, PagedListUtils.config()).build()
+
+    override fun getSeriesFavorite() =
+        LivePagedListBuilder(localDataSource.getSeriesFavorites().map {
+            it.toListFavoriteSeriesModel()
+        }, PagedListUtils.config()).build()
+
     override fun searchMovies(query: String) = remoteDataSource.searchMovies(query)
     override fun searchSeries(query: String) = remoteDataSource.searchSeries(query)
 

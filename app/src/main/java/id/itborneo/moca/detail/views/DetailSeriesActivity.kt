@@ -16,10 +16,9 @@ import id.itborneo.moca.R
 import id.itborneo.moca.core.domain.model.detail.GenreModel
 import id.itborneo.moca.core.domain.model.detail.SeriesDetailModel
 import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.utils.DataMapper
 import id.itborneo.moca.databinding.ActivityDetailSeriesBinding
-import id.itborneo.moca.detail.CastAdapter
-import id.itborneo.moca.detail.DetailSeriesViewModel
+import id.itborneo.moca.detail.adapters.CastAdapter
+import id.itborneo.moca.detail.viewmodels.DetailSeriesViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -77,10 +76,10 @@ class DetailSeriesActivity : AppCompatActivity() {
         binding.btnFavorite.setOnClickListener {
             viewModel.apply {
                 if (isFavorite.value == true) {
-                    viewModel.removeFavorite(DataMapper.detailSeriesToFavorite(detailSeries))
+                    viewModel.removeFavorite(detailSeries)
                     showToastFavoriteStatus(false)
                 } else {
-                    viewModel.addFavorite(DataMapper.detailSeriesToFavorite(detailSeries))
+                    viewModel.addFavorite(detailSeries)
                     showToastFavoriteStatus(true)
                 }
             }

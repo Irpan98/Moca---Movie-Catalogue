@@ -1,5 +1,7 @@
 package id.itborneo.moca.core.domain.usecase
 
+import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 import id.itborneo.moca.core.domain.model.MovieModel
 import id.itborneo.moca.core.domain.model.SeriesModel
 import id.itborneo.moca.core.domain.model.credits.CreditsModel
@@ -24,18 +26,18 @@ interface MocaUseCase {
 
     fun getCredits(id: Int): Flow<Resource<CreditsModel>>
 
-    //    fun addMovieFavorite(movieFavorite: FavoriteMovieEntity)
-//    fun addSeriesFavorite(SeriesFavorite: FavoriteSeriesEntity)
-//
-//    fun removeMovieFavorite(movieFavorite: FavoriteMovieEntity)
-//    fun removeSeriesFavorite(SeriesFavorite: FavoriteSeriesEntity)
-//
-//    fun getSingleMovieFavorite(id: Int): FavoriteMovieEntity?
-//    fun getSingleSeriesFavorite(id: Int): FavoriteSeriesEntity?
-//
-//    fun getMovieFavorite(): LiveData<PagedList<FavoriteMovieEntity>>
-//    fun getSeriesFavorite(): LiveData<PagedList<FavoriteSeriesEntity>>
-//
+    fun addMovieFavorite(movieFavorite: MovieDetailModel)
+    fun addSeriesFavorite(SeriesFavorite: SeriesDetailModel)
+
+    fun removeMovieFavorite(movieFavorite: MovieDetailModel)
+    fun removeSeriesFavorite(SeriesFavorite: SeriesDetailModel)
+
+    fun getSingleMovieFavorite(id: Int): MovieModel?
+    fun getSingleSeriesFavorite(id: Int): SeriesModel?
+
+    fun getMovieFavorite(): LiveData<PagedList<MovieModel>>
+    fun getSeriesFavorite(): LiveData<PagedList<SeriesModel>>
+
     fun searchMovies(query: String): Flow<Resource<List<MovieModel>>>
     fun searchSeries(query: String): Flow<Resource<List<SeriesModel>>>
 }

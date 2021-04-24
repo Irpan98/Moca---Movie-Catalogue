@@ -10,28 +10,28 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import id.itborneo.moca.R
 import id.itborneo.moca.core.constant.ImageConstant
-import id.itborneo.moca.core.data.local.database.enitity.FavoriteSeriesEntity
+import id.itborneo.moca.core.domain.model.SeriesModel
 import id.itborneo.moca.databinding.ItemPosterBinding
 
 
 class FavoriteSeriesPagedAdapter(
-    val listener: (FavoriteSeriesEntity) -> Unit
-) : PagedListAdapter<FavoriteSeriesEntity, FavoriteSeriesPagedAdapter.ViewHolder>(DIFF_CALLBACK) {
+    val listener: (SeriesModel) -> Unit
+) : PagedListAdapter<SeriesModel, FavoriteSeriesPagedAdapter.ViewHolder>(DIFF_CALLBACK) {
 
 
     companion object {
 
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<FavoriteSeriesEntity>() {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SeriesModel>() {
             override fun areItemsTheSame(
-                oldItem: FavoriteSeriesEntity,
-                newItem: FavoriteSeriesEntity
+                oldItem: SeriesModel,
+                newItem: SeriesModel
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: FavoriteSeriesEntity,
-                newItem: FavoriteSeriesEntity
+                oldItem: SeriesModel,
+                newItem: SeriesModel
             ): Boolean {
                 return oldItem == oldItem
             }
@@ -56,9 +56,9 @@ class FavoriteSeriesPagedAdapter(
 
     inner class ViewHolder(private val itemBinding: ItemPosterBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(series: FavoriteSeriesEntity) {
+        fun bind(series: SeriesModel) {
             itemBinding.apply {
-                tvName.text = series.title
+                tvName.text = series.name
                 Glide.with(root.context)
                     .load("${ImageConstant.BASE_IMAGE}${series.posterPath}")
                     .placeholder(R.drawable.ic_placeholder_image)

@@ -1,7 +1,8 @@
-package id.itborneo.moca.detail
+package id.itborneo.moca.detail.viewmodels
 
 import androidx.lifecycle.*
 import id.itborneo.moca.core.data.local.database.enitity.FavoriteSeriesEntity
+import id.itborneo.moca.core.domain.model.SeriesModel
 import id.itborneo.moca.core.domain.model.credits.CreditsModel
 import id.itborneo.moca.core.domain.model.detail.SeriesDetailModel
 import id.itborneo.moca.core.domain.usecase.MocaUseCase
@@ -22,15 +23,14 @@ class DetailSeriesViewModel(private val userCase: MocaUseCase, private val id: I
 
     }
 
-
     private fun isFavoriteCheck() = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-//            val seriesFavorite = userCase.getSingleSeriesFavorite(id)
-//            if (seriesFavorite != null) {
-//                isFavorite.postValue(true)
-//            } else {
-//                isFavorite.postValue(false)
-//            }
+            val seriesFavorite = userCase.getSingleSeriesFavorite(id)
+            if (seriesFavorite != null) {
+                isFavorite.postValue(true)
+            } else {
+                isFavorite.postValue(false)
+            }
         }
     }
 
@@ -42,16 +42,16 @@ class DetailSeriesViewModel(private val userCase: MocaUseCase, private val id: I
     fun getDetail() = detail
     fun getCredits() = credits
 
-    fun addFavorite(favorite: FavoriteSeriesEntity) = viewModelScope.launch {
+    fun addFavorite(favorite: SeriesDetailModel) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-//            userCase.addSeriesFavorite(favorite)
+            userCase.addSeriesFavorite(favorite)
             isFavorite.postValue(true)
         }
     }
 
-    fun removeFavorite(favorite: FavoriteSeriesEntity) = viewModelScope.launch {
+    fun removeFavorite(favorite: SeriesDetailModel) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-//            userCase.removeSeriesFavorite(favorite)
+            userCase.removeSeriesFavorite(favorite)
             isFavorite.postValue(false)
         }
     }

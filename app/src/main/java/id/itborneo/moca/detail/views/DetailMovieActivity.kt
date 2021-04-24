@@ -16,10 +16,9 @@ import id.itborneo.moca.R
 import id.itborneo.moca.core.domain.model.detail.GenreModel
 import id.itborneo.moca.core.domain.model.detail.MovieDetailModel
 import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.utils.DataMapper
 import id.itborneo.moca.databinding.ActivityDetailMoviesBinding
-import id.itborneo.moca.detail.CastAdapter
-import id.itborneo.moca.detail.DetailMovieViewModel
+import id.itborneo.moca.detail.adapters.CastAdapter
+import id.itborneo.moca.detail.viewmodels.DetailMovieViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -63,10 +62,10 @@ class DetailMovieActivity : AppCompatActivity() {
         binding.btnFavorite.setOnClickListener {
             viewModel.apply {
                 if (isFavorite.value == true) {
-                    viewModel.removeFavorite(DataMapper.detailMovieToFavorite(detailMovie))
+                    viewModel.removeFavorite(detailMovie)
                     showToastFavoriteStatus(false)
                 } else {
-                    viewModel.addFavorite(DataMapper.detailMovieToFavorite(detailMovie))
+                    viewModel.addFavorite(detailMovie)
                     showToastFavoriteStatus(true)
                 }
             }
@@ -159,7 +158,7 @@ class DetailMovieActivity : AppCompatActivity() {
 
 
         binding.tvGenres.text = getGenres(data.genres)
-        binding.tvOverview.text = data.overview.toString()
+        binding.tvOverview.text = data.overview
         binding.tvTitle.text = data.title
         binding.tvVoteAverage.text = data.voteAverage.toString()
 

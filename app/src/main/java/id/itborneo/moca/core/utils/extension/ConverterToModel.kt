@@ -1,5 +1,7 @@
 package id.itborneo.moca.core.utils.extension
 
+import id.itborneo.moca.core.data.local.database.enitity.FavoriteMovieEntity
+import id.itborneo.moca.core.data.local.database.enitity.FavoriteSeriesEntity
 import id.itborneo.moca.core.data.remote.response.MovieModelResponse
 import id.itborneo.moca.core.data.remote.response.SeriesModelResponse
 import id.itborneo.moca.core.data.remote.response.credits.CastResponse
@@ -23,9 +25,10 @@ fun List<MovieModelResponse>.toListMovieModel() = map {
         posterPath = it.posterPath
     )
 }
+
 fun List<SeriesModelResponse>.toListSeriesModel() = map {
     SeriesModel(
-        id = it.id,
+        id = it.id.toUnknownIntIfNull,
         name = it.name,
         posterPath = it.posterPath
     )
@@ -73,6 +76,21 @@ fun List<CastResponse>?.toListCast() = this?.map {
         profilePath = it.profilePath.toUnknownStringIfNull
     )
 }
+
+fun FavoriteMovieEntity.toListFavoriteMovieModel() =
+    MovieModel(
+        id = this.id,
+        title = this.title,
+        posterPath = this.posterPath
+    )
+
+
+fun FavoriteSeriesEntity.toListFavoriteSeriesModel() =
+    SeriesModel(
+        id = this.id,
+        name = this.title,
+        posterPath = this.posterPath
+    )
 
 
 

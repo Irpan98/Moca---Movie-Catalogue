@@ -1,7 +1,8 @@
-package id.itborneo.moca.detail
+package id.itborneo.moca.detail.viewmodels
 
 import androidx.lifecycle.*
 import id.itborneo.moca.core.data.local.database.enitity.FavoriteMovieEntity
+import id.itborneo.moca.core.domain.model.MovieModel
 import id.itborneo.moca.core.domain.model.credits.CreditsModel
 import id.itborneo.moca.core.domain.model.detail.MovieDetailModel
 import id.itborneo.moca.core.domain.usecase.MocaUseCase
@@ -23,12 +24,12 @@ class DetailMovieViewModel(private val useCase: MocaUseCase, private val id: Int
 
     private fun isFavoriteCheck() = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-//            val movieFavorite = useCase.getSingleMovieFavorite(id)
-//            if (movieFavorite != null) {
-//                isFavorite.postValue(true)
-//            } else {
-//                isFavorite.postValue(false)
-//            }
+            val movieFavorite = useCase.getSingleMovieFavorite(id)
+            if (movieFavorite != null) {
+                isFavorite.postValue(true)
+            } else {
+                isFavorite.postValue(false)
+            }
         }
     }
 
@@ -38,19 +39,18 @@ class DetailMovieViewModel(private val useCase: MocaUseCase, private val id: Int
     }
 
     fun getDetailMovie() = detail
-
     fun getCredits() = credits
 
-    fun addFavorite(favorite: FavoriteMovieEntity) = viewModelScope.launch {
+    fun addFavorite(favorite: MovieDetailModel) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-//            useCase.addMovieFavorite(favorite)
+            useCase.addMovieFavorite(favorite)
             isFavorite.postValue(true)
         }
     }
 
-    fun removeFavorite(favorite: FavoriteMovieEntity) = viewModelScope.launch {
+    fun removeFavorite(favorite: MovieDetailModel) = viewModelScope.launch {
         withContext(Dispatchers.IO) {
-//            useCase.removeMovieFavorite(favorite)
+            useCase.removeMovieFavorite(favorite)
             isFavorite.postValue(false)
         }
     }

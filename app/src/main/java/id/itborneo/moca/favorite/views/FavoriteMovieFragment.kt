@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.itborneo.moca.core.data.local.database.enitity.FavoriteMovieEntity
+import id.itborneo.moca.core.domain.model.MovieModel
 import id.itborneo.moca.databinding.FragmentFavoriteMovieBinding
 import id.itborneo.moca.detail.views.DetailMovieActivity
 import id.itborneo.moca.favorite.adapters.FavoriteMoviePagedAdapter
@@ -71,7 +72,7 @@ class FavoriteMovieFragment : Fragment() {
         binding.rvMovies.adapter = adapter
     }
 
-    private fun actionToDetail(movie: FavoriteMovieEntity) {
+    private fun actionToDetail(movie: MovieModel) {
         DetailMovieActivity.getInstance(requireContext(), movie.id)
     }
 }
