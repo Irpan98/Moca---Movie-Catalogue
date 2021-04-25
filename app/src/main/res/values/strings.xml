@@ -27,5 +27,6 @@
     <string name="find_series">Find Series you looking for . . </string>
     <string name="not_found">Not Found</string>
     <string name="empty_favorites">You Don\'t have any favorites </string>
+    <string name="title_favorite">Favorite</string>
 
 </resources>

@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import id.itborneo.moca.core.domain.model.MovieModel
-import id.itborneo.moca.core.domain.usecase.MocaUseCase
-import id.itborneo.moca.core.utils.PagedListUtils
+import id.itborneo.core.domain.model.MovieModel
+import id.itborneo.core.domain.usecase.MocaUseCase
+import id.itborneo.core.utils.PagedListUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

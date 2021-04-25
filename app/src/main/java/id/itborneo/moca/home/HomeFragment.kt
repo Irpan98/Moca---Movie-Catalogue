@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import id.itborneo.moca.core.domain.model.HomeItemModel
-import id.itborneo.moca.core.enums.Status
+import id.itborneo.core.domain.model.HomeItemModel
+import id.itborneo.core.enums.Status
 import id.itborneo.moca.databinding.FragmentHomeBinding
 import id.itborneo.moca.detail.views.DetailMovieActivity
 import id.itborneo.moca.detail.views.DetailSeriesActivity
@@ -106,10 +106,13 @@ class HomeFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {
-                        val items = it.data.map { model ->
+                        val data = it.data
+                        val items = data?.map { model ->
                             HomeItemModel(model.id, model.posterPath)
                         }
-                        airingTodaySeriesAdapter.set(items)
+                        if (items != null) {
+                            airingTodaySeriesAdapter.set(items)
+                        }
                     }
                     showLoading(binding.incAiringTodaySeriesLoading.root, false)
                 }
@@ -133,12 +136,14 @@ class HomeFragment : Fragment() {
                 Status.SUCCESS -> {
                     if (it.data != null) {
                         val data = it.data
-                        val items = data.map { model ->
+                        val items = data?.map { model ->
                             HomeItemModel(
                                 model.id, model.posterPath
                             )
                         }
-                        playingNowMovieAdapter.set(items)
+                        if (items != null) {
+                            playingNowMovieAdapter.set(items)
+                        }
                     }
                     showLoading(binding.incNowPlayingMoviesLoading.root, false)
                 }
@@ -161,12 +166,14 @@ class HomeFragment : Fragment() {
                 Status.SUCCESS -> {
                     if (it.data != null) {
                         val data = it.data
-                        val items = data.map { model ->
+                        val items = data?.map { model ->
                             HomeItemModel(
                                 model.id, model.posterPath
                             )
                         }
-                        trendingSeriesAdapter.set(items)
+                        if (items != null) {
+                            trendingSeriesAdapter.set(items)
+                        }
                     }
                     showLoading(binding.incTrendingSeriesLoading.root, false)
                 }
@@ -190,12 +197,14 @@ class HomeFragment : Fragment() {
                 Status.SUCCESS -> {
                     if (it.data != null) {
                         val data = it.data
-                        val items = data.map { model ->
+                        val items = data?.map { model ->
                             HomeItemModel(
                                 model.id, model.posterPath
                             )
                         }
-                        trendingMovieAdapter.set(items)
+                        if (items != null) {
+                            trendingMovieAdapter.set(items)
+                        }
                     }
                     showLoading(binding.incTrendingMoviesLoading.root, false)
                 }

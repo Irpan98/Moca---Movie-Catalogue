@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -15,6 +17,12 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+        buildConfigField(
+                "String",
+                "THE_MOVIE_DB_KEY",
+                '"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0N2ZkNTY3NTFiMmFhOTViMDczZTRkNDkxMWRjZGRhNyIsInN1YiI6IjVkMTYxMjZkNTBmN2NhMDAxNTE1ZjZiYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.i-k6okcETvpOqXvS_JC_YDSfeK0plnJh1x-VC1xvolk"')
+
     }
 
     buildTypes {
@@ -32,13 +40,15 @@ android {
     }
 }
 
-dependencies {
+apply from: '../shared_dependencies.gradle'
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+dependencies {
+//
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+//    implementation 'androidx.core:core-ktx:1.3.2'
+//    implementation 'androidx.appcompat:appcompat:1.2.0'
+//    implementation 'com.google.android.material:material:1.3.0'
+//    testImplementation 'junit:junit:4.+'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }

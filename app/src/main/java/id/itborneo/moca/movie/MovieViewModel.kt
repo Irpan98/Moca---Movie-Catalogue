@@ -1,9 +1,9 @@
 package id.itborneo.moca.movie
 
 import androidx.lifecycle.*
-import id.itborneo.moca.core.domain.model.MovieModel
-import id.itborneo.moca.core.domain.usecase.MocaUseCase
-import id.itborneo.moca.core.utils.Resource
+import id.itborneo.core.domain.model.MovieModel
+import id.itborneo.core.domain.usecase.MocaUseCase
+import id.itborneo.core.utils.Resource
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce

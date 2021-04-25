@@ -9,8 +9,8 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.itborneo.moca.core.domain.model.SeriesModel
-import id.itborneo.moca.core.enums.Status
+import id.itborneo.core.domain.model.SeriesModel
+import id.itborneo.core.enums.Status
 import id.itborneo.moca.databinding.FragmentSeriesBinding
 import id.itborneo.moca.detail.views.DetailSeriesActivity
 import kotlinx.coroutines.FlowPreview
@@ -52,12 +52,13 @@ class SeriesFragment : Fragment() {
         viewModel.getSeries().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
-                    if (it.data != null) {
-                        adapter.set(it.data)
+                    showLoading(false)
+                    val data = it.data
+                    if (data != null) {
+                        adapter.set(data)
                     } else {
                         showError()
                     }
-                    showLoading(false)
                 }
                 Status.LOADING -> {
                     showLoading(true)

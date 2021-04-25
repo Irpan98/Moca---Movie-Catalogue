@@ -12,11 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import es.dmoral.toasty.Toasty
+import id.itborneo.core.domain.model.SeriesModel
+import id.itborneo.core.domain.model.detail.GenreModel
+import id.itborneo.core.domain.model.detail.SeriesDetailModel
+import id.itborneo.core.enums.Status
 import id.itborneo.moca.R
-import id.itborneo.moca.core.domain.model.SeriesModel
-import id.itborneo.moca.core.domain.model.detail.GenreModel
-import id.itborneo.moca.core.domain.model.detail.SeriesDetailModel
-import id.itborneo.moca.core.enums.Status
 import id.itborneo.moca.databinding.ActivityDetailSeriesBinding
 import id.itborneo.moca.detail.adapters.CastAdapter
 import id.itborneo.moca.detail.viewmodels.DetailSeriesViewModel
@@ -99,9 +99,9 @@ class DetailSeriesActivity : AppCompatActivity() {
             when (it.status) {
                 Status.SUCCESS -> {
                     showLoading(false)
-
-                    if (it.data != null) {
-                        it.data.cast?.let { it1 -> creditsAdapter.set(it1) }
+                    val data = it.data
+                    if (data != null) {
+                        data.cast?.let { it1 -> creditsAdapter.set(it1) }
                     }
                 }
                 Status.LOADING -> {
@@ -125,10 +125,12 @@ class DetailSeriesActivity : AppCompatActivity() {
             when (it.status) {
                 Status.SUCCESS -> {
                     showLoading(false)
-
                     if (it.data != null) {
-                        detailSeries = it.data
-                        updateUI(detailSeries)
+                        val data = it.data
+                        if (data != null) {
+                            detailSeries = data
+                            updateUI(detailSeries)
+                        }
                     } else {
                         showError()
                     }

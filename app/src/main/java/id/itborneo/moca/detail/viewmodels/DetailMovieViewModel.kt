@@ -1,10 +1,10 @@
 package id.itborneo.moca.detail.viewmodels
 
 import androidx.lifecycle.*
-import id.itborneo.moca.core.domain.model.credits.CreditsModel
-import id.itborneo.moca.core.domain.model.detail.MovieDetailModel
-import id.itborneo.moca.core.domain.usecase.MocaUseCase
-import id.itborneo.moca.core.utils.Resource
+import id.itborneo.core.domain.model.credits.CreditsModel
+import id.itborneo.core.domain.model.detail.MovieDetailModel
+import id.itborneo.core.domain.usecase.MocaUseCase
+import id.itborneo.core.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

@@ -13,11 +13,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import es.dmoral.toasty.Toasty
 import id.itborneo.moca.R
-import id.itborneo.moca.core.domain.model.MovieModel
-import id.itborneo.moca.core.domain.model.SeriesModel
-import id.itborneo.moca.core.domain.model.detail.GenreModel
-import id.itborneo.moca.core.domain.model.detail.MovieDetailModel
-import id.itborneo.moca.core.enums.Status
+import id.itborneo.core.domain.model.MovieModel
+import id.itborneo.core.domain.model.SeriesModel
+import id.itborneo.core.domain.model.detail.GenreModel
+import id.itborneo.core.domain.model.detail.MovieDetailModel
+import id.itborneo.core.enums.Status
 import id.itborneo.moca.databinding.ActivityDetailMoviesBinding
 import id.itborneo.moca.detail.adapters.CastAdapter
 import id.itborneo.moca.detail.viewmodels.DetailMovieViewModel
@@ -97,10 +97,9 @@ class DetailMovieActivity : AppCompatActivity() {
             when (it.status) {
                 Status.SUCCESS -> {
                     showLoading(false)
-                    if (it.data != null) {
-                        it.data.cast?.let { it1 -> creditsAdapter.set(it1) }
-                    } else {
-                        showError()
+                    val data = it.data
+                    if (data != null) {
+                        data.cast?.let { it1 -> creditsAdapter.set(it1) }
                     }
                 }
                 Status.LOADING -> {
@@ -129,10 +128,12 @@ class DetailMovieActivity : AppCompatActivity() {
             when (it.status) {
                 Status.SUCCESS -> {
                     showLoading(false)
-
                     if (it.data != null) {
-                        detailMovie = it.data
-                        updateUI(detailMovie)
+                        val data = it.data
+                        if (data != null) {
+                            detailMovie = data
+                            updateUI(detailMovie)
+                        }
                     } else {
                         showError()
                     }

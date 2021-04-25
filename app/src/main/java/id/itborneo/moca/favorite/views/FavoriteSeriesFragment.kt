@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.itborneo.moca.core.domain.model.SeriesModel
+import id.itborneo.core.domain.model.SeriesModel
 import id.itborneo.moca.databinding.FragmentFavoriteSeriesBinding
 import id.itborneo.moca.detail.views.DetailSeriesActivity
 import id.itborneo.moca.favorite.adapters.FavoriteSeriesPagedAdapter

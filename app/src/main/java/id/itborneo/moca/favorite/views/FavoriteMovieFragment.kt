@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.itborneo.moca.core.data.local.database.enitity.FavoriteMovieEntity
-import id.itborneo.moca.core.domain.model.MovieModel
+import id.itborneo.core.data.local.database.enitity.FavoriteMovieEntity
+import id.itborneo.core.domain.model.MovieModel
 import id.itborneo.moca.databinding.FragmentFavoriteMovieBinding
 import id.itborneo.moca.detail.views.DetailMovieActivity
 import id.itborneo.moca.favorite.adapters.FavoriteMoviePagedAdapter

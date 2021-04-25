@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import id.itborneo.moca.core.domain.model.MovieModel
-import id.itborneo.moca.core.domain.model.SeriesModel
-import id.itborneo.moca.core.domain.usecase.MocaUseCase
-import id.itborneo.moca.core.utils.Resource
+import id.itborneo.core.domain.model.MovieModel
+import id.itborneo.core.domain.model.SeriesModel
+import id.itborneo.core.domain.usecase.MocaUseCase
+import id.itborneo.core.utils.Resource
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val useCase: MocaUseCase) : ViewModel() {

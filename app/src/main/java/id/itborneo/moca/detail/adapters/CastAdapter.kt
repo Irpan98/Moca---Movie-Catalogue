@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import id.itborneo.core.constant.ImageConstant
+import id.itborneo.core.domain.model.credits.CastModel
 import id.itborneo.moca.R
-import id.itborneo.moca.core.constant.ImageConstant
-import id.itborneo.moca.core.domain.model.credits.CastModel
 import id.itborneo.moca.databinding.ItemCastBinding
 
 

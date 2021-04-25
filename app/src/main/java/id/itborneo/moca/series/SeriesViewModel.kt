@@ -1,9 +1,9 @@
 package id.itborneo.moca.series
 
 import androidx.lifecycle.*
-import id.itborneo.moca.core.domain.model.SeriesModel
-import id.itborneo.moca.core.domain.usecase.MocaUseCase
-import id.itborneo.moca.core.utils.Resource
+import id.itborneo.core.domain.model.SeriesModel
+import id.itborneo.core.domain.usecase.MocaUseCase
+import id.itborneo.core.utils.Resource
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce

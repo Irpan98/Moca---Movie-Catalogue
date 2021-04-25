@@ -9,8 +9,8 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.itborneo.moca.core.domain.model.MovieModel
-import id.itborneo.moca.core.enums.Status
+import id.itborneo.core.domain.model.MovieModel
+import id.itborneo.core.enums.Status
 import id.itborneo.moca.databinding.FragmentMovieBinding
 import id.itborneo.moca.detail.views.DetailMovieActivity
 import kotlinx.coroutines.FlowPreview
@@ -50,9 +50,9 @@ class MovieFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     showLoading(false)
-
-                    if (it.data != null) {
-                        adapter.set(it.data)
+                    val data = it.data
+                    if (data != null) {
+                        adapter.set(data)
                     } else {
                         showError()
                     }
