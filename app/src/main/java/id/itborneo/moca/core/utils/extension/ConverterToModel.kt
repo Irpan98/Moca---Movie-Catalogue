@@ -77,7 +77,7 @@ fun List<CastResponse>?.toListCast() = this?.map {
     )
 }
 
-fun FavoriteMovieEntity.toListFavoriteMovieModel() =
+fun FavoriteMovieEntity.toFavoriteMovieModel() =
     MovieModel(
         id = this.id,
         title = this.title,
@@ -85,7 +85,7 @@ fun FavoriteMovieEntity.toListFavoriteMovieModel() =
     )
 
 
-fun FavoriteSeriesEntity.toListFavoriteSeriesModel() =
+fun FavoriteSeriesEntity.toFavoriteSeriesModel() =
     SeriesModel(
         id = this.id,
         name = this.title,

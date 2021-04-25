@@ -2,10 +2,7 @@ package id.itborneo.moca.core.app
 
 import android.app.Application
 import androidx.annotation.Keep
-import id.itborneo.moca.core.di.databaseModule
-import id.itborneo.moca.core.di.repositoryModule
-import id.itborneo.moca.core.di.useCaseModule
-import id.itborneo.moca.core.di.viewModelModule
+import id.itborneo.moca.core.di.*
 import kotlinx.coroutines.FlowPreview
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -24,6 +21,7 @@ class MyApplication : Application() {
                 listOf(
                     repositoryModule,
                     databaseModule,
+                    apiModule,
                     viewModelModule,
                     useCaseModule
                 )

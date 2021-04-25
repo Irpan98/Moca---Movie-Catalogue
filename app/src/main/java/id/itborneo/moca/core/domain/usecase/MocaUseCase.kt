@@ -1,6 +1,7 @@
 package id.itborneo.moca.core.domain.usecase
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.paging.PagedList
 import id.itborneo.moca.core.domain.model.MovieModel
 import id.itborneo.moca.core.domain.model.SeriesModel
@@ -32,11 +33,11 @@ interface MocaUseCase {
     fun removeMovieFavorite(movieFavorite: MovieDetailModel)
     fun removeSeriesFavorite(SeriesFavorite: SeriesDetailModel)
 
-    fun getSingleMovieFavorite(id: Int): MovieModel?
-    fun getSingleSeriesFavorite(id: Int): SeriesModel?
+    fun getSingleMovieFavorite(id: Int): Flow<MovieModel?>
+    fun getSingleSeriesFavorite(id: Int): Flow<SeriesModel?>
 
-    fun getMovieFavorite(): LiveData<PagedList<MovieModel>>
-    fun getSeriesFavorite(): LiveData<PagedList<SeriesModel>>
+    fun getMovieFavorite(): DataSource.Factory<Int, MovieModel>
+    fun getSeriesFavorite(): DataSource.Factory<Int, SeriesModel>
 
     fun searchMovies(query: String): Flow<Resource<List<MovieModel>>>
     fun searchSeries(query: String): Flow<Resource<List<SeriesModel>>>

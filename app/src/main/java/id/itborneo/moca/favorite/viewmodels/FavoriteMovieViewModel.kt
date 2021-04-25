@@ -3,9 +3,12 @@ package id.itborneo.moca.favorite.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import id.itborneo.moca.core.domain.model.MovieModel
 import id.itborneo.moca.core.domain.usecase.MocaUseCase
+import id.itborneo.moca.core.utils.PagedListUtils
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class FavoriteMovieViewModel(private val useCase: MocaUseCase) : ViewModel() {
@@ -17,7 +20,9 @@ class FavoriteMovieViewModel(private val useCase: MocaUseCase) : ViewModel() {
     }
 
     private fun initMovies() = viewModelScope.launch {
-        listMovie = useCase.getMovieFavorite()
+        listMovie =
+            LivePagedListBuilder(useCase.getMovieFavorite(), PagedListUtils.config()).build()
+
     }
 
     fun getMovies() = listMovie

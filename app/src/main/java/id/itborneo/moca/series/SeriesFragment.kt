@@ -81,10 +81,7 @@ class SeriesFragment : Fragment() {
     }
 
     private fun actionToDetail(series: SeriesModel) {
-        val id = series.id
-        if (id != null) {
-            DetailSeriesActivity.getInstance(requireContext(), id)
-        }
+        DetailSeriesActivity.getInstance(requireContext(), series.id)
     }
 
     private fun showLoading(showIt: Boolean = true) {

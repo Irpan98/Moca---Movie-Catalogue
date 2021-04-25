@@ -1,15 +1,14 @@
 package id.itborneo.moca.core.data
 
-import androidx.paging.LivePagedListBuilder
 import id.itborneo.moca.core.data.local.LocalDataSource
 import id.itborneo.moca.core.data.remote.RemoteDataSource
 import id.itborneo.moca.core.domain.model.detail.MovieDetailModel
 import id.itborneo.moca.core.domain.model.detail.SeriesDetailModel
 import id.itborneo.moca.core.domain.repository.IMocaRepository
 import id.itborneo.moca.core.utils.DataMapper
-import id.itborneo.moca.core.utils.PagedListUtils
-import id.itborneo.moca.core.utils.extension.toListFavoriteMovieModel
-import id.itborneo.moca.core.utils.extension.toListFavoriteSeriesModel
+import id.itborneo.moca.core.utils.extension.toFavoriteMovieModel
+import id.itborneo.moca.core.utils.extension.toFavoriteSeriesModel
+import kotlinx.coroutines.flow.map
 
 class MocaRepository(
     private val remoteDataSource: RemoteDataSource,
@@ -44,20 +43,26 @@ class MocaRepository(
         localDataSource.removeSeriesFavorite(DataMapper.detailSeriesToFavorite(SeriesFavorite))
 
     override fun getSingleMovieFavorite(id: Int) =
-        localDataSource.getSingleMovieFavorite(id)?.toListFavoriteMovieModel()
+        localDataSource.getSingleMovieFavorite(id).map {
+            it?.toFavoriteMovieModel()
+        }
 
     override fun getSingleSeriesFavorite(id: Int) =
-        localDataSource.getSingleSeriesFavorite(id)?.toListFavoriteSeriesModel()
+        localDataSource.getSingleSeriesFavorite(id).map {
+            it?.toFavoriteSeriesModel()
+        }
 
     override fun getMovieFavorite() =
-        LivePagedListBuilder(localDataSource.getMovieFavorites().map {
-            it.toListFavoriteMovieModel()
-        }, PagedListUtils.config()).build()
+        localDataSource.getMovieFavorites().map {
+            it.toFavoriteMovieModel()
+
+        }
 
     override fun getSeriesFavorite() =
-        LivePagedListBuilder(localDataSource.getSeriesFavorites().map {
-            it.toListFavoriteSeriesModel()
-        }, PagedListUtils.config()).build()
+        localDataSource.getSeriesFavorites().map {
+            it.toFavoriteSeriesModel()
+
+        }
 
     override fun searchMovies(query: String) = remoteDataSource.searchMovies(query)
     override fun searchSeries(query: String) = remoteDataSource.searchSeries(query)

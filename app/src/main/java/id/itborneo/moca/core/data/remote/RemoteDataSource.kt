@@ -1,6 +1,6 @@
 package id.itborneo.moca.core.data.remote
 
-import id.itborneo.moca.core.networks.ApiConfig
+import id.itborneo.moca.core.networks.ApiService
 import id.itborneo.moca.core.utils.Resource
 import id.itborneo.moca.core.utils.extension.toCreditsModel
 import id.itborneo.moca.core.utils.extension.toDetailModel
@@ -11,9 +11,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
-class RemoteDataSource {
+class RemoteDataSource(private val api: ApiService) {
 
-    private val api = ApiConfig.apiService
 
     fun getMovies() = flow {
         emit(Resource.loading(data = null))

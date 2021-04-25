@@ -37,16 +37,16 @@ class MocaInteractor(private val mocaRepository: IMocaRepository) : MocaUseCase 
     override fun removeSeriesFavorite(SeriesFavorite: SeriesDetailModel) =
         mocaRepository.removeSeriesFavorite(SeriesFavorite)
 
-    override fun getSingleMovieFavorite(id: Int): MovieModel? =
+    override fun getSingleMovieFavorite(id: Int)=
         mocaRepository.getSingleMovieFavorite(id)
 
-    override fun getSingleSeriesFavorite(id: Int): SeriesModel? =
+    override fun getSingleSeriesFavorite(id: Int) =
         mocaRepository.getSingleSeriesFavorite(id)
 
-    override fun getMovieFavorite(): LiveData<PagedList<MovieModel>> =
+    override fun getMovieFavorite()=
         mocaRepository.getMovieFavorite()
 
-    override fun getSeriesFavorite(): LiveData<PagedList<SeriesModel>> =
+    override fun getSeriesFavorite()=
         mocaRepository.getSeriesFavorite()
 
     override fun searchMovies(query: String) = mocaRepository.searchMovies(query)

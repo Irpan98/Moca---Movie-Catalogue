@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import es.dmoral.toasty.Toasty
 import id.itborneo.moca.R
+import id.itborneo.moca.core.domain.model.SeriesModel
 import id.itborneo.moca.core.domain.model.detail.GenreModel
 import id.itborneo.moca.core.domain.model.detail.SeriesDetailModel
 import id.itborneo.moca.core.enums.Status
@@ -75,7 +76,7 @@ class DetailSeriesActivity : AppCompatActivity() {
     private fun initFavorite() {
         binding.btnFavorite.setOnClickListener {
             viewModel.apply {
-                if (isFavorite.value == true) {
+                if (getFavorites().value != null) {
                     viewModel.removeFavorite(detailSeries)
                     showToastFavoriteStatus(false)
                 } else {
@@ -194,13 +195,13 @@ class DetailSeriesActivity : AppCompatActivity() {
     }
 
     private fun observerFavoriteStatus() {
-        viewModel.isFavorite.observe(this) {
+        viewModel.getFavorites().observe(this) {
             updateFavoriteStatusUI(it)
         }
     }
 
-    private fun updateFavoriteStatusUI(isFavorite: Boolean) {
-        if (isFavorite) {
+    private fun updateFavoriteStatusUI(isFavorite: SeriesModel?) {
+        if (isFavorite != null) {
             binding.btnFavorite.setImageResource(R.drawable.ic_favorite_active)
         } else {
             binding.btnFavorite.setImageResource(R.drawable.ic_favorite_inactive)

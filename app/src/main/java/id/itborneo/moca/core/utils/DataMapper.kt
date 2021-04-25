@@ -12,7 +12,7 @@ object DataMapper {
 
     fun detailMovieToFavorite(item: MovieDetailModel) =
         FavoriteMovieEntity(
-            title = item.title ?: "N/A",
+            title = item.title,
             id = item.id,
             posterPath = item.posterPath ?: "\"N/A\""
         )
