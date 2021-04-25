@@ -8,8 +8,8 @@ import androidx.test.espresso.action.ViewActions.swipeLeft
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import id.itborneo.core.utils.testing.EspressoIdlingResource
 import id.itborneo.moca.R
-import id.itborneo.moca.core.utils.testing.EspressoIdlingResource
 import id.itborneo.moca.main.MainActivity
 import org.junit.After
 import org.junit.Before

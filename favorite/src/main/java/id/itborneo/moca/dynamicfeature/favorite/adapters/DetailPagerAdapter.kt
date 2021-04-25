@@ -1,10 +1,10 @@
-package id.itborneo.moca.favorite.adapters
+package id.itborneo.moca.dynamicfeature.favorite.adapters
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import id.itborneo.moca.favorite.views.FavoriteMovieFragment
-import id.itborneo.moca.favorite.views.FavoriteSeriesFragment
+import id.itborneo.moca.dynamicfeature.favorite.views.FavoriteMovieFragment
+import id.itborneo.moca.dynamicfeature.favorite.views.FavoriteSeriesFragment
 
 class DetailPagerAdapter(activity: AppCompatActivity) :
     FragmentStateAdapter(activity) {

@@ -1,4 +1,4 @@
-package id.itborneo.moca.favorite.adapters
+package id.itborneo.moca.dynamicfeature.favorite.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
