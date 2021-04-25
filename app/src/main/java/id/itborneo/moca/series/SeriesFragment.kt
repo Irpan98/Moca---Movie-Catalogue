@@ -9,13 +9,15 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.model.SeriesModel
+import id.itborneo.core.domain.model.SeriesModel
+import id.itborneo.core.enums.Status
 import id.itborneo.moca.databinding.FragmentSeriesBinding
-import id.itborneo.moca.detail.DetailSeriesActivity
+import id.itborneo.moca.detail.views.DetailSeriesActivity
+import kotlinx.coroutines.FlowPreview
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
+@FlowPreview
 class SeriesFragment : Fragment() {
 
     companion object {
@@ -50,19 +52,13 @@ class SeriesFragment : Fragment() {
         viewModel.getSeries().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
-                    if (it.data != null) {
-                        val result = it.data.results
-                        if (result != null) {
-                            if (result.isNotEmpty()) {
-                                adapter.set(result)
-                            } else {
-                                showError()
-                            }
-                        } else {
-                            showError()
-                        }
-                    }
                     showLoading(false)
+                    val data = it.data
+                    if (data != null) {
+                        adapter.set(data)
+                    } else {
+                        showError()
+                    }
                 }
                 Status.LOADING -> {
                     showLoading(true)
@@ -86,10 +82,7 @@ class SeriesFragment : Fragment() {
     }
 
     private fun actionToDetail(series: SeriesModel) {
-        val id = series.id
-        if (id != null) {
-            DetailSeriesActivity.getInstance(requireContext(), id)
-        }
+        DetailSeriesActivity.getInstance(requireContext(), series.id)
     }
 
     private fun showLoading(showIt: Boolean = true) {
@@ -131,7 +124,6 @@ class SeriesFragment : Fragment() {
                     return true
                 }
             })
-
             setOnCloseListener {
                 viewModel.initSeries()
                 true
@@ -140,6 +132,7 @@ class SeriesFragment : Fragment() {
         }
     }
 
+    @FlowPreview
     private fun observerSearch() {
         viewModel.getSearched().observe(viewLifecycleOwner) {
             when (it.status) {
@@ -147,10 +140,10 @@ class SeriesFragment : Fragment() {
                     showLoading(false)
 
                     if (it.data != null) {
-                        val result = it.data.results
-                        if (!result.isNullOrEmpty()) {
+                        val data = it.data
+                        if (!data.isNullOrEmpty()) {
                             showNotFound(false)
-                            adapter.set(result)
+                            adapter.set(data)
                         } else {
                             showNotFound()
                         }

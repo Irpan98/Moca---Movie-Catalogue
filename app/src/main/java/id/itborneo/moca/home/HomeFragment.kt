@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import id.itborneo.moca.core.enums.Status
-import id.itborneo.moca.core.model.HomeItemModel
+import id.itborneo.core.domain.model.HomeItemModel
+import id.itborneo.core.enums.Status
 import id.itborneo.moca.databinding.FragmentHomeBinding
-import id.itborneo.moca.detail.DetailMovieActivity
-import id.itborneo.moca.detail.DetailSeriesActivity
+import id.itborneo.moca.detail.views.DetailMovieActivity
+import id.itborneo.moca.detail.views.DetailSeriesActivity
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
@@ -106,13 +106,11 @@ class HomeFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {
-                        val result = it.data.results
-                        if (result != null) {
-                            val items = result.map { model ->
-                                HomeItemModel(
-                                    model.id, model.posterPath
-                                )
-                            }
+                        val data = it.data
+                        val items = data?.map { model ->
+                            HomeItemModel(model.id, model.posterPath)
+                        }
+                        if (items != null) {
                             airingTodaySeriesAdapter.set(items)
                         }
                     }
@@ -137,13 +135,13 @@ class HomeFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {
-                        val result = it.data.results
-                        if (result != null) {
-                            val items = result.map { model ->
-                                HomeItemModel(
-                                    model.id, model.posterPath
-                                )
-                            }
+                        val data = it.data
+                        val items = data?.map { model ->
+                            HomeItemModel(
+                                model.id, model.posterPath
+                            )
+                        }
+                        if (items != null) {
                             playingNowMovieAdapter.set(items)
                         }
                     }
@@ -167,13 +165,13 @@ class HomeFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {
-                        val result = it.data.results
-                        if (result != null) {
-                            val items = result.map { model ->
-                                HomeItemModel(
-                                    model.id, model.posterPath
-                                )
-                            }
+                        val data = it.data
+                        val items = data?.map { model ->
+                            HomeItemModel(
+                                model.id, model.posterPath
+                            )
+                        }
+                        if (items != null) {
                             trendingSeriesAdapter.set(items)
                         }
                     }
@@ -198,13 +196,13 @@ class HomeFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (it.data != null) {
-                        val result = it.data.results
-                        if (result != null) {
-                            val items = result.map { model ->
-                                HomeItemModel(
-                                    model.id, model.posterPath
-                                )
-                            }
+                        val data = it.data
+                        val items = data?.map { model ->
+                            HomeItemModel(
+                                model.id, model.posterPath
+                            )
+                        }
+                        if (items != null) {
                             trendingMovieAdapter.set(items)
                         }
                     }

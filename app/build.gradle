@@ -18,10 +18,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField(
-                "String",
-                "THE_MOVIE_DB_KEY",
-                '"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0N2ZkNTY3NTFiMmFhOTViMDczZTRkNDkxMWRjZGRhNyIsInN1YiI6IjVkMTYxMjZkNTBmN2NhMDAxNTE1ZjZiYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.i-k6okcETvpOqXvS_JC_YDSfeK0plnJh1x-VC1xvolk"')
 
     }
 
@@ -51,76 +47,14 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+    dynamicFeatures = [':favorite']
 }
+apply from: '../shared_dependencies.gradle'
 
 dependencies {
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    implementation "androidx.core:core-ktx:$coreKtxVersion"
-    implementation "androidx.appcompat:appcompat:$appcompatVersion"
-    implementation "com.google.android.material:material:$materialVersion"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintVersion"
-    implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
-
-    testImplementation "junit:junit:$junitVersion"
-    testImplementation "org.mockito:mockito-core:$mockitoVersion"
-    testImplementation "org.mockito:mockito-inline:$mockitoVersion"
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlinVersion"
-    testImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
-
-    androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
-    implementation "androidx.test.espresso:espresso-idling-resource:$idleResourceVersion"
-
-    //fragment
-    implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
-    debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
-
-    //Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
-
-    //Coroutine
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
-
-    //LiveData
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$livedataVersion"
-
-    //lifecycle
-    implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
-
-    //LifeCycle - ViewModel and Live Data
-    implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
-
-    //Jetpack Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
-
-    //glide for image
-    implementation "com.github.bumptech.glide:glide:$glideVersion"
-
-    //Shimmer loading
-    implementation "com.facebook.shimmer:shimmer:$shimmerVersion"
-
-    //koin
-    implementation "org.koin:koin-core:$koinVersion"
-    implementation "org.koin:koin-android:$koinVersion"
-    implementation "org.koin:koin-android-viewmodel:$koinVersion"
-
-    //Room
-    implementation "androidx.room:room-runtime:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation project(":core")
 
 
-    //Toasty
-    implementation "com.github.GrenderG:Toasty:$toastyVersion"
-
-    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
 
 
 }

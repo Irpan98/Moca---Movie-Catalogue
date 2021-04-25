@@ -1,33 +1,46 @@
 package id.itborneo.moca.series
 
 import androidx.lifecycle.*
-import id.itborneo.moca.core.model.response.SeriesListResponse
-import id.itborneo.moca.core.repository.MocaRepository
-import id.itborneo.moca.core.utils.Resource
+import id.itborneo.core.domain.model.SeriesModel
+import id.itborneo.core.domain.usecase.MocaUseCase
+import id.itborneo.core.utils.Resource
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
-class SeriesViewModel(private val repo: MocaRepository) : ViewModel() {
+@FlowPreview
+class SeriesViewModel(private val useCase: MocaUseCase) : ViewModel() {
 
-    private lateinit var series: LiveData<Resource<SeriesListResponse>>
+    private lateinit var series: LiveData<Resource<List<SeriesModel>>>
     private val searchQuery = MutableLiveData<String>()
-    private var searchedSeries = Transformations.switchMap(searchQuery) {
-        repo.searchSeries(it).asLiveData()
-    } as MutableLiveData<Resource<SeriesListResponse>>
+    private val searchedSeries = object : MutableLiveData<Resource<List<SeriesModel>>>() {
+        override fun onActive() {
+            value?.let { return }
+            viewModelScope.launch {
+                searchQuery.asFlow()
+                    .debounce(300) // Wait
+                    .distinctUntilChanged() // Ignore same value (This is the default operator)
+                    .collect {
+                        useCase.searchSeries(it).collect { getValue ->
+                            value = getValue
+                        }
+                    }
+            }
+        }
+    }
 
     init {
         initSeries()
     }
 
     fun initSeries() = viewModelScope.launch {
-        series = repo.getSeries().asLiveData()
+        series = useCase.getSeries().asLiveData()
     }
 
-    fun setSearch(query: String) {
-        searchQuery.postValue(query)
-    }
-
+    fun setSearch(query: String): Unit = searchQuery.postValue(query)
     fun getSeries() = series
-
     fun getSearched() = searchedSeries
 
 

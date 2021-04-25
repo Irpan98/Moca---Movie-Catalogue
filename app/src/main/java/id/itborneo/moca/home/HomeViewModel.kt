@@ -4,31 +4,31 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import id.itborneo.moca.core.model.response.MovieListResponse
-import id.itborneo.moca.core.model.response.SeriesListResponse
-import id.itborneo.moca.core.repository.MocaRepository
-import id.itborneo.moca.core.utils.Resource
+import id.itborneo.core.domain.model.MovieModel
+import id.itborneo.core.domain.model.SeriesModel
+import id.itborneo.core.domain.usecase.MocaUseCase
+import id.itborneo.core.utils.Resource
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val repo: MocaRepository) : ViewModel() {
+class HomeViewModel(private val useCase: MocaUseCase) : ViewModel() {
 
 
-    private lateinit var trendingMovies: LiveData<Resource<MovieListResponse>>
-    private lateinit var trendingSeries: LiveData<Resource<SeriesListResponse>>
+    private lateinit var trendingMovies: LiveData<Resource<List<MovieModel>>>
+    private lateinit var trendingSeries: LiveData<Resource<List<SeriesModel>>>
 
-    private lateinit var nowPlayingMovie: LiveData<Resource<MovieListResponse>>
-    private lateinit var airingTodaySeries: LiveData<Resource<SeriesListResponse>>
+    private lateinit var nowPlayingMovie: LiveData<Resource<List<MovieModel>>>
+    private lateinit var airingTodaySeries: LiveData<Resource<List<SeriesModel>>>
 
     init {
         initData()
     }
 
-    fun initData() = viewModelScope.launch {
-        trendingMovies = repo.getTrendingMovies().asLiveData()
-        trendingSeries = repo.getTrendingSeries().asLiveData()
+    private fun initData() = viewModelScope.launch {
+        trendingMovies = useCase.getTrendingMovies().asLiveData()
+        trendingSeries = useCase.getTrendingSeries().asLiveData()
 
-        nowPlayingMovie = repo.getNowPlayingMovies().asLiveData()
-        airingTodaySeries = repo.getAiringTodaySeries().asLiveData()
+        nowPlayingMovie = useCase.getNowPlayingMovies().asLiveData()
+        airingTodaySeries = useCase.getAiringTodaySeries().asLiveData()
     }
 
 

@@ -39,6 +39,8 @@ Features
 - Mockito Testing
 - Shimmer Loading
 - Koin DI
+- Coroutine Flow
+- Coroutine Flow for Search
 
 Later
 - Room database
