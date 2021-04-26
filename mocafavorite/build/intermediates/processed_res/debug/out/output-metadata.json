@@ -4,7 +4,7 @@
     "type": "PROCESSED_RES",
     "kind": "Directory"
   },
-  "applicationId": "id.itborneo.moca",
+  "applicationId": "id.itborneo.moca.debug",
   "variantName": "processDebugResources",
   "elements": [
     {
