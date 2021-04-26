@@ -47,7 +47,7 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
-    dynamicFeatures = [':favorite']
+    dynamicFeatures = [':favorite', ':mocafavorite']
 }
 apply from: '../shared_dependencies.gradle'
 

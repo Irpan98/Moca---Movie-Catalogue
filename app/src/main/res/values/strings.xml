@@ -28,5 +28,6 @@
     <string name="not_found">Not Found</string>
     <string name="empty_favorites">You Don\'t have any favorites </string>
     <string name="title_favorite">Favorite</string>
+    <string name="title_mocafavorite">Module Title</string>
 
 </resources>
