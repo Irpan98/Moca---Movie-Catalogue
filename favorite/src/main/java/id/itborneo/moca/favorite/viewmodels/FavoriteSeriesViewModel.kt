@@ -1,4 +1,4 @@
-package id.itborneo.moca.dynamicfeature.favorite.viewmodels
+package id.itborneo.moca.favorite.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -24,5 +24,4 @@ class FavoriteSeriesViewModel(private val useCase: MocaUseCase) : ViewModel() {
     }
 
     fun getSeries() = listSeries
-
 }

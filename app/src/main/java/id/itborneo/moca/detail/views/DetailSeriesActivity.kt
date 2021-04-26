@@ -66,7 +66,6 @@ class DetailSeriesActivity : AppCompatActivity() {
         }
     }
 
-
     private fun initBinding() {
         binding = ActivityDetailSeriesBinding.inflate(layoutInflater)
         val view = binding.root
@@ -118,7 +117,6 @@ class DetailSeriesActivity : AppCompatActivity() {
     private fun retrieveData() {
         getIntentId = intent.extras?.getInt(EXTRA_ID_SERIES)
     }
-
 
     private fun observerDetailSeries() {
         viewModel.getDetail().observe(this) {
@@ -174,7 +172,6 @@ class DetailSeriesActivity : AppCompatActivity() {
 
         return stringGenre
     }
-
 
     private fun showLoading(showIt: Boolean = true) {
         binding.incLoading.root.apply {

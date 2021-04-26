@@ -26,7 +26,6 @@ import org.koin.core.parameter.parametersOf
 
 class DetailMovieActivity : AppCompatActivity() {
 
-
     companion object {
         const val EXTRA_ID_MOVIE = "extra_movie"
         private const val TAG = "DetailActivity"

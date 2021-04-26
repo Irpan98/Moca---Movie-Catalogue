@@ -3,7 +3,7 @@ package id.itborneo.moca.app
 import android.app.Application
 import androidx.annotation.Keep
 import id.itborneo.core.di.*
-import id.itborneo.moca.core.di.viewModelModule
+import id.itborneo.moca.di.viewModelModule
 import kotlinx.coroutines.FlowPreview
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger

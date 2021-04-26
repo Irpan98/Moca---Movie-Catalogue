@@ -69,7 +69,6 @@ class MovieFragment : Fragment() {
         }
     }
 
-
     private fun observerSearch() {
         viewModel.getSearched().observe(viewLifecycleOwner) {
             when (it.status) {
