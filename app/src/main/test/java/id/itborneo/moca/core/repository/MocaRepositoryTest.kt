@@ -72,6 +72,8 @@ class MocaRepositoryTest {
         assertEquals(dummyTrendingSeries, getDummySeries)
     }
 
+
+
     @Test
     fun getNowPlayingMovies() = runBlockingTest {
 
@@ -100,7 +102,7 @@ class MocaRepositoryTest {
     fun getDetailMovie() = runBlockingTest {
 
         val dummyDetailMovie = DummyTestData.getDetailMovie()
-        val id = dummyDetailMovie.value.data.id ?: 0
+        val id = dummyDetailMovie.value?.data?.id ?: 0
         Mockito.`when`(remote.getDetailMovie(id))
             .thenReturn(dummyDetailMovie)
         val getDummyMovie = mocaRepository.getDetailMovie(id)
@@ -122,6 +124,7 @@ class MocaRepositoryTest {
         assertEquals(dummyDetailSeries, getDummySeries)
     }
 
+
     @Test
     fun getCredits() = runBlockingTest {
 
@@ -134,6 +137,7 @@ class MocaRepositoryTest {
         assertNotNull(getDummySeries)
         assertEquals(dummyCredits, getDummySeries)
     }
+
 
     @Test
     fun getSingleMovieFavorite() = runBlockingTest {
@@ -160,6 +164,7 @@ class MocaRepositoryTest {
         assertNotNull(getDummySeries)
         assertEquals(dummySingleSeriesFavorite, getDummySeries)
     }
+
 
     @Test
     fun searchMovies() = runBlockingTest {
