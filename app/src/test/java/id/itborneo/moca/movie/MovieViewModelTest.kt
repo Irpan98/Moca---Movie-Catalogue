@@ -77,4 +77,23 @@ class MovieViewModelTest {
         )
     }
 
+    @Test
+    fun addRemoveFavoriteMovies() = runBlockingTest {
+        val dummy = DummyTestData.getSingleFavoriteMovie()
+
+        //add
+        Mockito.`when`(repository.addMovieFavorite(dummy))
+            .thenReturn(dummy.id.toLong())
+
+        val addedFavorite = repository.addMovieFavorite(dummy)
+        assertNotNull(addedFavorite)
+
+        //remove
+        Mockito.`when`(repository.removeMovieFavorite(dummy))
+            .thenReturn(dummy.id)
+
+        val removeFavorite = repository.removeMovieFavorite(dummy)
+        assertNotNull(removeFavorite)
+    }
+
 }

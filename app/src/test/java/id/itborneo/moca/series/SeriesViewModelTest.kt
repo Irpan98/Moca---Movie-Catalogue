@@ -76,4 +76,23 @@ class SeriesViewModelTest {
         )
     }
 
+    @Test
+    fun addRemoveFavoriteSeries() = runBlockingTest {
+        val dummySingleSeriesFavorite = DummyTestData.getSingleFavoriteSeries()
+
+        //add
+        Mockito.`when`(repository.addSeriesFavorite(dummySingleSeriesFavorite))
+            .thenReturn(dummySingleSeriesFavorite.id.toLong())
+
+        val addedFavorite = repository.addSeriesFavorite(dummySingleSeriesFavorite)
+        assertNotNull(addedFavorite)
+
+        //remove
+        Mockito.`when`(repository.removeSeriesFavorite(dummySingleSeriesFavorite))
+            .thenReturn(dummySingleSeriesFavorite.id)
+
+        val removeFavorite = repository.removeSeriesFavorite(dummySingleSeriesFavorite)
+        assertNotNull(removeFavorite)
+    }
+
 }

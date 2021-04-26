@@ -22,7 +22,6 @@ class MocaRepositoryTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-
     private val remote = Mockito.mock(RemoteDataSource::class.java)
     private val local = Mockito.mock(LocalDataSource::class.java)
 
@@ -100,7 +99,7 @@ class MocaRepositoryTest {
     fun getDetailMovie() = runBlockingTest {
 
         val dummyDetailMovie = DummyTestData.getDetailMovie()
-        val id = dummyDetailMovie.value.data.id ?: 0
+        val id = dummyDetailMovie.value?.data?.id ?: 0
         Mockito.`when`(remote.getDetailMovie(id))
             .thenReturn(dummyDetailMovie)
         val getDummyMovie = mocaRepository.getDetailMovie(id)
@@ -150,7 +149,6 @@ class MocaRepositoryTest {
 
     @Test
     fun getSingleSeriesFavorite() = runBlockingTest {
-
         val dummySingleSeriesFavorite = DummyTestData.getSingleFavoriteSeries()
         val id = dummySingleSeriesFavorite.id
         Mockito.`when`(local.getSingleSeriesFavorite(id))
@@ -181,5 +179,42 @@ class MocaRepositoryTest {
         assertEquals(dummySearchSeries, searchSeries)
     }
 
+    @Test
+    fun addRemoveFavoriteSeries() = runBlockingTest {
+        val dummySingleSeriesFavorite = DummyTestData.getSingleFavoriteSeries()
 
+        //add
+        Mockito.`when`(local.addSeriesFavorite(dummySingleSeriesFavorite))
+            .thenReturn(dummySingleSeriesFavorite.id.toLong())
+
+        val addedFavorite = local.addSeriesFavorite(dummySingleSeriesFavorite)
+        assertNotNull(addedFavorite)
+
+        //remove
+        Mockito.`when`(local.removeSeriesFavorite(dummySingleSeriesFavorite))
+            .thenReturn(dummySingleSeriesFavorite.id)
+
+        val removeFavorite = local.removeSeriesFavorite(dummySingleSeriesFavorite)
+        assertNotNull(removeFavorite)
+    }
+
+    @Test
+    fun addRemoveFavoriteMovies() = runBlockingTest {
+        val dummy = DummyTestData.getSingleFavoriteMovie()
+
+        //add
+        Mockito.`when`(local.addMovieFavorite(dummy))
+            .thenReturn(dummy.id.toLong())
+
+        val addedFavorite = local.addMovieFavorite(dummy)
+        assertNotNull(addedFavorite)
+
+        //remove
+        Mockito.`when`(local.removeMovieFavorite(dummy))
+            .thenReturn(dummy.id)
+
+        val removeFavorite = local.removeMovieFavorite(dummy)
+        assertNotNull(removeFavorite)
+
+    }
 }

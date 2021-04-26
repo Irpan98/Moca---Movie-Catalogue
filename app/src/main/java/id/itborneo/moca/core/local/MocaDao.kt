@@ -10,10 +10,10 @@ interface MocaDao {
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addMovieFavorite(favoriteMovie: FavoriteMovieEntity)
+    fun addMovieFavorite(favoriteMovie: FavoriteMovieEntity) : Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addSeriesFavorite(favoriteSeries: FavoriteSeriesEntity)
+    fun addSeriesFavorite(favoriteSeries: FavoriteSeriesEntity): Long
 
     @Query("SELECT * FROM movie_favorite WHERE id=:id ")
     fun getSingleMovieFavorite(id: Int): FavoriteMovieEntity?
@@ -22,10 +22,10 @@ interface MocaDao {
     fun getSingleSeriesFavorite(id: Int): FavoriteSeriesEntity?
 
     @Delete
-    fun removeMovieFavorite(favoriteMovie: FavoriteMovieEntity)
+    fun removeMovieFavorite(favoriteMovie: FavoriteMovieEntity): Int
 
     @Delete
-    fun removeSeriesFavorite(favoriteSeries: FavoriteSeriesEntity)
+    fun removeSeriesFavorite(favoriteSeries: FavoriteSeriesEntity) : Int
 
     @Query("SELECT * FROM movie_favorite")
     fun getMovieFavorites(): DataSource.Factory<Int, FavoriteMovieEntity>

@@ -1,21 +1,16 @@
 package id.itborneo.moca.dummy
 
 import androidx.lifecycle.MutableLiveData
-import id.itborneo.core.data.remote.response.MovieListResponse
-import id.itborneo.core.data.remote.response.SeriesListResponse
-import id.itborneo.core.domain.model.MovieModel
-import id.itborneo.core.domain.model.detail.MovieDetailModel
-import id.itborneo.core.domain.model.detail.SeriesDetailModel
-import id.itborneo.core.local.enitity.FavoriteMovieEntity
-import id.itborneo.core.local.enitity.FavoriteSeriesEntity
-import id.itborneo.core.model.MovieModel
-import id.itborneo.core.model.SeriesModel
-import id.itborneo.core.model.credits.CreditsModel
-import id.itborneo.core.model.detail.MovieDetailModel
-import id.itborneo.core.model.detail.SeriesDetailModel
-import id.itborneo.core.model.response.MovieListResponse
-import id.itborneo.core.model.response.SeriesListResponse
-import id.itborneo.core.utils.Resource
+import id.itborneo.moca.core.local.enitity.FavoriteMovieEntity
+import id.itborneo.moca.core.local.enitity.FavoriteSeriesEntity
+import id.itborneo.moca.core.model.MovieModel
+import id.itborneo.moca.core.model.SeriesModel
+import id.itborneo.moca.core.model.credits.CreditsModel
+import id.itborneo.moca.core.model.detail.MovieDetailModel
+import id.itborneo.moca.core.model.detail.SeriesDetailModel
+import id.itborneo.moca.core.model.response.MovieListResponse
+import id.itborneo.moca.core.model.response.SeriesListResponse
+import id.itborneo.moca.core.utils.Resource
 
 object DummyTestData {
 
@@ -131,7 +126,6 @@ object DummyTestData {
     }
 
     fun getSingleFavoriteMovie(): FavoriteMovieEntity =
-
         FavoriteMovieEntity(
             id = 1,
             title = "testMovie",
@@ -139,12 +133,9 @@ object DummyTestData {
         )
 
     fun getSingleFavoriteSeries(): FavoriteSeriesEntity =
-
         FavoriteSeriesEntity(
             id = 1,
             title = "testMovie",
             posterPath = ""
         )
-
-
 }
