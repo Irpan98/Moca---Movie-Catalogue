@@ -53,6 +53,8 @@ Features
 - Modularization 
 - Updated Dependencies
 - Favorite Dynamic Feature
+- Paging
+- Leak Canary
 
 
 
@@ -62,3 +64,4 @@ Suggestion I Followed
 3. Clean Architecture
 4. Reactive Programming for Search
 5. Using Jetpack Navigation Component for Navigation between Module
+

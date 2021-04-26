@@ -65,5 +65,9 @@ dependencies {
     //Toasty
     implementation "com.github.GrenderG:Toasty:$toastyVersion"
 
+    //Paging
     implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
+
 }
