@@ -53,5 +53,9 @@ apply from: '../shared_dependencies.gradle'
 dependencies {
     implementation project(":core")
 
+    //leak canary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
+
+
 
 }
