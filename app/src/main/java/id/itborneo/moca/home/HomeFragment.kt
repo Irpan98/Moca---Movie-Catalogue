@@ -250,5 +250,7 @@ class HomeFragment : Fragment() {
                 View.GONE
             }
         }
+
+
     }
 }

@@ -1,4 +1,4 @@
-package id.itborneo.moca.core.di
+package id.itborneo.moca.di
 
 import id.itborneo.moca.detail.viewmodels.DetailMovieViewModel
 import id.itborneo.moca.detail.viewmodels.DetailSeriesViewModel
@@ -21,17 +21,10 @@ val viewModelModule = module {
         SeriesViewModel(get())
     }
 
-//    viewModel {
-//        id.itborneo.moca.dynamicfeature.favorite.viewmodels.FavoriteMovieViewModel(get())
-//    }
-//    viewModel {
-//        id.itborneo.moca.dynamicfeature.favorite.viewmodels.FavoriteSeriesViewModel(get())
-//    }
     viewModel { parameter ->
         DetailSeriesViewModel(get(), parameter.get())
     }
     viewModel { parameter ->
         DetailMovieViewModel(get(), parameter.get())
     }
-
 }

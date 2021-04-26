@@ -1,4 +1,4 @@
-package id.itborneo.moca.dynamicfeature.favorite.views
+package id.itborneo.moca.favorite.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,33 +8,32 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.itborneo.core.domain.model.SeriesModel
-import id.itborneo.moca.databinding.FragmentFavoriteSeriesBinding
-import id.itborneo.moca.detail.views.DetailSeriesActivity
-import id.itborneo.moca.dynamicfeature.favorite.adapters.FavoriteSeriesPagedAdapter
-import id.itborneo.moca.dynamicfeature.favorite.viewmodels.FavoriteSeriesViewModel
+import id.itborneo.core.domain.model.MovieModel
+import id.itborneo.moca.databinding.FragmentFavoriteMovieBinding
+import id.itborneo.moca.detail.views.DetailMovieActivity
+import id.itborneo.moca.favorite.adapters.FavoriteMoviePagedAdapter
+import id.itborneo.moca.favorite.viewmodels.FavoriteMovieViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
-class FavoriteSeriesFragment : Fragment() {
+class FavoriteMovieFragment : Fragment() {
 
-    private lateinit var binding: FragmentFavoriteSeriesBinding
-    private lateinit var adapter: FavoriteSeriesPagedAdapter
-
-    private val viewModel: FavoriteSeriesViewModel by sharedViewModel()
+    private lateinit var binding: FragmentFavoriteMovieBinding
+    private lateinit var adapter: FavoriteMoviePagedAdapter
+    private val viewModel: FavoriteMovieViewModel by sharedViewModel()
     private val isEmpty = MutableLiveData(true)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFavoriteSeriesBinding.inflate(inflater, container, false)
+        binding = FragmentFavoriteMovieBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initRecycler()
         observerData()
         observerIsEmpty()
@@ -55,24 +54,22 @@ class FavoriteSeriesFragment : Fragment() {
     }
 
     private fun observerData() {
-        viewModel.getSeries().observe(viewLifecycleOwner) {
-
+        viewModel.getMovies().observe(viewLifecycleOwner) {
             isEmpty.value = it.size == 0
             adapter.submitList(it)
         }
     }
 
     private fun initRecycler() {
-        binding.rvSeries.layoutManager = LinearLayoutManager(requireContext())
-        adapter = FavoriteSeriesPagedAdapter {
+        binding.rvMovies.layoutManager = LinearLayoutManager(requireContext())
+        adapter = FavoriteMoviePagedAdapter {
             actionToDetail(it)
         }
-        binding.rvSeries.layoutManager = GridLayoutManager(context, 3)
-        binding.rvSeries.adapter = adapter
+        binding.rvMovies.layoutManager = GridLayoutManager(context, 3)
+        binding.rvMovies.adapter = adapter
     }
 
-    private fun actionToDetail(series: SeriesModel) {
-        val id = series.id
-        DetailSeriesActivity.getInstance(requireContext(), id)
+    private fun actionToDetail(movie: MovieModel) {
+        DetailMovieActivity.getInstance(requireContext(), movie.id)
     }
 }

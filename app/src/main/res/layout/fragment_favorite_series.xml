@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dynamicfeature.favorite.views.FavoriteSeriesFragment">
+    tools:context="id.itborneo.moca.favorite.views.FavoriteSeriesFragment">
 
     <include
         android:id="@+id/inc_empty_favorite"

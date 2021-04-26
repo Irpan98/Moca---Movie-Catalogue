@@ -41,13 +41,18 @@ Features
 - Koin DI
 - Coroutine Flow
 - Coroutine Flow for Search
-
-Later
 - Room database
 - Favorites. 
     - Adding Favorite
     - Remove Favorite
     - List Favorites
+- Modularization 
+- Updated Dependencies
+- Clean Architecture
+- Reactive Programming
+- Jetpack Navigation Component 
+Later
+
 - support 2 language
 - Lottie Animation
 - Open Movie link

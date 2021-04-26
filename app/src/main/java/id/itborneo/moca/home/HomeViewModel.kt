@@ -12,7 +12,6 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val useCase: MocaUseCase) : ViewModel() {
 
-
     private lateinit var trendingMovies: LiveData<Resource<List<MovieModel>>>
     private lateinit var trendingSeries: LiveData<Resource<List<SeriesModel>>>
 
@@ -23,7 +22,7 @@ class HomeViewModel(private val useCase: MocaUseCase) : ViewModel() {
         initData()
     }
 
-    private fun initData() = viewModelScope.launch {
+    fun initData() = viewModelScope.launch {
         trendingMovies = useCase.getTrendingMovies().asLiveData()
         trendingSeries = useCase.getTrendingSeries().asLiveData()
 
@@ -31,11 +30,11 @@ class HomeViewModel(private val useCase: MocaUseCase) : ViewModel() {
         airingTodaySeries = useCase.getAiringTodaySeries().asLiveData()
     }
 
-
     fun getTrendingSeries() = trendingSeries
     fun getTrendingMovies() = trendingMovies
 
     fun getNowPlayingMovies() = nowPlayingMovie
     fun getAiringTodaySeries() = airingTodaySeries
+
 
 }
