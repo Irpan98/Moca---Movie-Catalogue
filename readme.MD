@@ -46,15 +46,19 @@ Features
     - Adding Favorite
     - Remove Favorite
     - List Favorites
-- Modularization 
-- Updated Dependencies
 - Clean Architecture
 - Reactive Programming
 - Jetpack Navigation Component 
-Later
-
-- support 2 language
-- Lottie Animation
-- Open Movie link
-- Updated dependencies
 - handle When Error
+- Modularization 
+- Updated Dependencies
+- Favorite Dynamic Feature
+
+
+
+Suggestion I Followed
+1. Have Awesome UI UX 
+2. Have Search Feature
+3. Clean Architecture
+4. Reactive Programming for Search
+5. Using Jetpack Navigation Component for Navigation between Module
