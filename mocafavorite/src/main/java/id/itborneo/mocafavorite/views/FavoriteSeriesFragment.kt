@@ -1,4 +1,4 @@
-package id.itborneo.moca.favorite.views
+package id.itborneo.mocafavorite.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import id.itborneo.core.domain.model.SeriesModel
 import id.itborneo.moca.databinding.FragmentFavoriteSeriesBinding
 import id.itborneo.moca.detail.views.DetailSeriesActivity
-import id.itborneo.moca.favorite.adapters.FavoriteSeriesPagedAdapter
-import id.itborneo.moca.favorite.viewmodels.FavoriteSeriesViewModel
+import id.itborneo.mocafavorite.adapters.FavoriteSeriesPagedAdapter
+import id.itborneo.mocafavorite.viewmodels.FavoriteSeriesViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 

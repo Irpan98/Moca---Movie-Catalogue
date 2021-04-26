@@ -1,4 +1,4 @@
-package id.itborneo.moca.favorite.viewmodels
+package id.itborneo.mocafavorite.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

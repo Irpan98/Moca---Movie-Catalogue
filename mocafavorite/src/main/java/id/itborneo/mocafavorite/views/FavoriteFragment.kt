@@ -1,4 +1,4 @@
-package id.itborneo.moca.favorite.views
+package id.itborneo.mocafavorite.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import id.itborneo.moca.R
 import id.itborneo.moca.databinding.FragmentFavoriteBinding
-import id.itborneo.moca.favorite.adapters.DetailPagerAdapter
+import id.itborneo.mocafavorite.adapters.DetailPagerAdapter
 import org.koin.core.context.loadKoinModules
 
 

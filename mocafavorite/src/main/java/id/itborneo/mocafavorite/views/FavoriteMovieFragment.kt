@@ -1,4 +1,4 @@
-package id.itborneo.moca.favorite.views
+package id.itborneo.mocafavorite.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import id.itborneo.core.domain.model.MovieModel
 import id.itborneo.moca.databinding.FragmentFavoriteMovieBinding
 import id.itborneo.moca.detail.views.DetailMovieActivity
-import id.itborneo.moca.favorite.adapters.FavoriteMoviePagedAdapter
-import id.itborneo.moca.favorite.viewmodels.FavoriteMovieViewModel
+import id.itborneo.mocafavorite.adapters.FavoriteMoviePagedAdapter
+import id.itborneo.mocafavorite.viewmodels.FavoriteMovieViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 

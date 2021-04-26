@@ -1,7 +1,7 @@
-package id.itborneo.moca.favorite.views
+package id.itborneo.mocafavorite.views
 
-import id.itborneo.moca.favorite.viewmodels.FavoriteMovieViewModel
-import id.itborneo.moca.favorite.viewmodels.FavoriteSeriesViewModel
+import id.itborneo.mocafavorite.viewmodels.FavoriteMovieViewModel
+import id.itborneo.mocafavorite.viewmodels.FavoriteSeriesViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

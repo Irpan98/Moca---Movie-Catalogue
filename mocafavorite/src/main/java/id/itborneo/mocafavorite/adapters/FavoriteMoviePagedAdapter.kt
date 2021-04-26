@@ -1,4 +1,4 @@
-package id.itborneo.moca.favorite.adapters
+package id.itborneo.mocafavorite.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,33 +10,35 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import id.itborneo.moca.R
 import id.itborneo.core.constant.ImageConstant
-import id.itborneo.core.domain.model.SeriesModel
+import id.itborneo.core.domain.model.MovieModel
 import id.itborneo.moca.databinding.ItemPosterBinding
 
+class FavoriteMoviePagedAdapter(
+    val listener: (MovieModel) -> Unit
+) : PagedListAdapter<MovieModel, FavoriteMoviePagedAdapter.ViewHolder>(DIFF_CALLBACK) {
 
-class FavoriteSeriesPagedAdapter(
-    val listener: (SeriesModel) -> Unit
-) : PagedListAdapter<SeriesModel, FavoriteSeriesPagedAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
 
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SeriesModel>() {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieModel>() {
             override fun areItemsTheSame(
-                oldItem: SeriesModel,
-                newItem: SeriesModel
+                oldItem: MovieModel,
+                newItem: MovieModel
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: SeriesModel,
-                newItem: SeriesModel
+                oldItem: MovieModel,
+                newItem: MovieModel
             ): Boolean {
                 return oldItem == oldItem
             }
 
         }
+
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemBinding =
@@ -55,16 +57,16 @@ class FavoriteSeriesPagedAdapter(
 
     inner class ViewHolder(private val itemBinding: ItemPosterBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(series: SeriesModel) {
+        fun bind(movie: MovieModel) {
             itemBinding.apply {
-                tvName.text = series.name
+                tvName.text = movie.title
                 Glide.with(root.context)
-                    .load("${ImageConstant.BASE_IMAGE}${series.posterPath}")
+                    .load("${ImageConstant.BASE_IMAGE}${movie.posterPath}")
                     .placeholder(R.drawable.ic_placeholder_image)
                     .transform(CenterCrop(), RoundedCorners(ImageConstant.IMAGE_RADIUS))
                     .into(ivPoster)
                 root.setOnClickListener {
-                    listener(series)
+                    listener(movie)
                 }
             }
         }
