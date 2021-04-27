@@ -1,4 +1,4 @@
-package id.itborneo.moca.core.repository
+package id.itborneo.moca.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.asFlow
