@@ -1,47 +1,37 @@
 package id.itborneo.moca.dummy
 
-//import androidx.lifecycle.MutableLiveData
-//import androidx.paging.PagedList
-//import id.itborneo.moca.core.local.enitity.FavoriteMovieEntity
-//import id.itborneo.moca.core.local.enitity.FavoriteSeriesEntity
-//import id.itborneo.moca.core.model.MovieModel
-//import id.itborneo.moca.core.model.SeriesModel
-//import id.itborneo.moca.core.model.credits.CreditsModel
-//import id.itborneo.moca.core.model.detail.MovieDetailModel
-//import id.itborneo.moca.core.model.detail.SeriesDetailModel
-//import id.itborneo.moca.core.model.response.MovieListResponse
-//import id.itborneo.moca.core.model.response.SeriesListResponse
-//import id.itborneo.moca.core.utils.Resource
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asFlow
+import id.itborneo.core.domain.model.MovieModel
+import id.itborneo.core.utils.Resource
+import kotlinx.coroutines.flow.Flow
+
+object DummyTestData {
+
+    fun getMovies(): MutableLiveData<Resource<List<MovieModel>>> {
+        val movies = MutableLiveData<Resource<List<MovieModel>>>()
+        movies.value = Resource.success(
+            listOf(
+                MovieModel(
+                    id = 1,
+                    title = "testMovie",
+                    posterPath = ""
+                )
+            )
+        )
+        return movies
+    }
 //
-//object DummyTestData {
-//
-//    fun getMovies(): MutableLiveData<Resource<MovieListResponse>> {
-//        val movies = MutableLiveData<Resource<MovieListResponse>>()
+//    fun getMoviesEmpty(): MutableLiveData<Resource<List<MovieModel>>> {
+//        val movies = MutableLiveData<Resource<List<MovieModel>>>()
 //        movies.value = Resource.success(
-//            MovieListResponse(
-//                results = listOf(
-//                    MovieModel(
-//                        id = 1,
-//                        title = "testMovie",
-//                        posterPath = ""
-//                    )
-//                )
-//            )
-//        )
-//
-//        return movies
-//    }
-//
-//    fun getMoviesEmpty(): MutableLiveData<Resource<MovieListResponse>> {
-//        val movies = MutableLiveData<Resource<MovieListResponse>>()
-//        movies.value = Resource.success(
-//            MovieListResponse(results = listOf())
+//            List<MovieModel>(results = listOf())
 //        )
 //        return movies
 //    }
 //
-//    fun getMoviesError(): MutableLiveData<Resource<MovieListResponse>> {
-//        val movies = MutableLiveData<Resource<MovieListResponse>>()
+//    fun getMoviesError(): MutableLiveData<Resource<List<MovieModel>>> {
+//        val movies = MutableLiveData<Resource<List<MovieModel>>>()
 //        movies.value = Resource.error(null, "Error Load Data: No Internet")
 //        return movies
 //    }
@@ -142,6 +132,5 @@ package id.itborneo.moca.dummy
 //            posterPath = ""
 //        )
 //
-//
-//
-//}
+
+}
