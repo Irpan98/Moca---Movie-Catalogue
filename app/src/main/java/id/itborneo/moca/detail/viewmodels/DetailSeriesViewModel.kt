@@ -23,9 +23,9 @@ class DetailSeriesViewModel(private val useCase: MocaUseCase, private val id: In
         initDetailSeries()
     }
 
-    private fun initDetailSeries() = viewModelScope.launch {
-        detail = useCase.getDetailSeries(id).asLiveData()
-        credits = useCase.getCredits(id).asLiveData()
+    fun initDetailSeries() = viewModelScope.launch {
+        detail = useCase.getDetailSeries(id)
+        credits = useCase.getCredits(id)
     }
 
     fun getDetail() = detail

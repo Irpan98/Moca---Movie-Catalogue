@@ -23,11 +23,11 @@ class HomeViewModel(private val useCase: MocaUseCase) : ViewModel() {
     }
 
     fun initData() = viewModelScope.launch {
-        trendingMovies = useCase.getTrendingMovies().asLiveData()
-        trendingSeries = useCase.getTrendingSeries().asLiveData()
+        trendingMovies = useCase.getTrendingMovies()
+        trendingSeries = useCase.getTrendingSeries()
 
-        nowPlayingMovie = useCase.getNowPlayingMovies().asLiveData()
-        airingTodaySeries = useCase.getAiringTodaySeries().asLiveData()
+        nowPlayingMovie = useCase.getNowPlayingMovies()
+        airingTodaySeries = useCase.getAiringTodaySeries()
     }
 
     fun getTrendingSeries() = trendingSeries

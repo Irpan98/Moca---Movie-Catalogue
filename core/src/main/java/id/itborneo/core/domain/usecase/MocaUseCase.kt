@@ -2,7 +2,6 @@ package id.itborneo.core.domain.usecase
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
-import androidx.paging.PagedList
 import id.itborneo.core.domain.model.MovieModel
 import id.itborneo.core.domain.model.SeriesModel
 import id.itborneo.core.domain.model.credits.CreditsModel
@@ -13,19 +12,19 @@ import kotlinx.coroutines.flow.Flow
 
 interface MocaUseCase {
 
-    fun getMovies(): Flow<Resource<List<MovieModel>>>
-    fun getSeries(): Flow<Resource<List<SeriesModel>>>
+    fun getMovies(): LiveData<Resource<List<MovieModel>>>
+    fun getSeries(): LiveData<Resource<List<SeriesModel>>>
 
-    fun getDetailMovie(id: Int): Flow<Resource<MovieDetailModel>>
-    fun getDetailSeries(id: Int): Flow<Resource<SeriesDetailModel>>
+    fun getDetailMovie(id: Int): LiveData<Resource<MovieDetailModel>>
+    fun getDetailSeries(id: Int): LiveData<Resource<SeriesDetailModel>>
 
-    fun getTrendingMovies(): Flow<Resource<List<MovieModel>>>
-    fun getTrendingSeries(): Flow<Resource<List<SeriesModel>>>
+    fun getTrendingMovies(): LiveData<Resource<List<MovieModel>>>
+    fun getTrendingSeries(): LiveData<Resource<List<SeriesModel>>>
 
-    fun getNowPlayingMovies(): Flow<Resource<List<MovieModel>>>
-    fun getAiringTodaySeries(): Flow<Resource<List<SeriesModel>>>
+    fun getNowPlayingMovies(): LiveData<Resource<List<MovieModel>>>
+    fun getAiringTodaySeries(): LiveData<Resource<List<SeriesModel>>>
 
-    fun getCredits(id: Int): Flow<Resource<CreditsModel>>
+    fun getCredits(id: Int): LiveData<Resource<CreditsModel>>
 
     fun addMovieFavorite(movieFavorite: MovieDetailModel)
     fun addSeriesFavorite(SeriesFavorite: SeriesDetailModel)
