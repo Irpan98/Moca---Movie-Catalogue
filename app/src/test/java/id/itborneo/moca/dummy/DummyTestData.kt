@@ -1,16 +1,12 @@
 package id.itborneo.moca.dummy
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.asFlow
-import id.itborneo.core.data.local.database.enitity.FavoriteMovieEntity
-import id.itborneo.core.data.local.database.enitity.FavoriteSeriesEntity
 import id.itborneo.core.domain.model.MovieModel
 import id.itborneo.core.domain.model.SeriesModel
 import id.itborneo.core.domain.model.credits.CreditsModel
 import id.itborneo.core.domain.model.detail.MovieDetailModel
 import id.itborneo.core.domain.model.detail.SeriesDetailModel
 import id.itborneo.core.utils.Resource
-import kotlinx.coroutines.flow.Flow
 
 object DummyTestData {
 
@@ -123,30 +119,5 @@ object DummyTestData {
             )
         )
         return credits
-    }
-
-    fun getSingleFavoriteMovie(): Flow<FavoriteMovieEntity> {
-        val fav = MutableLiveData<FavoriteMovieEntity>()
-        fav.value =
-            FavoriteMovieEntity(
-                id = 1,
-                title = "testMovie",
-                posterPath = ""
-            )
-
-        return fav.asFlow()
-    }
-
-    fun getSingleFavoriteSeries(): Flow<FavoriteSeriesEntity> {
-        val fav = MutableLiveData<FavoriteSeriesEntity>()
-        fav.value =
-            FavoriteSeriesEntity(
-                id = 1,
-                title = "testMovie",
-                posterPath = ""
-            )
-        return fav.asFlow()
-
-
     }
 }

@@ -174,7 +174,7 @@ class DetailSeriesActivity : AppCompatActivity() {
     }
 
     private fun showLoading(showIt: Boolean = true) {
-        binding.incLoading.root.apply {
+        binding.incDetailSeriesLoading.root.apply {
             visibility = if (showIt) {
                 View.VISIBLE
             } else {
@@ -184,7 +184,7 @@ class DetailSeriesActivity : AppCompatActivity() {
     }
 
     private fun showError(showIt: Boolean = true) {
-        binding.incError.root.apply {
+        binding.incDetailSeriesError.root.apply {
             visibility = if (showIt) {
                 View.VISIBLE
             } else {

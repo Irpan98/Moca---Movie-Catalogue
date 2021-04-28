@@ -20,5 +20,6 @@ class DetailPagerAdapter(activity: AppCompatActivity) :
         return fragment as Fragment
     }
 
+
     override fun getItemCount() = fragments.size
 }

@@ -1,10 +1,6 @@
 package id.itborneo.core.domain.repository
 
-import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
-import androidx.paging.PagedList
-import id.itborneo.core.data.local.database.enitity.FavoriteMovieEntity
-import id.itborneo.core.data.local.database.enitity.FavoriteSeriesEntity
 import id.itborneo.core.domain.model.MovieModel
 import id.itborneo.core.domain.model.SeriesModel
 import id.itborneo.core.domain.model.credits.CreditsModel

@@ -1,48 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:orientation="vertical"
     tools:context=".movie.MovieFragment">
 
-    <LinearLayout
+    <TextView
+        style="@style/ItborneoText.AppTitle"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:drawablePadding="@dimen/padding_layout_half"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/padding_layout"
+        android:paddingBottom="@dimen/padding_layout_half"
+        android:text="@string/favorite" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="@dimen/padding_layout"
+        android:layout_marginBottom="@dimen/padding_layout"
+        android:background="@color/background_second"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:tabMode="fixed"
+        app:tabTextAppearance="@style/TextTabLayout" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            style="@style/ItborneoText.AppTitle"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:drawablePadding="@dimen/padding_layout_half"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="@dimen/padding_layout"
-            android:paddingBottom="@dimen/padding_layout_half"
-            android:text="@string/favorite" />
+    </androidx.viewpager2.widget.ViewPager2>
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_gravity="bottom"
-            android:layout_marginHorizontal="@dimen/padding_layout"
-            android:layout_marginBottom="@dimen/padding_layout"
-            android:background="@color/background_second"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:tabMode="fixed"
-            app:tabTextAppearance="@style/TextTabLayout" />
-
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view_pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        </androidx.viewpager2.widget.ViewPager2>
-
-
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>

@@ -45,8 +45,5 @@ object ApiConfig {
                     .add(hostname, "sha256/KwccWaCgrnaw6tsrrSO61FgLacNgG2MMLq8GE6+oP5I=")
                     .build()
             )
-
             .build()
-
-
 }

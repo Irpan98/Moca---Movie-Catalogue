@@ -2,7 +2,6 @@ package id.itborneo.moca.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import id.itborneo.core.domain.model.MovieModel
 import id.itborneo.core.domain.model.SeriesModel

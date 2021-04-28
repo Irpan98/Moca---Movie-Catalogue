@@ -74,4 +74,9 @@ class FavoriteSeriesFragment : Fragment() {
         val id = series.id
         DetailSeriesActivity.getInstance(requireContext(), id)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.root.removeAllViews()
+    }
 }

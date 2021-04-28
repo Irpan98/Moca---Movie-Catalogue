@@ -36,6 +36,8 @@ dependencies {
 
     //lifecycle
     implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 
     //LifeCycle - ViewModel and Live Data

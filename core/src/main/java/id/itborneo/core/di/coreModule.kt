@@ -1,5 +1,6 @@
 package id.itborneo.core.di
 
+import androidx.room.Room
 import id.itborneo.core.data.MocaRepository
 import id.itborneo.core.data.local.LocalDataSource
 import id.itborneo.core.data.local.database.AppDatabase
@@ -8,15 +9,29 @@ import id.itborneo.core.domain.repository.IMocaRepository
 import id.itborneo.core.domain.usecase.MocaInteractor
 import id.itborneo.core.domain.usecase.MocaUseCase
 import id.itborneo.core.networks.ApiConfig
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val databaseModule = module {
-    single {
-        AppDatabase.getInstance(androidContext())
-    }
+    val tableName = "db_favorite"
 
     single { get<AppDatabase>().favoriteDao() }
+
+    single {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("moca".toCharArray())
+        val factory = SupportFactory(passphrase)
+
+        Room.databaseBuilder(
+            androidContext(),
+            AppDatabase::class.java, tableName
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
+
+    }
+
 
 }
 

@@ -10,10 +10,19 @@ import com.google.android.material.tabs.TabLayoutMediator
 import id.itborneo.moca.R
 import id.itborneo.moca.databinding.FragmentFavoriteBinding
 import id.itborneo.mocafavorite.adapters.DetailPagerAdapter
+import id.itborneo.mocafavorite.di.FavoriteModules
 import org.koin.core.context.loadKoinModules
 
 
 class FavoriteFragment : Fragment() {
+
+    companion object {
+        private val TAB_TITLES = intArrayOf(
+            R.string.movies,
+            R.string.series
+        )
+    }
+
     private lateinit var binding: FragmentFavoriteBinding
 
     override fun onCreateView(
@@ -34,17 +43,23 @@ class FavoriteFragment : Fragment() {
         loadKoinModules(FavoriteModules)
     }
 
-
-    private val TAB_TITLES = intArrayOf(
-        R.string.movies,
-        R.string.series
-    )
+    private lateinit var tabLayoutMediator: TabLayoutMediator
 
     private fun initTabLayout() {
         val sectionsPagerAdapter = DetailPagerAdapter(requireActivity() as AppCompatActivity)
         binding.viewPager.adapter = sectionsPagerAdapter
-        TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
+        tabLayoutMediator = TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
-        }.attach()
+        }
+
+        tabLayoutMediator.attach()
     }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.root.removeAllViews()
+        tabLayoutMediator.detach()
+    }
+
 }

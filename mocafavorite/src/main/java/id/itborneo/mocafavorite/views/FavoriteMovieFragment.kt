@@ -72,4 +72,9 @@ class FavoriteMovieFragment : Fragment() {
     private fun actionToDetail(movie: MovieModel) {
         DetailMovieActivity.getInstance(requireContext(), movie.id)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.root.removeAllViews()
+    }
 }

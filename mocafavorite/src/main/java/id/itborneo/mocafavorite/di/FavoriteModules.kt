@@ -1,4 +1,4 @@
-package id.itborneo.mocafavorite.views
+package id.itborneo.mocafavorite.di
 
 import id.itborneo.mocafavorite.viewmodels.FavoriteMovieViewModel
 import id.itborneo.mocafavorite.viewmodels.FavoriteSeriesViewModel

@@ -157,14 +157,14 @@
     </ScrollView>
 
     <include
-        android:id="@+id/inc_error"
+        android:id="@+id/inc_detail_series_error"
         layout="@layout/partial_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
 
     <include
-        android:id="@+id/inc_loading"
+        android:id="@+id/inc_detail_series_loading"
         layout="@layout/partial_loading_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
