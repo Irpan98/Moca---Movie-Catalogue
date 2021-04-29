@@ -15,6 +15,7 @@
         android:theme="@style/Theme.MocaJetpack"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".changename.ChangeNameActivity"></activity>
         <activity android:name=".splash.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +29,5 @@
         <activity android:name=".detail.views.DetailSeriesActivity" />
         <activity android:name=".detail.views.DetailMovieActivity" />
     </application>
-
 
 </manifest>

@@ -11,6 +11,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import id.itborneo.core.domain.model.HomeItemModel
 import id.itborneo.core.enums.Status
 import id.itborneo.moca.R
+import id.itborneo.moca.changename.ChangeNameActivity
 import id.itborneo.moca.databinding.FragmentHomeBinding
 import id.itborneo.moca.detail.views.DetailMovieActivity
 import id.itborneo.moca.detail.views.DetailSeriesActivity
@@ -38,7 +39,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         initRecycler()
         observerData()
+
+        getUserName()
+        actionToChangeName()
     }
+
+
 
     private fun initRecycler() {
 
@@ -248,5 +254,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onDestroyView() {
         super.onDestroyView()
         binding.root.removeAllViews()
+    }
+
+    private fun actionToChangeName(){
+        ChangeNameActivity.getInstance(requireContext())
+    }
+
+    private fun getUserName() {
+
     }
 }

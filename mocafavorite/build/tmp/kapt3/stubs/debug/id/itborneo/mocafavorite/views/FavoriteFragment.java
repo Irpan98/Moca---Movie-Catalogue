@@ -6,7 +6,7 @@ import java.lang.System;
 public final class FavoriteFragment extends androidx.fragment.app.Fragment {
     private id.itborneo.moca.databinding.FragmentFavoriteBinding binding;
     private com.google.android.material.tabs.TabLayoutMediator tabLayoutMediator;
-    private static final int[] TAB_TITLES = {2131820694, 2131820741};
+    private static final int[] TAB_TITLES = {2131886243, 2131886290};
     @org.jetbrains.annotations.NotNull()
     public static final id.itborneo.mocafavorite.views.FavoriteFragment.Companion Companion = null;
     

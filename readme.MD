@@ -53,10 +53,16 @@ Features
 - Clean Architecture
 - Reactive Programming
 - Jetpack Navigation Component 
+
+
 Later
 
-- support 2 language
 - Lottie Animation
 - Open Movie link
 - Updated dependencies
+
 - handle When Error
+
+-Security
+    - Shared Preferences 
+    
