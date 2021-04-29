@@ -43,7 +43,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         observerData()
 
         initializeGetUsername()
-        actionToChangeName()
     }
 
 
@@ -264,6 +263,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var sharedprefs: SharedPreferences
 
     private fun initializeGetUsername() {
+        binding.tvHomeChangeName.setOnClickListener {
+            actionToChangeName()
+        }
         sharedprefs = SecureSharedPreferences.sharedPreferences(requireContext())
 
         sharedprefs.registerOnSharedPreferenceChangeListener { sharedPref, key ->
