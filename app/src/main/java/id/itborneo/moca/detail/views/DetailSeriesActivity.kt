@@ -33,7 +33,6 @@ class DetailSeriesActivity : AppCompatActivity() {
             intent.putExtra(EXTRA_ID_SERIES, data)
             context.startActivity(intent)
         }
-
     }
 
     private lateinit var creditsAdapter: CastAdapter

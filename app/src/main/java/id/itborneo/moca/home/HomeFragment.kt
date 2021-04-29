@@ -1,5 +1,6 @@
 package id.itborneo.moca.home
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import id.itborneo.core.domain.model.HomeItemModel
 import id.itborneo.core.enums.Status
+import id.itborneo.core.utils.sharedpreferences.SecureSharedPreferences
 import id.itborneo.moca.R
 import id.itborneo.moca.changename.ChangeNameActivity
 import id.itborneo.moca.databinding.FragmentHomeBinding
@@ -40,10 +42,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         initRecycler()
         observerData()
 
-        getUserName()
+        initializeGetUsername()
         actionToChangeName()
     }
-
 
 
     private fun initRecycler() {
@@ -256,11 +257,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.root.removeAllViews()
     }
 
-    private fun actionToChangeName(){
+    private fun actionToChangeName() {
         ChangeNameActivity.getInstance(requireContext())
     }
 
-    private fun getUserName() {
+    private lateinit var sharedprefs: SharedPreferences
+
+    private fun initializeGetUsername() {
+        sharedprefs = SecureSharedPreferences.sharedPreferences(requireContext())
+
+        sharedprefs.registerOnSharedPreferenceChangeListener { sharedPref, key ->
+            val getName = sharedPref.getString(key, "")
+            Log.d("getUserName", "$getName")
+
+        }
 
     }
 }

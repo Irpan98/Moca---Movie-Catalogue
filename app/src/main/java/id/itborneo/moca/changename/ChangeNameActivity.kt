@@ -2,19 +2,17 @@ package id.itborneo.moca.changename
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
+import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKeys
+import id.itborneo.core.constant.SharedPrefConstant
+import id.itborneo.core.utils.sharedpreferences.SecureSharedPreferences
 import id.itborneo.moca.R
-
 
 class ChangeNameActivity : AppCompatActivity() {
 
     companion object {
-        const val SHARED_PREF_USER_NAME = "user name"
 
         fun getInstance(context: Context) {
             val intent = Intent(context, ChangeNameActivity::class.java)
@@ -26,31 +24,23 @@ class ChangeNameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_name)
 
-        editNameWithSecurity()
+//        editNameWithSecurity(findViewById<EditText>(R.id.ed_change_name_username).text.toString())
+
+        findViewById<Button>(R.id.btn_change_name_save).setOnClickListener {
+            editNameWithSecurity(findViewById<EditText>(R.id.ed_change_name_username).text.toString())
+        }
     }
 
-    var masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 
-    private fun editNameWithSecurity() {
-
-        val sharedPreferences: SharedPreferences = EncryptedSharedPreferences.create(
-            "secret_shared_prefs",
-            masterKeyAlias,
-            this,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
-
-
-        val getName = sharedPreferences.getString(SHARED_PREF_USER_NAME, "")
-        Log.d("ChangeNameActivity", "$getName")
-
+    private fun editNameWithSecurity(name: String) {
+        val sharedPreferences = SecureSharedPreferences.sharedPreferences(this)
         with(sharedPreferences.edit()) {
             // Edit the user's shared preferences...
-            this.putString(SHARED_PREF_USER_NAME, "IRPAN")
+            this.putString(SharedPrefConstant.SHARED_PREF_USER_NAME, name)
             apply()
+            finish()
         }
-
-
     }
+
+
 }
