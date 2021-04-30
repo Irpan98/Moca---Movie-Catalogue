@@ -26,11 +26,8 @@ class ChangeNameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         initBinding()
-
         initView()
-
     }
-
 
     private fun initBinding() {
         binding = ActivityChangeNameBinding.inflate(layoutInflater)
@@ -55,6 +52,4 @@ class ChangeNameActivity : AppCompatActivity() {
             finish()
         }
     }
-
-
 }

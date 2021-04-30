@@ -28,12 +28,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:elevation="1dp"
                 android:id="@+id/btnFavorite"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/favorite"
+                android:elevation="1dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_favorite_inactive"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_detail_movie_poster"
@@ -56,7 +56,6 @@
                 app:tint="@color/white" />
 
             <ImageView
-                tools:scaleType="centerCrop"
                 android:id="@+id/iv_detail_movie_poster"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
@@ -64,6 +63,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                tools:scaleType="centerCrop"
                 tools:src="@tools:sample/backgrounds/scenic" />
 
 
@@ -85,10 +85,10 @@
             <TextView
                 android:id="@+id/tv_detail_movie_genres"
                 android:layout_width="0dp"
-                android:gravity="center_horizontal"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/padding_layout"
                 android:layout_marginTop="@dimen/padding_layout"
+                android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -142,7 +142,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_detail_movie_overview" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_casts"
+                android:id="@+id/rv_detail_movie_casts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding_layout"

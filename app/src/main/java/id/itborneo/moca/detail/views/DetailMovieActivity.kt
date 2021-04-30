@@ -34,7 +34,6 @@ class DetailMovieActivity : AppCompatActivity() {
             intent.putExtra(EXTRA_ID_MOVIE, data)
             context.startActivity(intent)
         }
-
     }
 
     private lateinit var creditsAdapter: CastAdapter
@@ -42,7 +41,6 @@ class DetailMovieActivity : AppCompatActivity() {
     private lateinit var detailMovie: MovieDetailModel
 
     private var getIntentId: Int? = null
-
     private val viewModel: DetailMovieViewModel by viewModel { parametersOf(getIntentId) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,10 +81,10 @@ class DetailMovieActivity : AppCompatActivity() {
 
     private fun initCreditsRecycler() {
 
-        binding.rvCasts.layoutManager =
+        binding.rvDetailMovieCasts.layoutManager =
             LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         creditsAdapter = CastAdapter()
-        binding.rvCasts.adapter = creditsAdapter
+        binding.rvDetailMovieCasts.adapter = creditsAdapter
 
     }
 
