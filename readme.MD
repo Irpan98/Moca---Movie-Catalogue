@@ -52,6 +52,9 @@ Features
 - Clean Architecture
 - Reactive Programming
 - Jetpack Navigation Component 
+-Testing   
+    - Instrument Testing
+    - Unit Testing
 
 
 Later
