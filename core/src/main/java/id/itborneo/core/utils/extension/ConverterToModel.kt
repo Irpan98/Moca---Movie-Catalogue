@@ -18,19 +18,19 @@ import id.itborneo.core.domain.model.detail.MovieDetailModel
 import id.itborneo.core.domain.model.detail.SeriesDetailModel
 
 
-fun List<MovieModelResponse>.toListMovieModel() = map {
+fun List<MovieModelResponse?>.toListMovieModel() = map {
     MovieModel(
-        id = it.id,
-        title = it.title,
-        posterPath = it.posterPath
+        id = it?.id.toUnknownIntIfNull,
+        title = it?.title.toUnknownStringIfNull,
+        posterPath = it?.posterPath.toUnknownStringIfNull
     )
 }
 
 fun List<SeriesModelResponse>.toListSeriesModel() = map {
     SeriesModel(
         id = it.id.toUnknownIntIfNull,
-        name = it.name,
-        posterPath = it.posterPath
+        name = it.name.toUnknownStringIfNull,
+        posterPath = it.posterPath.toUnknownStringIfNull
     )
 }
 

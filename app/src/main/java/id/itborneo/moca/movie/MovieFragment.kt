@@ -164,4 +164,9 @@ class MovieFragment : Fragment() {
             })
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.root.removeAllViews()
+    }
 }

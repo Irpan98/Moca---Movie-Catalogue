@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Moca</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="movie_item">movie item</string>
@@ -22,11 +22,14 @@
     <string name="added_to_favorite">Added to Favorite</string>
     <string name="removed_from_favorite">Removed from Favorite</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="find_movie">Find movies you looking for . . </string>
     <string name="find_series">Find Series you looking for . . </string>
     <string name="not_found">Not Found</string>
-    <string name="empty_favorites">You Don\'t have any favorites </string>
-    <string name="title_favorite">Favorite</string>
+    <string name="empty_favorites" tools:ignore="UnusedResources">You Don\'t have any favorites </string>
+    <string name="title_favorite" tools:keep="@string/title_favorite">Favorite</string>
+    <string name="title_mocafavorite">Module Title</string>
+    <string name="input_your_name">Input Your Name</string>
+    <string name="input_your_name_here">Input Your Name Here</string>
+    <string name="save">Save</string>
 
 </resources>

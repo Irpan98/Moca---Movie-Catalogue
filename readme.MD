@@ -1,6 +1,8 @@
 Moca 
 Movie Catalogue
 
+
+
 Need update later ReadMe
 
 Features
@@ -31,7 +33,6 @@ Features
 - Coroutine
 - LiveData
 - LiveCycle
-- ViewModel Factory
 - Unit Testing
 - Instruments Testing
 - Coroutine Unit Testing
@@ -51,10 +52,19 @@ Features
 - Clean Architecture
 - Reactive Programming
 - Jetpack Navigation Component 
+-Testing   
+    - Instrument Testing
+    - Unit Testing
+
+
 Later
 
-- support 2 language
 - Lottie Animation
 - Open Movie link
 - Updated dependencies
+
 - handle When Error
+
+-Security
+    - Shared Preferences 
+    

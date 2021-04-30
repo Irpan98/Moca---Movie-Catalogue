@@ -174,4 +174,8 @@ class SeriesFragment : Fragment() {
 
         }
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.root.removeAllViews()
+    }
 }

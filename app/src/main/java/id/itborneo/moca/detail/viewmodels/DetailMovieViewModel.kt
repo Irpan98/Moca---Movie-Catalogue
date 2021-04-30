@@ -22,9 +22,9 @@ class DetailMovieViewModel(private val useCase: MocaUseCase, private val id: Int
         initDetailMovie()
     }
 
-    private fun initDetailMovie() = viewModelScope.launch {
-        detail = useCase.getDetailMovie(id).asLiveData()
-        credits = useCase.getCredits(id).asLiveData()
+     fun initDetailMovie() = viewModelScope.launch {
+        detail = useCase.getDetailMovie(id)
+        credits = useCase.getCredits(id)
     }
 
     fun getDetailMovie() = detail

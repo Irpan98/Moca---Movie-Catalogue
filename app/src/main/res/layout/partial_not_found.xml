@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/ItborneoText.Title"
     android:layout_width="match_parent"
     android:layout_height="400dp"
@@ -8,5 +9,6 @@
     android:gravity="center"
     android:maxLines="2"
     android:padding="@dimen/padding_layout"
-    android:text="@string/not_found" />
+    android:text="@string/not_found"
+    tools:ignore="Overdraw" />
 

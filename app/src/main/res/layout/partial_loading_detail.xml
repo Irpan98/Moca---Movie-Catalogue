@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/ivShare"
+            android:id="@+id/iv_loading_share"
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"
             android:layout_margin="@dimen/padding_layout"
@@ -42,7 +42,7 @@
             app:tint="@color/white" />
 
         <ImageView
-            android:id="@+id/iv_backdrop"
+            android:id="@+id/iv_loading_backdrop"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:contentDescription="@string/backdrop_poster"
@@ -53,7 +53,7 @@
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <ImageView
-            android:id="@+id/iv_poster"
+            android:id="@+id/iv_loading_poster"
             android:layout_width="match_parent"
             android:layout_height="500dp"
             android:background="@color/grey_loading"
@@ -75,7 +75,7 @@
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_poster"
+            app:layout_constraintTop_toBottomOf="@id/iv_loading_poster"
             tools:text="@tools:sample/lorem" />
 
         <TextView
@@ -108,7 +108,7 @@
             tools:text="8.8" />
 
         <TextView
-            android:id="@+id/tv_label_storyline"
+            android:id="@+id/tv_loading_label_storyline"
             style="@style/ItborneoText.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -126,7 +126,7 @@
             android:background="@color/grey_loading"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_label_storyline"
+            app:layout_constraintTop_toBottomOf="@id/tv_loading_label_storyline"
             tools:lines="3"
             tools:text="@tools:sample/lorem/random" />
 

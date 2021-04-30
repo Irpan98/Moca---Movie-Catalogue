@@ -1,22 +1,29 @@
 package id.itborneo.moca.home
 
+import android.app.Activity
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import by.kirich1409.viewbindingdelegate.viewBinding
+import id.itborneo.core.constant.SharedPrefConstant
 import id.itborneo.core.domain.model.HomeItemModel
 import id.itborneo.core.enums.Status
+import id.itborneo.core.utils.sharedpreferences.SecureSharedPreferences
+import id.itborneo.moca.R
+import id.itborneo.moca.changename.ChangeNameActivity
 import id.itborneo.moca.databinding.FragmentHomeBinding
 import id.itborneo.moca.detail.views.DetailMovieActivity
 import id.itborneo.moca.detail.views.DetailSeriesActivity
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     companion object {
         private const val TAG = "HomeFragment"
@@ -28,24 +35,18 @@ class HomeFragment : Fragment() {
     private lateinit var playingNowMovieAdapter: HomeAdapter
     private lateinit var airingTodaySeriesAdapter: HomeAdapter
 
-    private lateinit var binding: FragmentHomeBinding
+    private val binding: FragmentHomeBinding by viewBinding(FragmentHomeBinding::bind)
 
     private val viewModel: HomeViewModel by sharedViewModel()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initRecycler()
+        initGetUsername()
         observerData()
     }
+
 
     private fun initRecycler() {
 
@@ -250,7 +251,42 @@ class HomeFragment : Fragment() {
                 View.GONE
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.root.removeAllViews()
+    }
+
+    private fun actionToChangeName() {
+
+    }
+
+    private lateinit var sharedPrefs: SharedPreferences
 
 
+    val getContent =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                setUsername()
+            }
+        }
+
+    private fun initGetUsername() {
+        binding.tvHomeChangeName.setOnClickListener {
+            ChangeNameActivity.getInstance(requireContext(), getContent)
+        }
+        sharedPrefs = SecureSharedPreferences.sharedPreferences(requireContext())
+
+        setUsername()
+    }
+
+    private fun setUsername() {
+        val getName = sharedPrefs.getString(
+            SharedPrefConstant.SHARED_PREF_USER_NAME,
+            ""
+        )
+        val helloUser = if (getName?.isEmpty() == true) "Hi There" else "Hi $getName"
+        binding.tvHomeChangeName.text = helloUser
     }
 }

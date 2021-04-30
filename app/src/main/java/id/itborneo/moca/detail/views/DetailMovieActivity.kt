@@ -12,12 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import es.dmoral.toasty.Toasty
-import id.itborneo.moca.R
 import id.itborneo.core.domain.model.MovieModel
-import id.itborneo.core.domain.model.SeriesModel
 import id.itborneo.core.domain.model.detail.GenreModel
 import id.itborneo.core.domain.model.detail.MovieDetailModel
 import id.itborneo.core.enums.Status
+import id.itborneo.moca.R
 import id.itborneo.moca.databinding.ActivityDetailMoviesBinding
 import id.itborneo.moca.detail.adapters.CastAdapter
 import id.itborneo.moca.detail.viewmodels.DetailMovieViewModel
@@ -35,7 +34,6 @@ class DetailMovieActivity : AppCompatActivity() {
             intent.putExtra(EXTRA_ID_MOVIE, data)
             context.startActivity(intent)
         }
-
     }
 
     private lateinit var creditsAdapter: CastAdapter
@@ -43,7 +41,6 @@ class DetailMovieActivity : AppCompatActivity() {
     private lateinit var detailMovie: MovieDetailModel
 
     private var getIntentId: Int? = null
-
     private val viewModel: DetailMovieViewModel by viewModel { parametersOf(getIntentId) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,10 +81,10 @@ class DetailMovieActivity : AppCompatActivity() {
 
     private fun initCreditsRecycler() {
 
-        binding.rvCasts.layoutManager =
+        binding.rvDetailMovieCasts.layoutManager =
             LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         creditsAdapter = CastAdapter()
-        binding.rvCasts.adapter = creditsAdapter
+        binding.rvDetailMovieCasts.adapter = creditsAdapter
 
     }
 
@@ -156,13 +153,13 @@ class DetailMovieActivity : AppCompatActivity() {
             .apply(RequestOptions().dontTransform().placeholder(R.drawable.ic_placeholder_image))
             .fitCenter()
             .centerCrop()
-            .into(binding.ivPoster)
+            .into(binding.ivDetailMoviePoster)
 
 
-        binding.tvGenres.text = getGenres(data.genres)
-        binding.tvOverview.text = data.overview
-        binding.tvTitle.text = data.title
-        binding.tvVoteAverage.text = data.voteAverage.toString()
+        binding.tvDetailMovieGenres.text = getGenres(data.genres)
+        binding.tvDetailMovieOverview.text = data.overview
+        binding.tvDetailMovieTitle.text = data.title
+        binding.tvDetailMovieVoteAverage.text = data.voteAverage.toString()
 
     }
 
@@ -206,7 +203,7 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
     private fun updateFavoriteStatusUI(isFavorite: MovieModel?) {
-        if (isFavorite !=null) {
+        if (isFavorite != null) {
             binding.btnFavorite.setImageResource(R.drawable.ic_favorite_active)
         } else {
             binding.btnFavorite.setImageResource(R.drawable.ic_favorite_inactive)

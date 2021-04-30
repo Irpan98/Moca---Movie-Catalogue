@@ -36,7 +36,7 @@ class SeriesViewModel(private val useCase: MocaUseCase) : ViewModel() {
     }
 
     fun initSeries() = viewModelScope.launch {
-        series = useCase.getSeries().asLiveData()
+        series = useCase.getSeries()
     }
 
     fun setSearch(query: String): Unit = searchQuery.postValue(query)

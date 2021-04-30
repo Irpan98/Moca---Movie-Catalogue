@@ -36,6 +36,8 @@ dependencies {
 
     //lifecycle
     implementation "android.arch.lifecycle:extensions:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
 
     //LifeCycle - ViewModel and Live Data
@@ -66,4 +68,10 @@ dependencies {
     implementation "com.github.GrenderG:Toasty:$toastyVersion"
 
     implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
+
+    //Security Crypto
+    implementation "androidx.security:security-crypto:1.0.0"
+    implementation "androidx.security:security-identity-credential:1.0.0-alpha02"
+
+
 }

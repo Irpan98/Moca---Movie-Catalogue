@@ -38,7 +38,7 @@ class MovieViewModel(private val useCase: MocaUseCase) : ViewModel() {
     }
 
     fun initMovies() = viewModelScope.launch {
-        listMovie = useCase.getMovies().asLiveData()
+        listMovie = useCase.getMovies()
     }
 
 

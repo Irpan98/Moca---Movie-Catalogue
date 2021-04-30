@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_series" />
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="id.itborneo.moca.favorite.views.FavoriteFragment"
+        android:name="id.itborneo.mocafavorite.views.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
 </navigation>

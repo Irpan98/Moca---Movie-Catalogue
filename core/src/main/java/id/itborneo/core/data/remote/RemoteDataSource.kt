@@ -1,5 +1,6 @@
 package id.itborneo.core.data.remote
 
+import android.util.Log
 import id.itborneo.core.networks.ApiService
 import id.itborneo.core.utils.Resource
 import id.itborneo.core.utils.extension.toCreditsModel
@@ -19,6 +20,9 @@ class RemoteDataSource(private val api: ApiService) {
         EspressoIdlingResource.increment()
         try {
             val results = api.getMovies().results
+            Log.d("getMovies", api.getMovies().toString() )
+
+            Log.d("getMovies", results.toString() )
             emit(Resource.success(data = results.toListMovieModel()))
             EspressoIdlingResource.decrement()
 
