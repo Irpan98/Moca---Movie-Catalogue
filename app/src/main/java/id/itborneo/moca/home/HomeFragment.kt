@@ -1,14 +1,17 @@
 package id.itborneo.moca.home
 
+import android.app.Activity
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import id.itborneo.core.constant.SharedPrefConstant
 import id.itborneo.core.domain.model.HomeItemModel
 import id.itborneo.core.enums.Status
 import id.itborneo.core.utils.sharedpreferences.SecureSharedPreferences
@@ -40,9 +43,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         initRecycler()
+        initGetUsername()
         observerData()
-
-        initializeGetUsername()
     }
 
 
@@ -257,22 +259,34 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun actionToChangeName() {
-        ChangeNameActivity.getInstance(requireContext())
+
     }
 
-    private lateinit var sharedprefs: SharedPreferences
+    private lateinit var sharedPrefs: SharedPreferences
 
-    private fun initializeGetUsername() {
+
+    val getContent =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                setUsername()
+            }
+        }
+
+    private fun initGetUsername() {
         binding.tvHomeChangeName.setOnClickListener {
-            actionToChangeName()
+            ChangeNameActivity.getInstance(requireContext(), getContent)
         }
-        sharedprefs = SecureSharedPreferences.sharedPreferences(requireContext())
+        sharedPrefs = SecureSharedPreferences.sharedPreferences(requireContext())
 
-        sharedprefs.registerOnSharedPreferenceChangeListener { sharedPref, key ->
-            val getName = sharedPref.getString(key, "")
-            Log.d("getUserName", "$getName")
+        setUsername()
+    }
 
-        }
-
+    private fun setUsername() {
+        val getName = sharedPrefs.getString(
+            SharedPrefConstant.SHARED_PREF_USER_NAME,
+            ""
+        )
+        val helloUser = if (getName?.isEmpty() == true) "Hi There" else "Hi $getName"
+        binding.tvHomeChangeName.text = helloUser
     }
 }

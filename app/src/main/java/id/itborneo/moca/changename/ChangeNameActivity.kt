@@ -3,34 +3,47 @@ package id.itborneo.moca.changename
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.EditText
+import androidx.activity.result.ActivityResultLauncher
 import androidx.appcompat.app.AppCompatActivity
 import id.itborneo.core.constant.SharedPrefConstant
 import id.itborneo.core.utils.sharedpreferences.SecureSharedPreferences
 import id.itborneo.moca.R
+import id.itborneo.moca.databinding.ActivityChangeNameBinding
 
 class ChangeNameActivity : AppCompatActivity() {
 
     companion object {
-
-        fun getInstance(context: Context) {
+        fun getInstance(context: Context, launcher: ActivityResultLauncher<Intent>) {
             val intent = Intent(context, ChangeNameActivity::class.java)
-            context.startActivity(intent)
+            launcher.launch(intent)
         }
     }
+
+    private lateinit var binding: ActivityChangeNameBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_change_name)
 
-//        editNameWithSecurity(findViewById<EditText>(R.id.ed_change_name_username).text.toString())
+        initBinding()
 
-        findViewById<Button>(R.id.btn_change_name_save).setOnClickListener {
+        initView()
+
+    }
+
+
+    private fun initBinding() {
+        binding = ActivityChangeNameBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+    }
+
+    private fun initView() {
+        binding.edChangeNameUsername.requestFocus()
+        binding.btnChangeNameSave.setOnClickListener {
             editNameWithSecurity(findViewById<EditText>(R.id.ed_change_name_username).text.toString())
         }
     }
-
 
     private fun editNameWithSecurity(name: String) {
         val sharedPreferences = SecureSharedPreferences.sharedPreferences(this)
@@ -38,6 +51,7 @@ class ChangeNameActivity : AppCompatActivity() {
             // Edit the user's shared preferences...
             this.putString(SharedPrefConstant.SHARED_PREF_USER_NAME, name)
             apply()
+            setResult(RESULT_OK)
             finish()
         }
     }

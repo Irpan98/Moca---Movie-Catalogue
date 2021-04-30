@@ -33,7 +33,6 @@ Features
 - Coroutine
 - LiveData
 - LiveCycle
-- ViewModel Factory
 - Unit Testing
 - Instruments Testing
 - Coroutine Unit Testing

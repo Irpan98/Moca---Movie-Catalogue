@@ -1,38 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/padding_layout"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".changename.ChangeNameActivity">
 
-    <TextView
-        android:id="@+id/tv_change_name_label_name"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+android:id="@+id/il_change_name_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/input_your_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
-
-    <EditText
-        android:id="@+id/ed_change_name_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/input_your_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_change_name_label_name" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_change_name_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_your_name_here"
+            android:textColor="@color/white"
+            android:textColorHint="@color/grey" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_change_name_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/save"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ed_change_name_username" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
