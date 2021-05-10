@@ -58,20 +58,16 @@ dependencies {
     implementation "org.koin:koin-android:$koinVersion"
     implementation "org.koin:koin-android-viewmodel:$koinVersion"
 
-    //Room
-    implementation "androidx.room:room-runtime:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
-    implementation "androidx.room:room-ktx:$roomVersion"
 
 
     //Toasty
     implementation "com.github.GrenderG:Toasty:$toastyVersion"
 
+    //paging
     implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
 
     //Security Crypto
-    implementation "androidx.security:security-crypto:1.0.0"
-    implementation "androidx.security:security-identity-credential:1.0.0-alpha02"
-
+    implementation "androidx.security:security-crypto:$securityCryptoVersion"
+    implementation "androidx.security:security-identity-credential:$securityIdentityCredential"
 
 }

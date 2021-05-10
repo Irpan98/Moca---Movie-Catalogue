@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:orientation="vertical"
-    tools:context=".movie.MovieFragment">
+    tools:context=".movie.MovieFragment"
+    tools:keep="@layout/fragment_favorite">
 
     <TextView
         style="@style/ItborneoText.AppTitle"

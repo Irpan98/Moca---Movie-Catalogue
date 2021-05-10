@@ -8,4 +8,5 @@
     android:background="@color/grey_loading"
     android:contentDescription="@string/image_poster"
     android:scaleType="centerCrop"
-    tools:ignore="Overdraw" />
+    tools:ignore="Overdraw"
+    tools:keep="@layout/item_home_loading" />

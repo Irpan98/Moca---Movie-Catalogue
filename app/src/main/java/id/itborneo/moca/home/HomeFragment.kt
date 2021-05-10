@@ -31,9 +31,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var trendingMovieAdapter: HomeAdapter
     private lateinit var trendingSeriesAdapter: HomeAdapter
-
     private lateinit var playingNowMovieAdapter: HomeAdapter
     private lateinit var airingTodaySeriesAdapter: HomeAdapter
+    private lateinit var sharedPrefs: SharedPreferences
 
     private val binding: FragmentHomeBinding by viewBinding(FragmentHomeBinding::bind)
 
@@ -258,13 +258,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.root.removeAllViews()
     }
 
-    private fun actionToChangeName() {
-
-    }
-
-    private lateinit var sharedPrefs: SharedPreferences
-
-
     val getContent =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -277,7 +270,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             ChangeNameActivity.getInstance(requireContext(), getContent)
         }
         sharedPrefs = SecureSharedPreferences.sharedPreferences(requireContext())
-
         setUsername()
     }
 

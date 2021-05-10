@@ -21,7 +21,6 @@ class FavoriteMovieViewModel(private val useCase: MocaUseCase) : ViewModel() {
     private fun initMovies() = viewModelScope.launch {
         listMovie =
             LivePagedListBuilder(useCase.getMovieFavorite(), PagedListUtils.config()).build()
-
     }
 
     fun getMovies() = listMovie

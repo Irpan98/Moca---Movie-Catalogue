@@ -5,7 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class GenreModel(
-
     val id: Int,
     val name: String
 ) : Parcelable
