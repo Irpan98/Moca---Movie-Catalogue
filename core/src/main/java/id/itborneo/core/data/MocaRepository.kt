@@ -2,8 +2,8 @@ package id.itborneo.core.data
 
 import id.itborneo.core.data.local.LocalDataSource
 import id.itborneo.core.data.remote.RemoteDataSource
-import id.itborneo.core.domain.model.detail.MovieDetailModel
-import id.itborneo.core.domain.model.detail.SeriesDetailModel
+import id.itborneo.core.domain.model.detail.MovieDetailDomainModel
+import id.itborneo.core.domain.model.detail.SeriesDetailDomainModel
 import id.itborneo.core.domain.repository.IMocaRepository
 import id.itborneo.core.utils.DataMapper
 import id.itborneo.core.utils.extension.toFavoriteMovieModel
@@ -29,17 +29,17 @@ class MocaRepository(
 
     override fun getCredits(id: Int) = remoteDataSource.getCredits(id)
 
-    override fun addMovieFavorite(movieFavorite: MovieDetailModel) =
+    override fun addMovieFavorite(movieFavorite: MovieDetailDomainModel) =
         localDataSource.addMovieFavorite(DataMapper.detailMovieToFavorite(movieFavorite))
 
-    override fun addSeriesFavorite(SeriesFavorite: SeriesDetailModel) =
+    override fun addSeriesFavorite(SeriesFavorite: SeriesDetailDomainModel) =
         localDataSource.addSeriesFavorite(DataMapper.detailSeriesToFavorite(SeriesFavorite))
 
 
-    override fun removeMovieFavorite(movieFavorite: MovieDetailModel) =
+    override fun removeMovieFavorite(movieFavorite: MovieDetailDomainModel) =
         localDataSource.removeMovieFavorite(DataMapper.detailMovieToFavorite(movieFavorite))
 
-    override fun removeSeriesFavorite(SeriesFavorite: SeriesDetailModel) =
+    override fun removeSeriesFavorite(SeriesFavorite: SeriesDetailDomainModel) =
         localDataSource.removeSeriesFavorite(DataMapper.detailSeriesToFavorite(SeriesFavorite))
 
     override fun getSingleMovieFavorite(id: Int) =

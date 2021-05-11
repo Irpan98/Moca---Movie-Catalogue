@@ -9,7 +9,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import id.itborneo.moca.R
 import id.itborneo.core.constant.ImageConstant
-import id.itborneo.core.domain.model.HomeItemModel
+import id.itborneo.moca.model.HomeItemModel
 import id.itborneo.moca.databinding.ItemHomeBinding
 
 

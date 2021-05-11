@@ -1,8 +1,8 @@
 package id.itborneo.core.domain.usecase
 
 import androidx.lifecycle.asLiveData
-import id.itborneo.core.domain.model.detail.MovieDetailModel
-import id.itborneo.core.domain.model.detail.SeriesDetailModel
+import id.itborneo.core.domain.model.detail.MovieDetailDomainModel
+import id.itborneo.core.domain.model.detail.SeriesDetailDomainModel
 import id.itborneo.core.domain.repository.IMocaRepository
 
 class MocaInteractor(private val mocaRepository: IMocaRepository) : MocaUseCase {
@@ -20,16 +20,16 @@ class MocaInteractor(private val mocaRepository: IMocaRepository) : MocaUseCase 
 
     override fun getCredits(id: Int) = mocaRepository.getCredits(id).asLiveData()
 
-    override fun addMovieFavorite(movieFavorite: MovieDetailModel) =
+    override fun addMovieFavorite(movieFavorite: MovieDetailDomainModel) =
         mocaRepository.addMovieFavorite(movieFavorite)
 
-    override fun addSeriesFavorite(SeriesFavorite: SeriesDetailModel) =
+    override fun addSeriesFavorite(SeriesFavorite: SeriesDetailDomainModel) =
         mocaRepository.addSeriesFavorite(SeriesFavorite)
 
-    override fun removeMovieFavorite(movieFavorite: MovieDetailModel) =
+    override fun removeMovieFavorite(movieFavorite: MovieDetailDomainModel) =
         mocaRepository.removeMovieFavorite(movieFavorite)
 
-    override fun removeSeriesFavorite(SeriesFavorite: SeriesDetailModel) =
+    override fun removeSeriesFavorite(SeriesFavorite: SeriesDetailDomainModel) =
         mocaRepository.removeSeriesFavorite(SeriesFavorite)
 
     override fun getSingleMovieFavorite(id: Int) =

@@ -1,4 +1,4 @@
-package id.itborneo.core.domain.model.detail
+package id.itborneo.moca.model.detail
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -26,6 +26,6 @@ data class SeriesDetailModel(
     val voteAverage: Double? = null,
 
     @field:SerializedName("name")
-    val name: String? = null,
+    val name: String? = null
 
-    ) : Parcelable
+) : Parcelable

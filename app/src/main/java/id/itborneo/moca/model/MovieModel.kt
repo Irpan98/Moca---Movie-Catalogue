@@ -1,4 +1,4 @@
-package id.itborneo.core.domain.model
+package id.itborneo.moca.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

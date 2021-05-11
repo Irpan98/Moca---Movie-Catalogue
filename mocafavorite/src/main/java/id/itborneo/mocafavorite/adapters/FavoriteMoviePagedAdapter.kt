@@ -10,27 +10,27 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import id.itborneo.moca.R
 import id.itborneo.core.constant.ImageConstant
-import id.itborneo.core.domain.model.MovieModel
+import id.itborneo.core.domain.model.MovieDomainModel
 import id.itborneo.moca.databinding.ItemPosterBinding
 
 class FavoriteMoviePagedAdapter(
-    val listener: (MovieModel) -> Unit
-) : PagedListAdapter<MovieModel, FavoriteMoviePagedAdapter.ViewHolder>(DIFF_CALLBACK) {
+    val listener: (MovieDomainModel) -> Unit
+) : PagedListAdapter<MovieDomainModel, FavoriteMoviePagedAdapter.ViewHolder>(DIFF_CALLBACK) {
 
 
     companion object {
 
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieModel>() {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<MovieDomainModel>() {
             override fun areItemsTheSame(
-                oldItem: MovieModel,
-                newItem: MovieModel
+                oldItem: MovieDomainModel,
+                newItem: MovieDomainModel
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: MovieModel,
-                newItem: MovieModel
+                oldItem: MovieDomainModel,
+                newItem: MovieDomainModel
             ): Boolean {
                 return oldItem == oldItem
             }
@@ -57,7 +57,7 @@ class FavoriteMoviePagedAdapter(
 
     inner class ViewHolder(private val itemBinding: ItemPosterBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(movie: MovieModel) {
+        fun bind(movie: MovieDomainModel) {
             itemBinding.apply {
                 tvName.text = movie.title
                 Glide.with(root.context)

@@ -1,4 +1,4 @@
-package id.itborneo.core.domain.model
+package id.itborneo.moca.model
 
 data class HomeItemModel(
     val id: Int? = null,

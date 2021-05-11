@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class GenreModel(
+class GenreDomainModel(
     val id: Int,
     val name: String
 ) : Parcelable

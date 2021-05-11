@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.itborneo.core.domain.model.SeriesModel
+import id.itborneo.core.domain.model.SeriesDomainModel
 import id.itborneo.moca.databinding.FragmentFavoriteSeriesBinding
 import id.itborneo.moca.detail.views.DetailSeriesActivity
 import id.itborneo.mocafavorite.adapters.FavoriteSeriesPagedAdapter
@@ -70,7 +70,7 @@ class FavoriteSeriesFragment : Fragment() {
         binding.rvSeries.adapter = adapter
     }
 
-    private fun actionToDetail(series: SeriesModel) {
+    private fun actionToDetail(series: SeriesDomainModel) {
         val id = series.id
         DetailSeriesActivity.getInstance(requireContext(), id)
     }

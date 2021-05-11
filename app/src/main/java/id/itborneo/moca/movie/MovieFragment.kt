@@ -9,10 +9,11 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.itborneo.core.domain.model.MovieModel
+import id.itborneo.core.domain.model.MovieDomainModel
 import id.itborneo.core.enums.Status
 import id.itborneo.moca.databinding.FragmentMovieBinding
 import id.itborneo.moca.detail.views.DetailMovieActivity
+import id.itborneo.moca.model.MovieModel
 import kotlinx.coroutines.FlowPreview
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 

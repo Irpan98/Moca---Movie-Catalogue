@@ -4,10 +4,10 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class MovieDetailModel(
+data class MovieDetailDomainModel(
     val id: Int,
     val title: String,
-    val genres: List<GenreModel?>?,
+    val genres: List<GenreDomainModel?>?,
     val voteCount: Int,
     val overview: String,
     val posterPath: String?,

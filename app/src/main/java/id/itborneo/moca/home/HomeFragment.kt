@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import id.itborneo.core.constant.SharedPrefConstant
-import id.itborneo.core.domain.model.HomeItemModel
+import id.itborneo.moca.model.HomeItemModel
 import id.itborneo.core.enums.Status
 import id.itborneo.core.utils.sharedpreferences.SecureSharedPreferences
 import id.itborneo.moca.R

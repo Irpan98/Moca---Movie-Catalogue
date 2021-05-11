@@ -2,11 +2,13 @@ package id.itborneo.moca.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import id.itborneo.core.domain.model.MovieModel
-import id.itborneo.core.domain.model.SeriesModel
 import id.itborneo.core.domain.usecase.MocaUseCase
 import id.itborneo.core.utils.Resource
+import id.itborneo.moca.model.MovieModel
+import id.itborneo.moca.model.SeriesModel
+import id.itborneo.moca.utils.ModelDataMapper
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val useCase: MocaUseCase) : ViewModel() {
@@ -22,11 +24,19 @@ class HomeViewModel(private val useCase: MocaUseCase) : ViewModel() {
     }
 
     fun initData() = viewModelScope.launch {
-        trendingMovies = useCase.getTrendingMovies()
-        trendingSeries = useCase.getTrendingSeries()
+        trendingMovies = useCase.getTrendingMovies().map {
+            ModelDataMapper.movieListFromDomain(it)
+        }
+        trendingSeries = useCase.getTrendingSeries().map {
+            ModelDataMapper.seriesListFromDomain(it)
+        }
 
-        nowPlayingMovie = useCase.getNowPlayingMovies()
-        airingTodaySeries = useCase.getAiringTodaySeries()
+        nowPlayingMovie = useCase.getNowPlayingMovies().map {
+            ModelDataMapper.movieListFromDomain(it)
+        }
+        airingTodaySeries = useCase.getAiringTodaySeries().map {
+            ModelDataMapper.seriesListFromDomain(it)
+        }
     }
 
     fun getTrendingSeries() = trendingSeries
