@@ -6,8 +6,8 @@ Movie Catalogue
 Need update later ReadMe
 
 Features
-- MVVM
 - Clean Code
+- MVVM
 - Multiple List in Home 
 - List Movies
 - List Series
@@ -54,18 +54,10 @@ Features
 - Jetpack Navigation Component 
 -Testing   
     - Instrument Testing
-    - Unit Testing
-    - Code Coverage
-
-
-Later
-
-- Lottie Animation
-- Open Movie link
-- Updated dependencies
-
 - handle When Error
+- Security
+- Shared Preferences 
 
--Security
-    - Shared Preferences 
+
+
     

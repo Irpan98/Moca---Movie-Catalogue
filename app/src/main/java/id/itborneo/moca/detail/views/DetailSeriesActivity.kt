@@ -155,7 +155,7 @@ class DetailSeriesActivity : AppCompatActivity() {
             .centerCrop()
             .into(binding.ivPoster)
 
-//        binding.tvGenres.text = getGenres(data.genres)
+        binding.tvGenres.text = getGenres(data.genres)
         binding.tvOverview.text = data.overview.toString()
         binding.tvTitle.text = data.name
         binding.tvVoteAverage.text = data.voteAverage.toString()
