@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import es.dmoral.toasty.Toasty
-import id.itborneo.core.domain.model.SeriesDomainModel
-import id.itborneo.core.domain.model.detail.SeriesDetailDomainModel
 import id.itborneo.core.enums.Status
 import id.itborneo.moca.R
 import id.itborneo.moca.databinding.ActivityDetailSeriesBinding
@@ -32,7 +30,7 @@ class DetailSeriesActivity : AppCompatActivity() {
 
         fun getInstance(context: Context, data: Int) {
             val intent = Intent(context, DetailSeriesActivity::class.java)
-            intent.putExtra(EXTRA_ID_SERIES, data)
+            intent.putExtra(EXTRA_ID_SERIES, data).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             context.startActivity(intent)
         }
     }
