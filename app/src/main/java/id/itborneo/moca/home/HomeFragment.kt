@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import id.itborneo.core.constant.SharedPrefConstant
-import id.itborneo.core.domain.model.HomeItemModel
+import id.itborneo.moca.model.HomeItemModel
 import id.itborneo.core.enums.Status
 import id.itborneo.core.utils.sharedpreferences.SecureSharedPreferences
 import id.itborneo.moca.R
@@ -31,9 +31,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var trendingMovieAdapter: HomeAdapter
     private lateinit var trendingSeriesAdapter: HomeAdapter
-
     private lateinit var playingNowMovieAdapter: HomeAdapter
     private lateinit var airingTodaySeriesAdapter: HomeAdapter
+    private lateinit var sharedPrefs: SharedPreferences
 
     private val binding: FragmentHomeBinding by viewBinding(FragmentHomeBinding::bind)
 
@@ -258,13 +258,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.root.removeAllViews()
     }
 
-    private fun actionToChangeName() {
-
-    }
-
-    private lateinit var sharedPrefs: SharedPreferences
-
-
     val getContent =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -277,7 +270,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             ChangeNameActivity.getInstance(requireContext(), getContent)
         }
         sharedPrefs = SecureSharedPreferences.sharedPreferences(requireContext())
-
         setUsername()
     }
 

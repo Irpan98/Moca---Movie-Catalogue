@@ -58,7 +58,7 @@
 
     </style>
 
-    <style name="TextTabLayout" parent="TextAppearance.Design.Tab">
+    <style name="TextTabLayout" parent="TextAppearance.Design.Tab" tools:keep="@style/TextTabLayout">
         <item name="textAllCaps">false</item>
     </style>
 

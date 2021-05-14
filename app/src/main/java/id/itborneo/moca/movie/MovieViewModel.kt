@@ -1,9 +1,10 @@
 package id.itborneo.moca.movie
 
 import androidx.lifecycle.*
-import id.itborneo.core.domain.model.MovieModel
 import id.itborneo.core.domain.usecase.MocaUseCase
 import id.itborneo.core.utils.Resource
+import id.itborneo.moca.model.MovieModel
+import id.itborneo.moca.utils.ModelDataMapper
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
@@ -26,7 +27,7 @@ class MovieViewModel(private val useCase: MocaUseCase) : ViewModel() {
                     .distinctUntilChanged() // Ignore same value (This is the default operator)
                     .collect {
                         useCase.searchMovies(it).collect { getValue ->
-                            value = getValue
+                            value = ModelDataMapper.movieListFromDomain(getValue)
                         }
                     }
             }
@@ -38,7 +39,9 @@ class MovieViewModel(private val useCase: MocaUseCase) : ViewModel() {
     }
 
     fun initMovies() = viewModelScope.launch {
-        listMovie = useCase.getMovies()
+        listMovie = useCase.getMovies().map {
+            ModelDataMapper.movieListFromDomain(it)
+        }
     }
 
 

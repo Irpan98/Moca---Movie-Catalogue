@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'jacoco'
+
 }
 
 android {
@@ -36,6 +38,8 @@ android {
 //        }
         debug {
             applicationIdSuffix ".debug"
+            testCoverageEnabled true
+
             debuggable true
         }
     }
@@ -54,18 +58,36 @@ android {
     testOptions {
         unitTests.returnDefaultValues = true
     }
+
+    task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+
+        reports {
+            xml.enabled = true
+            html.enabled = true
+        }
+
+        def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+        def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+        def mainSrc = "${project.projectDir}/src/main/java"
+
+        sourceDirectories.setFrom(files([mainSrc]))
+        classDirectories.setFrom(files([debugTree]))
+        executionData.setFrom(fileTree(dir: "$buildDir", includes: [
+                "jacoco/testDebugUnitTest.exec",
+                "outputs/code-coverage/connected/*coverage.ec"
+        ]))
+    }
     dynamicFeatures = [':mocafavorite']
 }
 apply from: '../shared_dependencies.gradle'
 
 dependencies {
     implementation project(":core")
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    androidTestImplementation project(":mocafavorite")
+
 
     //leak canary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'
-    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.4.4'
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryeVersion"
+    implementation "com.github.kirich1409:viewbindingpropertydelegate:$viewBindingPropertyDelegateVersion"
 
 }

@@ -9,17 +9,17 @@ import id.itborneo.core.data.remote.response.credits.CreditsResponse
 import id.itborneo.core.data.remote.response.detail.GenreResponse
 import id.itborneo.core.data.remote.response.detail.MovieDetailResponse
 import id.itborneo.core.data.remote.response.detail.SeriesDetailResponse
-import id.itborneo.core.domain.model.MovieModel
-import id.itborneo.core.domain.model.SeriesModel
-import id.itborneo.core.domain.model.credits.CastModel
-import id.itborneo.core.domain.model.credits.CreditsModel
-import id.itborneo.core.domain.model.detail.GenreModel
-import id.itborneo.core.domain.model.detail.MovieDetailModel
-import id.itborneo.core.domain.model.detail.SeriesDetailModel
+import id.itborneo.core.domain.model.MovieDomainModel
+import id.itborneo.core.domain.model.SeriesDomainModel
+import id.itborneo.core.domain.model.credits.CastDomainModel
+import id.itborneo.core.domain.model.credits.CreditsDomainModel
+import id.itborneo.core.domain.model.detail.GenreDomainModel
+import id.itborneo.core.domain.model.detail.MovieDetailDomainModel
+import id.itborneo.core.domain.model.detail.SeriesDetailDomainModel
 
 
 fun List<MovieModelResponse?>.toListMovieModel() = map {
-    MovieModel(
+    MovieDomainModel(
         id = it?.id.toUnknownIntIfNull,
         title = it?.title.toUnknownStringIfNull,
         posterPath = it?.posterPath.toUnknownStringIfNull
@@ -27,7 +27,7 @@ fun List<MovieModelResponse?>.toListMovieModel() = map {
 }
 
 fun List<SeriesModelResponse>.toListSeriesModel() = map {
-    SeriesModel(
+    SeriesDomainModel(
         id = it.id.toUnknownIntIfNull,
         name = it.name.toUnknownStringIfNull,
         posterPath = it.posterPath.toUnknownStringIfNull
@@ -36,7 +36,7 @@ fun List<SeriesModelResponse>.toListSeriesModel() = map {
 
 
 fun MovieDetailResponse.toDetailModel() =
-    MovieDetailModel(
+    MovieDetailDomainModel(
         id = this.id,
         title = this.title.toUnknownStringIfNull,
         posterPath = this.posterPath.toUnknownStringIfNull,
@@ -47,7 +47,7 @@ fun MovieDetailResponse.toDetailModel() =
     )
 
 fun SeriesDetailResponse.toDetailModel() =
-    SeriesDetailModel(
+    SeriesDetailDomainModel(
         id = this.id,
         name = this.name.toUnknownStringIfNull,
         posterPath = this.posterPath.toUnknownStringIfNull,
@@ -58,19 +58,19 @@ fun SeriesDetailResponse.toDetailModel() =
     )
 
 fun List<GenreResponse?>?.toListGenreResponse() = this?.map {
-    GenreModel(
+    GenreDomainModel(
         name = it?.name.toUnknownStringIfNull,
         id = it?.id.toUnknownIntIfNull
     )
 }
 
-fun CreditsResponse.toCreditsModel() = CreditsModel(
+fun CreditsResponse.toCreditsModel() = CreditsDomainModel(
     id = this.id.toUnknownIntIfNull,
     cast = this.cast.toListCast()
 )
 
 fun List<CastResponse>?.toListCast() = this?.map {
-    CastModel(
+    CastDomainModel(
         id = it.id.toUnknownIntIfNull,
         name = it.name.toUnknownStringIfNull,
         profilePath = it.profilePath.toUnknownStringIfNull
@@ -78,7 +78,7 @@ fun List<CastResponse>?.toListCast() = this?.map {
 }
 
 fun FavoriteMovieEntity.toFavoriteMovieModel() =
-    MovieModel(
+    MovieDomainModel(
         id = this.id,
         title = this.title,
         posterPath = this.posterPath
@@ -86,7 +86,7 @@ fun FavoriteMovieEntity.toFavoriteMovieModel() =
 
 
 fun FavoriteSeriesEntity.toFavoriteSeriesModel() =
-    SeriesModel(
+    SeriesDomainModel(
         id = this.id,
         name = this.title,
         posterPath = this.posterPath

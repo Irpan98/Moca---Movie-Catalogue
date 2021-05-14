@@ -9,10 +9,11 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.itborneo.core.domain.model.SeriesModel
+import id.itborneo.core.domain.model.SeriesDomainModel
 import id.itborneo.core.enums.Status
 import id.itborneo.moca.databinding.FragmentSeriesBinding
 import id.itborneo.moca.detail.views.DetailSeriesActivity
+import id.itborneo.moca.model.SeriesModel
 import kotlinx.coroutines.FlowPreview
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 

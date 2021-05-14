@@ -1,9 +1,10 @@
 package id.itborneo.moca.series
 
 import androidx.lifecycle.*
-import id.itborneo.core.domain.model.SeriesModel
 import id.itborneo.core.domain.usecase.MocaUseCase
 import id.itborneo.core.utils.Resource
+import id.itborneo.moca.model.SeriesModel
+import id.itborneo.moca.utils.ModelDataMapper
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
@@ -24,7 +25,7 @@ class SeriesViewModel(private val useCase: MocaUseCase) : ViewModel() {
                     .distinctUntilChanged() // Ignore same value (This is the default operator)
                     .collect {
                         useCase.searchSeries(it).collect { getValue ->
-                            value = getValue
+                            value = ModelDataMapper.seriesListFromDomain(getValue)
                         }
                     }
             }
@@ -36,7 +37,9 @@ class SeriesViewModel(private val useCase: MocaUseCase) : ViewModel() {
     }
 
     fun initSeries() = viewModelScope.launch {
-        series = useCase.getSeries()
+        series = useCase.getSeries().map {
+            ModelDataMapper.seriesListFromDomain(it)
+        }
     }
 
     fun setSearch(query: String): Unit = searchQuery.postValue(query)

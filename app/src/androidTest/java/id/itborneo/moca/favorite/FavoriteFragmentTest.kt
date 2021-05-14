@@ -34,7 +34,7 @@ class FavoriteFragmentTest {
     @Test
     fun movieAddRemoveFavorite() {
 
-        val position = 1
+        val position = 2
         val recyclerViewTest = Espresso.onView(ViewMatchers.withId(R.id.rv_movies))
 
         Espresso.onView(ViewMatchers.withId(R.id.movieFragment)).perform(ViewActions.click())
@@ -65,7 +65,7 @@ class FavoriteFragmentTest {
     @Test
     fun seriesAddRemoveFavorite() {
 
-        val position = 1
+        val position = 4
         val recyclerViewTest = Espresso.onView(ViewMatchers.withId(R.id.rv_series))
 
         Espresso.onView(ViewMatchers.withId(R.id.seriesFragment)).perform(ViewActions.click())

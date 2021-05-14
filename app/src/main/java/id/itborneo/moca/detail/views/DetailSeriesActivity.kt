@@ -12,14 +12,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import es.dmoral.toasty.Toasty
-import id.itborneo.core.domain.model.SeriesModel
-import id.itborneo.core.domain.model.detail.GenreModel
-import id.itborneo.core.domain.model.detail.SeriesDetailModel
+import id.itborneo.core.domain.model.SeriesDomainModel
+import id.itborneo.core.domain.model.detail.SeriesDetailDomainModel
 import id.itborneo.core.enums.Status
 import id.itborneo.moca.R
 import id.itborneo.moca.databinding.ActivityDetailSeriesBinding
 import id.itborneo.moca.detail.adapters.CastAdapter
 import id.itborneo.moca.detail.viewmodels.DetailSeriesViewModel
+import id.itborneo.moca.model.SeriesModel
+import id.itborneo.moca.model.detail.GenreModel
+import id.itborneo.moca.model.detail.SeriesDetailModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 

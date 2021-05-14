@@ -10,27 +10,27 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import id.itborneo.moca.R
 import id.itborneo.core.constant.ImageConstant
-import id.itborneo.core.domain.model.SeriesModel
+import id.itborneo.core.domain.model.SeriesDomainModel
 import id.itborneo.moca.databinding.ItemPosterBinding
 
 
 class FavoriteSeriesPagedAdapter(
-    val listener: (SeriesModel) -> Unit
-) : PagedListAdapter<SeriesModel, FavoriteSeriesPagedAdapter.ViewHolder>(DIFF_CALLBACK) {
+    val listener: (SeriesDomainModel) -> Unit
+) : PagedListAdapter<SeriesDomainModel, FavoriteSeriesPagedAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
 
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SeriesModel>() {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SeriesDomainModel>() {
             override fun areItemsTheSame(
-                oldItem: SeriesModel,
-                newItem: SeriesModel
+                oldItem: SeriesDomainModel,
+                newItem: SeriesDomainModel
             ): Boolean {
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(
-                oldItem: SeriesModel,
-                newItem: SeriesModel
+                oldItem: SeriesDomainModel,
+                newItem: SeriesDomainModel
             ): Boolean {
                 return oldItem == oldItem
             }
@@ -55,7 +55,7 @@ class FavoriteSeriesPagedAdapter(
 
     inner class ViewHolder(private val itemBinding: ItemPosterBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(series: SeriesModel) {
+        fun bind(series: SeriesDomainModel) {
             itemBinding.apply {
                 tvName.text = series.name
                 Glide.with(root.context)

@@ -28,7 +28,7 @@
     <string name="empty_favorites" tools:ignore="UnusedResources">You Don\'t have any favorites </string>
     <string name="title_favorite" tools:keep="@string/title_favorite">Favorite</string>
     <string name="title_mocafavorite">Module Title</string>
-    <string name="input_your_name">Input Your Name</string>
+    <string name="input_your_name" tools:keep="@string/input_your_name">Input Your Name</string>
     <string name="input_your_name_here">Input Your Name Here</string>
     <string name="save">Save</string>
 
