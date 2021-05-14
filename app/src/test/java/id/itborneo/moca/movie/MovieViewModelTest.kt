@@ -1,8 +1,12 @@
 package id.itborneo.moca.movie
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
 import id.itborneo.core.domain.usecase.MocaUseCase
+import id.itborneo.core.utils.Resource
 import id.itborneo.moca.dummy.DummyTestData
+import id.itborneo.moca.model.MovieModel
+import id.itborneo.moca.utils.ModelSingleDataMapper
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.test.runBlockingTest
@@ -24,10 +28,14 @@ class MovieViewModelTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
+
     private lateinit var viewModel: MovieViewModel
 
     @Mock
     private lateinit var useCase: MocaUseCase
+
+    @Mock
+    private lateinit var observer: Observer<Resource<List<MovieModel>>>
 
     @Before
     fun setUp() {
@@ -44,13 +52,18 @@ class MovieViewModelTest {
 
         // not null movies after called
         viewModel.initMovies()
+        viewModel.getMovies().observeForever(observer)
         val movies = viewModel.getMovies()
 
+
         assertNotNull(movies)
+        assertNotNull(movies.value)
 
         assertEquals(
-            DummyTestData.getMovies().value,
-            movies.value,
+            DummyTestData.getMovies().value?.data?.map {
+                ModelSingleDataMapper.movieFromDomain(it)
+            },
+            movies.value?.data,
         )
     }
 
@@ -59,6 +72,7 @@ class MovieViewModelTest {
 
         Mockito.`when`(useCase.getMovies()).thenReturn(DummyTestData.getMoviesEmpty())
         viewModel.initMovies()
+        viewModel.getMovies().observeForever(observer)
 
         //check size data should be 0
         assertEquals(
@@ -74,12 +88,15 @@ class MovieViewModelTest {
 
         Mockito.`when`(useCase.getMovies()).thenReturn(DummyTestData.getMoviesError())
         viewModel.initMovies()
+        viewModel.getMovies().observeForever(observer)
+
 
         //check message, should get error message
         assertEquals(
             DummyTestData.getMoviesError().value?.message,
             viewModel.getMovies().value?.message,
         )
+
     }
 
 }

@@ -1,9 +1,12 @@
 package id.itborneo.moca.detail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
 import id.itborneo.core.domain.usecase.MocaUseCase
+import id.itborneo.core.utils.Resource
 import id.itborneo.moca.detail.viewmodels.DetailMovieViewModel
 import id.itborneo.moca.dummy.DummyTestData
+import id.itborneo.moca.model.detail.MovieDetailModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
@@ -27,6 +30,11 @@ class DetailMovieViewModelTest {
     @Mock
     private lateinit var useCase: MocaUseCase
 
+
+    @Mock
+    private lateinit var observer: Observer<Resource<MovieDetailModel>>
+
+
     @Before
     fun setUp() {
         viewModel = DetailMovieViewModel(
@@ -46,11 +54,12 @@ class DetailMovieViewModelTest {
         // not null movies after getDetailMovie
         viewModel.initDetailMovie()
         assertNotNull(viewModel.getDetailMovie())
+        viewModel.getDetailMovie().observeForever(observer)
 
         //check data get detail movie
         assertEquals(
-            viewModel.getDetailMovie().value?.data,
-            DummyTestData.getDetailMovie().value?.data
+            viewModel.getDetailMovie().value?.data?.title,
+            DummyTestData.getDetailMovie().value?.data?.title
         )
     }
 
@@ -61,6 +70,7 @@ class DetailMovieViewModelTest {
         Mockito.`when`(useCase.getDetailMovie(1))
             .thenReturn(DummyTestData.getDetailMoviesError())
         viewModel.initDetailMovie()
+        viewModel.getDetailMovie().observeForever(observer)
 
         //check message, should get error message
         assertEquals(

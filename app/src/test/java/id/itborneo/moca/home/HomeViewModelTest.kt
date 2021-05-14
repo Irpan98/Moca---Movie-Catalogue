@@ -1,8 +1,12 @@
 package id.itborneo.moca.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
 import id.itborneo.core.domain.usecase.MocaUseCase
+import id.itborneo.core.utils.Resource
 import id.itborneo.moca.dummy.DummyTestData
+import id.itborneo.moca.model.MovieModel
+import id.itborneo.moca.model.SeriesModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
@@ -26,6 +30,12 @@ class HomeViewModelTest {
     @Mock
     private lateinit var useCase: MocaUseCase
 
+    @Mock
+    private lateinit var seriesObserver: Observer<Resource<List<SeriesModel>>>
+    @Mock
+    private lateinit var movieObserver: Observer<Resource<List<MovieModel>>>
+
+
     @Before
     fun setUp() {
         viewModel = HomeViewModel(useCase)
@@ -42,6 +52,7 @@ class HomeViewModelTest {
         // not null movies after called
         viewModel.initData()
         assertNotNull(viewModel.getTrendingMovies())
+        viewModel.getTrendingMovies().observeForever(movieObserver)
 
         //check title data getMovies
         assertEquals(
@@ -61,6 +72,7 @@ class HomeViewModelTest {
         // not null movies after called
         viewModel.initData()
         assertNotNull(viewModel.getNowPlayingMovies())
+        viewModel.getNowPlayingMovies().observeForever(movieObserver)
 
         //check title data getMovies
         assertEquals(
@@ -80,6 +92,7 @@ class HomeViewModelTest {
         // not null series after called
         viewModel.initData()
         assertNotNull(viewModel.getTrendingSeries())
+        viewModel.getTrendingSeries().observeForever(seriesObserver)
 
         //check name data get Series
         assertEquals(
@@ -99,6 +112,7 @@ class HomeViewModelTest {
         // not null movies after called
         viewModel.initData()
         assertNotNull(viewModel.getAiringTodaySeries())
+        viewModel.getAiringTodaySeries().observeForever(seriesObserver)
 
         //check title data getMovies
         assertEquals(

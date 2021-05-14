@@ -1,9 +1,13 @@
 package id.itborneo.moca.detail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
 import id.itborneo.core.domain.usecase.MocaUseCase
+import id.itborneo.core.utils.Resource
 import id.itborneo.moca.detail.viewmodels.DetailSeriesViewModel
 import id.itborneo.moca.dummy.DummyTestData
+import id.itborneo.moca.model.detail.MovieDetailModel
+import id.itborneo.moca.model.detail.SeriesDetailModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
@@ -27,6 +31,10 @@ class DetailSeriesViewModelTest {
     @Mock
     private lateinit var useCase: MocaUseCase
 
+    @Mock
+    private lateinit var observer: Observer<Resource<SeriesDetailModel>>
+
+
     @Before
     fun setUp() {
         viewModel = DetailSeriesViewModel(
@@ -46,11 +54,12 @@ class DetailSeriesViewModelTest {
         // not null movies after getDetailMovie
         viewModel.initDetailSeries()
         assertNotNull(viewModel.getDetail())
+        viewModel.getDetail().observeForever(observer)
 
         //check data get detail movie
         assertEquals(
-            viewModel.getDetail().value?.data,
-            DummyTestData.getDetailSeries().value?.data
+            viewModel.getDetail().value?.data?.name,
+            DummyTestData.getDetailSeries().value?.data?.name
         )
     }
 
@@ -61,6 +70,7 @@ class DetailSeriesViewModelTest {
         Mockito.`when`(useCase.getDetailSeries(1))
             .thenReturn(DummyTestData.getDetailSeriesError())
         viewModel.initDetailSeries()
+        viewModel.getDetail().observeForever(observer)
 
         //check message, should get error message
         assertEquals(
