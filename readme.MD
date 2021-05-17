@@ -59,5 +59,12 @@ Features
 - Shared Preferences 
 
 
+1. UI dan UX yang sudah sesuai standar dicoding
+2. fitur tambahan yaitu 2 Search, user name dan home dengan list Series Airing, Treding Series, Movies Trending and Now Playing Movies
+3. Tidak menggunakan Code yang sama di DIcoding. yaitu tidak menggunakan NetworkBoundResource
+4. Minor Issue di Inspect Code
+5. Terdapat Unit Test pada aplikasi
+6. Terdapat CI dengan code Coverage
+6. Terdapat security tambahan yaitu Security Crypto dan identity credential
 
     
