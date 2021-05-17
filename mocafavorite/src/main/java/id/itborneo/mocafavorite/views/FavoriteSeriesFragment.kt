@@ -18,7 +18,9 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class FavoriteSeriesFragment : Fragment() {
 
-    private lateinit var binding: FragmentFavoriteSeriesBinding
+    private var binding: FragmentFavoriteSeriesBinding? = null
+
+
     private lateinit var adapter: FavoriteSeriesPagedAdapter
 
     private val viewModel: FavoriteSeriesViewModel by sharedViewModel()
@@ -27,9 +29,9 @@ class FavoriteSeriesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentFavoriteSeriesBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,11 +48,14 @@ class FavoriteSeriesFragment : Fragment() {
     }
 
     private fun showEmptyFavorite(showIt: Boolean) {
-        if (showIt) {
-            binding.incEmptyFavorite.root.visibility = View.VISIBLE
-        } else {
-            binding.incEmptyFavorite.root.visibility = View.GONE
+        binding?.apply {
+            if (showIt) {
+                incEmptyFavorite.root.visibility = View.VISIBLE
+            } else {
+                incEmptyFavorite.root.visibility = View.GONE
+            }
         }
+
     }
 
     private fun observerData() {
@@ -62,12 +67,14 @@ class FavoriteSeriesFragment : Fragment() {
     }
 
     private fun initRecycler() {
-        binding.rvSeries.layoutManager = LinearLayoutManager(requireContext())
-        adapter = FavoriteSeriesPagedAdapter {
-            actionToDetail(it)
+        binding?.apply {
+            rvSeries.layoutManager = LinearLayoutManager(requireContext())
+            adapter = FavoriteSeriesPagedAdapter {
+                actionToDetail(it)
+            }
+            rvSeries.layoutManager = GridLayoutManager(context, 3)
+            rvSeries.adapter = adapter
         }
-        binding.rvSeries.layoutManager = GridLayoutManager(context, 3)
-        binding.rvSeries.adapter = adapter
     }
 
     private fun actionToDetail(series: SeriesDomainModel) {
@@ -77,6 +84,6 @@ class FavoriteSeriesFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.root.removeAllViews()
+        binding = null
     }
 }

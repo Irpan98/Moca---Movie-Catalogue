@@ -1,10 +1,7 @@
 package id.itborneo.core.domain.model.detail
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
 data class SeriesDetailDomainModel(
 
     @field:SerializedName("id")
@@ -28,4 +25,4 @@ data class SeriesDetailDomainModel(
     @field:SerializedName("name")
     val name: String? = null,
 
-    ) : Parcelable
+    )

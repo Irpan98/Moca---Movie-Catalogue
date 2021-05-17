@@ -10,7 +10,7 @@ import id.itborneo.moca.main.MainActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySplashScreenBinding
+    private var binding: ActivitySplashScreenBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +21,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun initBinding() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
-        val view = binding.root
+        val view = binding?.root
         setContentView(view)
     }
 

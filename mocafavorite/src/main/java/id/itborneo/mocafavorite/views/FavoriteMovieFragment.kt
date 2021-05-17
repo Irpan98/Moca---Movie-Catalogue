@@ -18,7 +18,8 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class FavoriteMovieFragment : Fragment() {
 
-    private lateinit var binding: FragmentFavoriteMovieBinding
+    private var binding: FragmentFavoriteMovieBinding? = null
+
     private lateinit var adapter: FavoriteMoviePagedAdapter
     private val viewModel: FavoriteMovieViewModel by sharedViewModel()
     private val isEmpty = MutableLiveData(true)
@@ -26,9 +27,9 @@ class FavoriteMovieFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentFavoriteMovieBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,10 +47,11 @@ class FavoriteMovieFragment : Fragment() {
     }
 
     private fun showEmptyFavorite(showIt: Boolean) {
+
         if (showIt) {
-            binding.incEmptyFavorite.root.visibility = View.VISIBLE
+            binding?.incEmptyFavorite?.root?.visibility = View.VISIBLE
         } else {
-            binding.incEmptyFavorite.root.visibility = View.GONE
+            binding?.incEmptyFavorite?.root?.visibility = View.GONE
         }
     }
 
@@ -61,12 +63,15 @@ class FavoriteMovieFragment : Fragment() {
     }
 
     private fun initRecycler() {
-        binding.rvMovies.layoutManager = LinearLayoutManager(requireContext())
-        adapter = FavoriteMoviePagedAdapter {
-            actionToDetail(it)
+        binding?.apply {
+            rvMovies.layoutManager = LinearLayoutManager(requireContext())
+            adapter = FavoriteMoviePagedAdapter {
+                actionToDetail(it)
+            }
+            rvMovies.layoutManager = GridLayoutManager(context, 3)
+            rvMovies.adapter = adapter
         }
-        binding.rvMovies.layoutManager = GridLayoutManager(context, 3)
-        binding.rvMovies.adapter = adapter
+
     }
 
     private fun actionToDetail(movie: MovieDomainModel) {
@@ -75,6 +80,7 @@ class FavoriteMovieFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.root.removeAllViews()
+        binding = null
+
     }
 }

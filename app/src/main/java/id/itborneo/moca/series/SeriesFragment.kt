@@ -9,7 +9,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.itborneo.core.domain.model.SeriesDomainModel
 import id.itborneo.core.enums.Status
 import id.itborneo.moca.databinding.FragmentSeriesBinding
 import id.itborneo.moca.detail.views.DetailSeriesActivity
@@ -25,7 +24,8 @@ class SeriesFragment : Fragment() {
         private const val TAG = "SeriesFragment"
     }
 
-    private lateinit var binding: FragmentSeriesBinding
+    private var binding: FragmentSeriesBinding? = null
+
     private lateinit var adapter: SeriesAdapter
 
     private val viewModel: SeriesViewModel by sharedViewModel()
@@ -33,9 +33,9 @@ class SeriesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentSeriesBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
 
@@ -74,12 +74,15 @@ class SeriesFragment : Fragment() {
     }
 
     private fun initRecycler() {
-        binding.rvSeries.layoutManager = LinearLayoutManager(requireContext())
-        adapter = SeriesAdapter {
-            actionToDetail(it)
+        binding?.apply {
+            rvSeries.layoutManager = LinearLayoutManager(requireContext())
+            adapter = SeriesAdapter {
+                actionToDetail(it)
+            }
+            rvSeries.layoutManager = GridLayoutManager(context, 3)
+            rvSeries.adapter = adapter
         }
-        binding.rvSeries.layoutManager = GridLayoutManager(context, 3)
-        binding.rvSeries.adapter = adapter
+
     }
 
     private fun actionToDetail(series: SeriesModel) {
@@ -87,7 +90,7 @@ class SeriesFragment : Fragment() {
     }
 
     private fun showLoading(showIt: Boolean = true) {
-        binding.incLoading.root.apply {
+        binding?.incLoading?.root?.apply {
             visibility = if (showIt) {
                 View.VISIBLE
             } else {
@@ -97,7 +100,7 @@ class SeriesFragment : Fragment() {
     }
 
     private fun showError(showIt: Boolean = true) {
-        binding.incError.root.apply {
+        binding?.incError?.root?.apply {
             visibility = if (showIt) {
                 View.VISIBLE
             } else {
@@ -107,7 +110,7 @@ class SeriesFragment : Fragment() {
     }
 
     private fun initSearch() {
-        binding.sbUsers.apply {
+        binding?.sbUsers?.apply {
             setOnClickListener {
                 onActionViewExpanded()
             }
@@ -166,17 +169,20 @@ class SeriesFragment : Fragment() {
     }
 
     private fun showNotFound(showIt: Boolean = true) {
-        if (showIt) {
-            binding.incNotFound.root.visibility = View.VISIBLE
-            binding.rvSeries.visibility = View.GONE
-        } else {
-            binding.incNotFound.root.visibility = View.GONE
-            binding.rvSeries.visibility = View.VISIBLE
-
+        binding?.apply {
+            if (showIt) {
+                incNotFound.root.visibility = View.VISIBLE
+                rvSeries.visibility = View.GONE
+            } else {
+                incNotFound.root.visibility = View.GONE
+                rvSeries.visibility = View.VISIBLE
+            }
         }
+
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.root.removeAllViews()
+        binding = null
     }
 }

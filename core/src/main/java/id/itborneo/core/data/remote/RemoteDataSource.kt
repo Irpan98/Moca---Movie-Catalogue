@@ -13,13 +13,11 @@ import kotlinx.coroutines.flow.flowOn
 
 class RemoteDataSource(private val api: ApiService) {
 
-
-    fun getMovies() = flow {
+    private fun <T> saveCall(call: suspend () -> T) = flow {
         emit(Resource.loading(data = null))
         EspressoIdlingResource.increment()
         try {
-            val results = api.getMovies().results
-            emit(Resource.success(data = results.toListMovieModel()))
+            emit(Resource.success(data = call()))
             EspressoIdlingResource.decrement()
 
         } catch (exception: Exception) {
@@ -28,148 +26,31 @@ class RemoteDataSource(private val api: ApiService) {
         }
     }.flowOn(Dispatchers.IO)
 
-    fun getSeries() = flow {
-        emit(Resource.loading(data = null))
-        EspressoIdlingResource.increment()
+    fun getMovies() = saveCall { api.getMovies().results.toListMovieModel() }
 
-        try {
-            emit(Resource.success(data = api.getSeries().results.toListSeriesModel()))
-            EspressoIdlingResource.decrement()
+    fun getSeries() = saveCall { api.getSeries().results.toListSeriesModel() }
 
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-            EspressoIdlingResource.decrement()
-        }
-    }.flowOn(Dispatchers.IO)
+    fun getDetailMovie(id: Int) = saveCall { api.getDetailMovie(id).toDetailModel() }
 
-    fun getDetailMovie(id: Int) = flow {
-        emit(Resource.loading(data = null))
-        EspressoIdlingResource.increment()
+    fun getDetailSeries(id: Int) = saveCall { api.getDetailSeries(id).toDetailModel() }
 
-        try {
-            emit(Resource.success(data = api.getDetailMovie(id).toDetailModel()))
-            EspressoIdlingResource.decrement()
+    fun getTrendingMovies() = saveCall { api.getTrendingMovie().results.toListMovieModel() }
 
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-            EspressoIdlingResource.decrement()
-        }
-    }.flowOn(Dispatchers.IO)
+    fun getTrendingSeries() = saveCall { api.getTrendingSeries().results.toListSeriesModel() }
 
-    fun getDetailSeries(id: Int) = flow {
-        emit(Resource.loading(data = null))
-        EspressoIdlingResource.increment()
+    fun getNowPlayingMovies() = saveCall { api.getPlayingNowMovies().results.toListMovieModel() }
 
-        try {
-            emit(Resource.success(data = api.getDetailSeries(id).toDetailModel()))
-            EspressoIdlingResource.decrement()
+    fun getAiringTodaySeries() = saveCall { api.getAiringTodaySeries().results.toListSeriesModel() }
 
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-            EspressoIdlingResource.decrement()
-        }
-    }.flowOn(Dispatchers.IO)
+    fun getCredits(id: Int) = saveCall { api.getCreditsMovie(id).toCreditsModel() }
 
-    fun getTrendingMovies() = flow {
-        emit(Resource.loading(data = null))
-        EspressoIdlingResource.increment()
-        try {
-            emit(Resource.success(data = api.getTrendingMovie().results.toListMovieModel()))
-            EspressoIdlingResource.decrement()
+    fun searchMovies(query: String) =
+        saveCall { api.searchMovies(query).results.toListMovieModel() }
 
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-            EspressoIdlingResource.decrement()
-        }
-    }.flowOn(Dispatchers.IO)
-
-    fun getTrendingSeries() = flow {
-        emit(Resource.loading(data = null))
-        EspressoIdlingResource.increment()
-
-        try {
-            emit(Resource.success(data = api.getTrendingSeries().results.toListSeriesModel()))
-            EspressoIdlingResource.decrement()
-
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-            EspressoIdlingResource.decrement()
-        }
-    }.flowOn(Dispatchers.IO)
+    fun searchSeries(query: String) =
+        saveCall { api.searchSeries(query).results.toListSeriesModel() }
 
 
-    fun getNowPlayingMovies() = flow {
-        emit(Resource.loading(data = null))
-        EspressoIdlingResource.increment()
-
-        try {
-            emit(Resource.success(data = api.getPlayingNowMovies().results.toListMovieModel()))
-            EspressoIdlingResource.decrement()
-
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-            EspressoIdlingResource.decrement()
-
-        }
-    }.flowOn(Dispatchers.IO)
-
-    fun getAiringTodaySeries() = flow {
-        emit(Resource.loading(data = null))
-        EspressoIdlingResource.increment()
-
-        try {
-            emit(Resource.success(data = api.getAiringTodaySeries().results.toListSeriesModel()))
-            EspressoIdlingResource.decrement()
-
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-            EspressoIdlingResource.decrement()
-        }
-    }.flowOn(Dispatchers.IO)
-
-    fun getCredits(id: Int) = flow {
-        emit(Resource.loading(data = null))
-        EspressoIdlingResource.increment()
-
-        try {
-            emit(Resource.success(data = api.getCreditsMovie(id).toCreditsModel()))
-            EspressoIdlingResource.decrement()
-
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-            EspressoIdlingResource.decrement()
-        }
-    }.flowOn(Dispatchers.IO)
-
-
-    fun searchMovies(query: String) = flow {
-        emit(Resource.loading(data = null))
-        EspressoIdlingResource.increment()
-
-        try {
-            emit(Resource.success(data = api.searchMovies(query).results.toListMovieModel()))
-            EspressoIdlingResource.decrement()
-
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-            EspressoIdlingResource.decrement()
-        }
-    }.flowOn(Dispatchers.IO)
-
-    fun searchSeries(query: String) = flow {
-
-        emit(Resource.loading(data = null))
-        EspressoIdlingResource.increment()
-
-        try {
-            emit(Resource.success(data = api.searchSeries(query).results.toListSeriesModel()))
-            EspressoIdlingResource.decrement()
-
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-            EspressoIdlingResource.decrement()
-        }
-    }.flowOn(Dispatchers.IO)
 }
 
 

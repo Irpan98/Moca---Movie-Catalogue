@@ -29,14 +29,10 @@ val databaseModule = module {
         ).fallbackToDestructiveMigration()
             .openHelperFactory(factory)
             .build()
-
     }
-
-
 }
 
 val apiModule = module {
-
     single {
         ApiConfig.apiService
     }

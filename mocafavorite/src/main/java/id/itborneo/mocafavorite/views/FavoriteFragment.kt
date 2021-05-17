@@ -23,14 +23,14 @@ class FavoriteFragment : Fragment() {
         )
     }
 
-    private lateinit var binding: FragmentFavoriteBinding
+    private var binding: FragmentFavoriteBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentFavoriteBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,20 +46,22 @@ class FavoriteFragment : Fragment() {
     private lateinit var tabLayoutMediator: TabLayoutMediator
 
     private fun initTabLayout() {
-        val sectionsPagerAdapter = DetailPagerAdapter(requireActivity() as AppCompatActivity)
-        binding.viewPager.adapter = sectionsPagerAdapter
-        tabLayoutMediator = TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
-            tab.text = resources.getString(TAB_TITLES[position])
+        binding?.apply {
+
+            val sectionsPagerAdapter = DetailPagerAdapter(requireActivity() as AppCompatActivity)
+            binding?.viewPager?.adapter = sectionsPagerAdapter
+            tabLayoutMediator =
+                TabLayoutMediator(this.tabs, this.viewPager) { tab, position ->
+                    tab.text = resources.getString(TAB_TITLES[position])
+                }
+
+            tabLayoutMediator.attach()
         }
-
-        tabLayoutMediator.attach()
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.root.removeAllViews()
+        binding = null
         tabLayoutMediator.detach()
     }
-
 }

@@ -29,7 +29,7 @@ class DetailMovieViewModel(private val useCase: MocaUseCase, private val id: Int
         initDetailMovie()
     }
 
-    fun initDetailMovie() = viewModelScope.launch {
+     fun initDetailMovie() = viewModelScope.launch {
         detail = useCase.getDetailMovie(id).map {
             ModelSingleDataMapper.movieDetailFromDomain(it)
         }

@@ -1,7 +1,6 @@
 package id.itborneo.moca.model.detail
 
 import android.os.Parcelable
-import id.itborneo.moca.model.detail.GenreModel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

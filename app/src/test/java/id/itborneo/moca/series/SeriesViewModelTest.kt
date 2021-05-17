@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer
 import id.itborneo.core.domain.usecase.MocaUseCase
 import id.itborneo.core.utils.Resource
 import id.itborneo.moca.dummy.DummyTestData
-import id.itborneo.moca.model.MovieModel
 import id.itborneo.moca.model.SeriesModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview

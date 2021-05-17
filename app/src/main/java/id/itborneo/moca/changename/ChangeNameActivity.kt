@@ -20,7 +20,7 @@ class ChangeNameActivity : AppCompatActivity() {
         }
     }
 
-    private lateinit var binding: ActivityChangeNameBinding
+    private var binding: ActivityChangeNameBinding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,25 +31,25 @@ class ChangeNameActivity : AppCompatActivity() {
 
     private fun initBinding() {
         binding = ActivityChangeNameBinding.inflate(layoutInflater)
-        val view = binding.root
+        val view = binding?.root
         setContentView(view)
     }
 
     private fun initView() {
-        binding.edChangeNameUsername.requestFocus()
-        binding.btnChangeNameSave.setOnClickListener {
+        binding?.edChangeNameUsername?.requestFocus()
+        binding?.btnChangeNameSave?.setOnClickListener {
             editNameWithSecurity(findViewById<EditText>(R.id.ed_change_name_username).text.toString())
         }
     }
 
     private fun editNameWithSecurity(name: String) {
         val sharedPreferences = SecureSharedPreferences.sharedPreferences(this)
-        with(sharedPreferences.edit()) {
-            // Edit the user's shared preferences...
+        sharedPreferences.edit().apply {
             this.putString(SharedPrefConstant.SHARED_PREF_USER_NAME, name)
             apply()
             setResult(RESULT_OK)
             finish()
         }
+
     }
 }

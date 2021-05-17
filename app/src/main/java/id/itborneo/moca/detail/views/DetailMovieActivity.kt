@@ -36,8 +36,9 @@ class DetailMovieActivity : AppCompatActivity() {
         }
     }
 
+    private var binding: ActivityDetailMoviesBinding? = null
+
     private lateinit var creditsAdapter: CastAdapter
-    private lateinit var binding: ActivityDetailMoviesBinding
     private lateinit var detailMovie: MovieDetailModel
 
     private var getIntentId: Int? = null
@@ -57,7 +58,7 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
     private fun initFavorite() {
-        binding.btnFavorite.setOnClickListener {
+        binding?.btnFavorite?.setOnClickListener {
             viewModel.apply {
                 if (getFavorites().value != null) {
                     viewModel.removeFavorite(detailMovie)
@@ -71,20 +72,23 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
     private fun initAppbarListener() {
-        binding.ivBack.setOnClickListener {
+        binding?.ivBack?.setOnClickListener {
             finish()
         }
-        binding.ivShare.setOnClickListener {
+        binding?.ivShare?.setOnClickListener {
             Toast.makeText(this, getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun initCreditsRecycler() {
 
-        binding.rvDetailMovieCasts.layoutManager =
-            LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
-        creditsAdapter = CastAdapter()
-        binding.rvDetailMovieCasts.adapter = creditsAdapter
+        binding?.apply {
+            rvDetailMovieCasts.layoutManager =
+                LinearLayoutManager(this@DetailMovieActivity, RecyclerView.HORIZONTAL, false)
+            creditsAdapter = CastAdapter()
+            rvDetailMovieCasts.adapter = creditsAdapter
+        }
+
 
     }
 
@@ -115,7 +119,7 @@ class DetailMovieActivity : AppCompatActivity() {
 
     private fun initBinding() {
         binding = ActivityDetailMoviesBinding.inflate(layoutInflater)
-        val view = binding.root
+        val view = binding?.root
         setContentView(view)
     }
 
@@ -148,36 +152,35 @@ class DetailMovieActivity : AppCompatActivity() {
 
     private fun updateUI(data: MovieDetailModel) {
 
-        Glide.with(this)
-            .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.posterPath}")
-            .apply(RequestOptions().dontTransform().placeholder(R.drawable.ic_placeholder_image))
-            .fitCenter()
-            .centerCrop()
-            .into(binding.ivDetailMoviePoster)
+        binding?.apply {
+            Glide.with(this@DetailMovieActivity)
+                .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.posterPath}")
+                .apply(
+                    RequestOptions().dontTransform().placeholder(R.drawable.ic_placeholder_image)
+                )
+                .fitCenter()
+                .centerCrop()
+                .into(this.ivDetailMoviePoster)
 
 
-        binding.tvDetailMovieGenres.text = getGenres(data.genres)
-        binding.tvDetailMovieOverview.text = data.overview
-        binding.tvDetailMovieTitle.text = data.title
-        binding.tvDetailMovieVoteAverage.text = data.voteAverage.toString()
+            this.tvDetailMovieGenres.text = getGenres(data.genres)
+            this.tvDetailMovieOverview.text = data.overview
+            this.tvDetailMovieTitle.text = data.title
+            this.tvDetailMovieVoteAverage.text = data.voteAverage.toString()
+        }
+
 
     }
 
     private fun getGenres(genres: List<GenreModel?>?): String {
-        var stringGenre = ""
-        genres?.forEachIndexed { index, genresItem ->
-            stringGenre += if (index != genres.lastIndex) {
-                " ${genresItem?.name} |"
-            } else {
-                " ${genresItem?.name}"
-            }
+        val genresString = genres?.map {
+            it?.name
         }
-
-        return stringGenre
+        return genresString?.joinToString(" | ") ?: ""
     }
 
     private fun showLoading(showIt: Boolean = true) {
-        binding.incLoading.root.apply {
+        binding?.incLoading?.root?.apply {
             visibility = if (showIt) {
                 View.VISIBLE
             } else {
@@ -187,7 +190,7 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
     private fun showError(showIt: Boolean = true) {
-        binding.incError.root.apply {
+        binding?.incError?.root?.apply {
             visibility = if (showIt) {
                 View.VISIBLE
             } else {
@@ -204,9 +207,9 @@ class DetailMovieActivity : AppCompatActivity() {
 
     private fun updateFavoriteStatusUI(isFavorite: MovieModel?) {
         if (isFavorite != null) {
-            binding.btnFavorite.setImageResource(R.drawable.ic_favorite_active)
+            binding?.btnFavorite?.setImageResource(R.drawable.ic_favorite_active)
         } else {
-            binding.btnFavorite.setImageResource(R.drawable.ic_favorite_inactive)
+            binding?.btnFavorite?.setImageResource(R.drawable.ic_favorite_inactive)
         }
     }
 

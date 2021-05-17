@@ -6,7 +6,6 @@ import id.itborneo.core.domain.usecase.MocaUseCase
 import id.itborneo.core.utils.Resource
 import id.itborneo.moca.detail.viewmodels.DetailSeriesViewModel
 import id.itborneo.moca.dummy.DummyTestData
-import id.itborneo.moca.model.detail.MovieDetailModel
 import id.itborneo.moca.model.detail.SeriesDetailModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest

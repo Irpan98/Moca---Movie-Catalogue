@@ -1,5 +1,6 @@
 package id.itborneo.core.networks
 
+import id.itborneo.core.BuildConfig
 import id.itborneo.core.BuildConfig.THE_MOVIE_DB_KEY
 import okhttp3.CertificatePinner
 import okhttp3.Interceptor
@@ -12,7 +13,7 @@ import java.util.concurrent.TimeUnit
 
 object ApiConfig {
 
-    const val hostname = "themoviedb.org"
+    private const val hostname = "themoviedb.org"
     private const val BASE_URL = "https://api.themoviedb.org/"
     val apiService: ApiService = getRetrofit().create(ApiService::class.java)
 
@@ -20,21 +21,15 @@ object ApiConfig {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(provideOkHttpClient())
+            .client(provideOkHttpClient().build())
             .build()
 
-    private fun provideOkHttpClient(): OkHttpClient =
-        OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .addInterceptor { chain: Interceptor.Chain ->
-                val request =
-                    chain.request().newBuilder().addHeader(
-                        "Authorization",
-                        "Bearer $THE_MOVIE_DB_KEY"
-                    ).build()
-                chain.proceed(request)
+    private fun provideOkHttpClient(): OkHttpClient.Builder {
 
-            }
+
+        val okHttpClient = OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+
             .connectTimeout(20, TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
             .certificatePinner(
@@ -45,5 +40,22 @@ object ApiConfig {
                     .add(hostname, "sha256/KwccWaCgrnaw6tsrrSO61FgLacNgG2MMLq8GE6+oP5I=")
                     .build()
             )
-            .build()
+
+
+        if (BuildConfig.DEBUG) {
+            okHttpClient.addInterceptor { chain: Interceptor.Chain ->
+                val request =
+                    chain.request().newBuilder().addHeader(
+                        "Authorization",
+                        "Bearer $THE_MOVIE_DB_KEY"
+                    ).build()
+                chain.proceed(request)
+
+            }
+
+        }
+
+        return okHttpClient
+
+    }
 }

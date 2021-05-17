@@ -9,7 +9,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.itborneo.core.domain.model.MovieDomainModel
 import id.itborneo.core.enums.Status
 import id.itborneo.moca.databinding.FragmentMovieBinding
 import id.itborneo.moca.detail.views.DetailMovieActivity
@@ -24,7 +23,8 @@ class MovieFragment : Fragment() {
         private const val TAG = "MovieFragment"
     }
 
-    private lateinit var binding: FragmentMovieBinding
+    private var binding: FragmentMovieBinding? = null
+
     private lateinit var adapter: MovieAdapter
 
     private val viewModel: MovieViewModel by sharedViewModel()
@@ -32,9 +32,9 @@ class MovieFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentMovieBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -101,23 +101,28 @@ class MovieFragment : Fragment() {
     }
 
     private fun showNotFound(showIt: Boolean = true) {
-        if (showIt) {
-            binding.incNotFound.root.visibility = View.VISIBLE
-            binding.rvMovies.visibility = View.GONE
-        } else {
-            binding.incNotFound.root.visibility = View.GONE
-            binding.rvMovies.visibility = View.VISIBLE
+        binding?.apply {
+            if (showIt) {
+                incNotFound.root.visibility = View.VISIBLE
+                rvMovies.visibility = View.GONE
+            } else {
+                incNotFound.root.visibility = View.GONE
+                rvMovies.visibility = View.VISIBLE
 
+            }
         }
+
     }
 
     private fun initRecycler() {
-        binding.rvMovies.layoutManager = LinearLayoutManager(requireContext())
-        adapter = MovieAdapter {
-            actionToDetail(it)
+        binding?.apply {
+            rvMovies.layoutManager = LinearLayoutManager(requireContext())
+            adapter = MovieAdapter {
+                actionToDetail(it)
+            }
+            rvMovies.layoutManager = GridLayoutManager(context, 3)
+            rvMovies.adapter = adapter
         }
-        binding.rvMovies.layoutManager = GridLayoutManager(context, 3)
-        binding.rvMovies.adapter = adapter
     }
 
     private fun actionToDetail(movie: MovieModel) {
@@ -125,7 +130,7 @@ class MovieFragment : Fragment() {
     }
 
     private fun showLoading(showIt: Boolean = true) {
-        binding.incLoading.root.apply {
+        binding?.incLoading?.root?.apply {
             visibility = if (showIt) {
                 View.VISIBLE
             } else {
@@ -135,7 +140,7 @@ class MovieFragment : Fragment() {
     }
 
     private fun showError(showIt: Boolean = true) {
-        binding.incError.root.apply {
+        binding?.incError?.root?.apply {
             visibility = if (showIt) {
                 View.VISIBLE
             } else {
@@ -145,7 +150,7 @@ class MovieFragment : Fragment() {
     }
 
     private fun initSearch() {
-        binding.sbUsers.apply {
+        binding?.sbUsers?.apply {
             setOnClickListener {
                 onActionViewExpanded()
             }
@@ -168,6 +173,6 @@ class MovieFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding.root.removeAllViews()
+        binding = null
     }
 }

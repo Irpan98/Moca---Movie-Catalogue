@@ -35,8 +35,9 @@ class DetailSeriesActivity : AppCompatActivity() {
         }
     }
 
+    private var binding: ActivityDetailSeriesBinding? = null
+
     private lateinit var creditsAdapter: CastAdapter
-    private lateinit var binding: ActivityDetailSeriesBinding
     private lateinit var detailSeries: SeriesDetailModel
 
     private var getIntentId: Int? = null
@@ -57,22 +58,23 @@ class DetailSeriesActivity : AppCompatActivity() {
     }
 
     private fun initAppbarListener() {
-        binding.ivBack.setOnClickListener {
+
+        binding?.ivBack?.setOnClickListener {
             finish()
         }
-        binding.ivShare.setOnClickListener {
+        binding?.ivShare?.setOnClickListener {
             Toast.makeText(this, getString(R.string.coming_soon), Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun initBinding() {
         binding = ActivityDetailSeriesBinding.inflate(layoutInflater)
-        val view = binding.root
+        val view = binding?.root
         setContentView(view)
     }
 
     private fun initFavorite() {
-        binding.btnFavorite.setOnClickListener {
+        binding?.btnFavorite?.setOnClickListener {
             viewModel.apply {
                 if (getFavorites().value != null) {
                     viewModel.removeFavorite(detailSeries)
@@ -86,10 +88,10 @@ class DetailSeriesActivity : AppCompatActivity() {
     }
 
     private fun initCreditsRecycler() {
-        binding.rvCasts.layoutManager =
+        binding?.rvCasts?.layoutManager =
             LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
         creditsAdapter = CastAdapter()
-        binding.rvCasts.adapter = creditsAdapter
+        binding?.rvCasts?.adapter = creditsAdapter
     }
 
     private fun observerCredits() {
@@ -146,17 +148,22 @@ class DetailSeriesActivity : AppCompatActivity() {
 
     private fun updateUI(data: SeriesDetailModel) {
 
-        Glide.with(this)
-            .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.posterPath}")
-            .apply(RequestOptions().dontTransform().placeholder(R.drawable.ic_placeholder_image))
-            .fitCenter()
-            .centerCrop()
-            .into(binding.ivPoster)
+        binding?.apply {
+            Glide.with(this@DetailSeriesActivity)
+                .load("https://image.tmdb.org/t/p/w600_and_h900_bestv2/${data.posterPath}")
+                .apply(
+                    RequestOptions().dontTransform().placeholder(R.drawable.ic_placeholder_image)
+                )
+                .fitCenter()
+                .centerCrop()
+                .into(this.ivPoster)
 
-        binding.tvGenres.text = getGenres(data.genres)
-        binding.tvOverview.text = data.overview.toString()
-        binding.tvTitle.text = data.name
-        binding.tvVoteAverage.text = data.voteAverage.toString()
+            this.tvGenres.text = getGenres(data.genres)
+            this.tvOverview.text = data.overview.toString()
+            this.tvTitle.text = data.name
+            this.tvVoteAverage.text = data.voteAverage.toString()
+        }
+
     }
 
     private fun getGenres(genres: List<GenreModel?>?): String {
@@ -173,7 +180,7 @@ class DetailSeriesActivity : AppCompatActivity() {
     }
 
     private fun showLoading(showIt: Boolean = true) {
-        binding.incDetailSeriesLoading.root.apply {
+        binding?.incDetailSeriesLoading?.root?.apply {
             visibility = if (showIt) {
                 View.VISIBLE
             } else {
@@ -183,7 +190,7 @@ class DetailSeriesActivity : AppCompatActivity() {
     }
 
     private fun showError(showIt: Boolean = true) {
-        binding.incDetailSeriesError.root.apply {
+        binding?.incDetailSeriesError?.root?.apply {
             visibility = if (showIt) {
                 View.VISIBLE
             } else {
@@ -200,9 +207,9 @@ class DetailSeriesActivity : AppCompatActivity() {
 
     private fun updateFavoriteStatusUI(isFavorite: SeriesModel?) {
         if (isFavorite != null) {
-            binding.btnFavorite.setImageResource(R.drawable.ic_favorite_active)
+            binding?.btnFavorite?.setImageResource(R.drawable.ic_favorite_active)
         } else {
-            binding.btnFavorite.setImageResource(R.drawable.ic_favorite_inactive)
+            binding?.btnFavorite?.setImageResource(R.drawable.ic_favorite_inactive)
         }
     }
 

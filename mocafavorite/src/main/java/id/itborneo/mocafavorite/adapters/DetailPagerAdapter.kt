@@ -12,12 +12,7 @@ class DetailPagerAdapter(activity: AppCompatActivity) :
     private val fragments = listOf(FavoriteMovieFragment(), FavoriteSeriesFragment())
 
     override fun createFragment(position: Int): Fragment {
-        var fragment: Fragment? = null
-        when (position) {
-            0 -> fragment = fragments[0]
-            1 -> fragment = fragments[1]
-        }
-        return fragment as Fragment
+        return fragments[position]
     }
 
 
