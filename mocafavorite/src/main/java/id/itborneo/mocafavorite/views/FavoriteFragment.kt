@@ -43,7 +43,7 @@ class FavoriteFragment : Fragment() {
         loadKoinModules(FavoriteModules)
     }
 
-    private lateinit var tabLayoutMediator: TabLayoutMediator
+    private var tabLayoutMediator: TabLayoutMediator? = null
 
     private fun initTabLayout() {
         binding?.apply {
@@ -55,13 +55,16 @@ class FavoriteFragment : Fragment() {
                     tab.text = resources.getString(TAB_TITLES[position])
                 }
 
-            tabLayoutMediator.attach()
+            tabLayoutMediator?.attach()
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        tabLayoutMediator?.detach()
+        tabLayoutMediator = null
+        binding?.viewPager?.adapter = null //prevent memory leaks
         binding = null
-        tabLayoutMediator.detach()
+
     }
 }

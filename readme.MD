@@ -65,6 +65,6 @@ Features
 4. Minor Issue di Inspect Code
 5. Terdapat Unit Test pada aplikasi
 6. Terdapat CI dengan code Coverage
-6. Terdapat security tambahan yaitu Security Crypto dan identity credential
+7. Terdapat security tambahan yaitu Security Crypto dan identity credential
 
     
