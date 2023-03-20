@@ -1,53 +1,53 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
-INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
-INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
-INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
-INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
-INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
-INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
+ADDED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
+INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
+INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
+INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
+INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
+INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
+INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
 	package
-		ADDED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:3:5-39
-		INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
-		INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
+		ADDED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:3:5-39
+		INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml
+		INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml
 	android:versionName
-		INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
-		ADDED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
-		INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
+		INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml
+		ADDED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
+		INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml
 	xmlns:dist
-		ADDED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:2:11-67
+		ADDED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:2:11-67
 	xmlns:android
-		ADDED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
+		ADDED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
 	android:versionCode
-		INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
-		ADDED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
-		INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
+		INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml
+		ADDED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:2:1-13:12
+		INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml
 dist:module
-ADDED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:5:5-12:19
+ADDED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:5:5-12:19
 	dist:instant
-		ADDED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:6:9-29
+		ADDED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:6:9-29
 	dist:title
-		ADDED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:7:9-48
+		ADDED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:7:9-48
 dist:delivery
-ADDED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:8:9-10:25
+ADDED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:8:9-10:25
 dist:install-time
-ADDED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:9:13-34
+ADDED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:9:13-34
 dist:fusing
-ADDED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:11:9-44
+ADDED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:11:9-44
 	dist:include
-		ADDED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml:11:22-41
+		ADDED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml:11:22-41
 uses-sdk
-INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
-INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
-INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
-INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
+INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml
+INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml
+INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml
+INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
-		ADDED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
-		INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
+		INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml
+		ADDED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml
+		INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
-		ADDED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
-		INJECTED from C:\AndroidProjects\Bangkit\5_bajp\moca\mocafavorite\src\main\AndroidManifest.xml
+		INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml
+		ADDED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml
+		INJECTED from C:\Irpan-Data\temporary\ExpandableRecyclerView\Moca---Movie-Catalogue\mocafavorite\src\main\AndroidManifest.xml

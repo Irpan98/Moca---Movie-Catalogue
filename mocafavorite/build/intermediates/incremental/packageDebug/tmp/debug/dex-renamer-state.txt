@@ -1,4 +1,4 @@
-#Fri Apr 30 16:47:28 SGT 2021
-base.0=C\:\\AndroidProjects\\Bangkit\\5_bajp\\moca\\mocafavorite\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
-path.0=classes.dex
+#Sun Mar 19 11:55:21 SGT 2023
+base.0=C\:\\Irpan-Data\\temporary\\ExpandableRecyclerView\\Moca---Movie-Catalogue\\mocafavorite\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\classes.dex
 renamed.0=classes.dex
+path.0=classes.dex
